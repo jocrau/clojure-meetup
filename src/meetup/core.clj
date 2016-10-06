@@ -1,4 +1,6 @@
 (ns meetup.core)
 
 (defn web-app [request]
-  nil)
+  {:status  200
+   :headers {"Content-Type" "text/html"}
+   :body    "<h1>Hello World</h1>"})
