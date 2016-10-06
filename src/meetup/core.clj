@@ -1,5 +1,4 @@
 (ns meetup.core)
 
-(def web-app
-  (fn [request]
-    nil))
+(defn web-app [request]
+  nil)
