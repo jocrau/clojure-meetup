@@ -2,23 +2,20 @@
   (:require
     [aleph.http :refer [start-server]]))
 
-(def defaults
-  {:headers {"Content-Type" "text/html"}})
-
 (def not-found-response
-  (merge defaults
-         {:status 404
-          :body   "Nothing here. That's sad."}))
+  {:status 404
+   :headers {"Content-Type" "text/html"}
+   :body   "Nothing here. That's sad."})
 
 (def home-response
-  (merge defaults
-         {:status 200
-          :body   "<h1>Hello World</h1><a href=\"/products\">Products</a>"}))
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body   "<h1>Hello World</h1><a href=\"/products\">Products</a>"})
 
 (def products-response
-  (merge defaults
-         {:status 200
-          :body   "<h1>Products Page</h1>"}))
+  {:status 200
+   :headers {"Content-Type" "text/html"}
+   :body   "<h1>Products Page</h1>"})
 
 (def routes
   {"/"         (fn [request] home-response)
