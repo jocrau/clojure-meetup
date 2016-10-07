@@ -10,7 +10,12 @@
                   :headers {"Content-Type" "text/html"}
                   :body    "<h1>Products Page</h1>"})})
 
+(def not-found-response
+  {:status 404})
+
 (defn web-app [request]
   (let [uri (get request :uri)
         handle (get routes uri)]
-    (handle request)))
+    (if handle
+      (handle request)
+      not-found-response)))

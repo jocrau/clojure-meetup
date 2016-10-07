@@ -16,4 +16,7 @@
   (testing "simple request-response cycle"
     (let [response (web-app test-request)]
       (is (= (get response :status) 200))
-      (is (re-find #"Product" (get response :body))))))
+      (is (re-find #"Product" (get response :body)))))
+  (testing "404 response"
+    (let [response (web-app (assoc test-request :uri "/nope"))]
+      (is (= (get response :status) 404)))))
