@@ -14,17 +14,17 @@
 
 (deftest web-app-test
   (testing "simple request-response cycle"
-    (let [response (web-app test-request)]
+    (let [response ((web-app) test-request)]
       (is (= (get response :status) 200))
       (is (re-find #"Product" (get response :body)))))
   (testing "404 response"
-    (let [response (web-app (assoc test-request :uri "/nope"))]
+    (let [response ((web-app) (assoc test-request :uri "/nope"))]
       (is (= (get response :status) 404))))
   (testing "POST request"
-    (let [response (web-app (assoc test-request
-                              :request-method :post))]
+    (let [response ((web-app) (assoc test-request
+                                :request-method :post))]
       (is (= (get response :status) 201)))
-    (let [response (web-app (assoc test-request
-                              :request-method :post
-                              :uri "/"))]
+    (let [response ((web-app) (assoc test-request
+                                :request-method :post
+                                :uri "/"))]
       (is (= (get response :status) 405)))))

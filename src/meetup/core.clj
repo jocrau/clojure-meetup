@@ -1,4 +1,6 @@
-(ns meetup.core)
+(ns meetup.core
+  (:require
+    [aleph.http :refer [start-server]]))
 
 (defn persist [data]
   ;; some magical side-effect
@@ -9,7 +11,7 @@
 
 (defn handler [resource]
   (fn [request]
-    (let [request-method (:request-method request)
+    (let [request-method (get request :request-method)
           handle (get-in resource [request-method :handler])]
       (if handle
         (handle request)
@@ -36,9 +38,16 @@
 (def not-found-response
   {:status 404})
 
-(defn web-app [request]
-  (let [uri (get request :uri)
-        handle (get routes uri)]
-    (if handle
-      (handle request)
-      not-found-response)))
+(defn web-app []
+  (fn [request]
+    (let [uri (get request :uri)
+          handle (get routes uri)]
+      (if handle
+        (handle request)
+        not-found-response))))
+
+(defn start []
+  (start-server (web-app) {:port 8080}))
+
+(defn stop [server]
+  (.close server))
