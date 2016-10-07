@@ -1,6 +1,7 @@
 (ns meetup.persistence)
 
+(defonce storage (atom nil))
+
 (defn persist [data]
-  ;; some magical side-effect
-  true)
+  (reset! storage data))
 

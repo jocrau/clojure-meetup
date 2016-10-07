@@ -22,7 +22,8 @@
       (is (= (get response :status) 404))))
   (testing "POST request"
     (let [response ((web-app) (assoc test-request
-                                :request-method :post))]
+                                :request-method :post
+                                :body "[{:id 1234 :name \"Stand Mixer\"}]"))]
       (is (= (get response :status) 201)))
     (let [response ((web-app) (assoc test-request
                                 :request-method :post
