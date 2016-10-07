@@ -16,4 +16,4 @@
   (testing "simple request-response cycle"
     (let [response (web-app test-request)]
       (is (= (get response :status) 200))
-      (is (string? (get response :body))))))
+      (is (re-find #"Product" (get response :body))))))
