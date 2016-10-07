@@ -19,4 +19,7 @@
       (is (re-find #"Product" (get response :body)))))
   (testing "404 response"
     (let [response (web-app (assoc test-request :uri "/nope"))]
-      (is (= (get response :status) 404)))))
+      (is (= (get response :status) 404))))
+  (testing "POST request"
+    (let [response (web-app (assoc test-request :request-method :post))]
+      (is (= (get response :status) 201)))))
