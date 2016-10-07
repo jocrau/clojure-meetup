@@ -1,7 +1,7 @@
 (ns meetup.core
   (:require
     [aleph.http :refer [start-server]]
-    [meetup.persistence :refer [persist]]))
+    [meetup.persistence :refer [persist find-products]]))
 
 (def method-not-allowed-response
   {:status 405})
@@ -22,7 +22,7 @@
 (def product-resource
   {:get  {:handler (fn [request] {:status  200
                                   :headers {"Content-Type" "text/html"}
-                                  :body    "<h1>Products Page</h1>"})}
+                                  :body    (str "<h1>Products Page</h1>" (find-products))})}
    :post {:handler (fn [request]
                      (if (persist (read-string (slurp (:body request))))
                        {:status 201}

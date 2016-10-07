@@ -5,3 +5,6 @@
 (defn persist [data]
   (reset! storage data))
 
+(defn find-products []
+  (deref storage))
+
