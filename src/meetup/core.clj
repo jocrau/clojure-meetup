@@ -1,10 +1,7 @@
 (ns meetup.core
   (:require
-    [aleph.http :refer [start-server]]))
-
-(defn persist [data]
-  ;; some magical side-effect
-  true)
+    [aleph.http :refer [start-server]]
+    [meetup.persistence :refer [persist]]))
 
 (def method-not-allowed-response
   {:status 405})
