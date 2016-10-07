@@ -21,5 +21,10 @@
     (let [response (web-app (assoc test-request :uri "/nope"))]
       (is (= (get response :status) 404))))
   (testing "POST request"
-    (let [response (web-app (assoc test-request :request-method :post))]
-      (is (= (get response :status) 201)))))
+    (let [response (web-app (assoc test-request
+                              :request-method :post))]
+      (is (= (get response :status) 201)))
+    (let [response (web-app (assoc test-request
+                              :request-method :post
+                              :uri "/"))]
+      (is (= (get response :status) 405)))))

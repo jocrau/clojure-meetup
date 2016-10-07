@@ -1,16 +1,33 @@
 (ns meetup.core)
 
+(defn persist [data]
+  ;; some magical side-effect
+  true)
+
+(def method-not-allowed-response
+  {:status 405})
+
 (defn handler [resource]
   (fn [request]
-    {:status  200
-     :headers {"Content-Type" "text/html"}
-     :body    (get resource :html)}))
+    (let [request-method (:request-method request)
+          handle (get-in resource [request-method :handler])]
+      (if handle
+        (handle request)
+        method-not-allowed-response))))
 
 (def home-resource
-  {:html "<h1>Hello World</h1><a href=\"/products\">Products</a>"})
+  {:get {:handler (fn [request] {:status  200
+                                 :headers {"Content-Type" "text/html"}
+                                 :body    "<h1>Hello World</h1><a href=\"/products\">Products</a>"})}})
 
 (def product-resource
-  {:html "<h1>Products Page</h1>"})
+  {:get  {:handler (fn [request] {:status  200
+                                  :headers {"Content-Type" "text/html"}
+                                  :body    "<h1>Products Page</h1>"})}
+   :post {:handler (fn [request]
+                     (if (persist (:body request))
+                       {:status 201}
+                       {:status 406}))}})
 
 (def routes
   {"/"         (handler home-resource)
