@@ -9,6 +9,6 @@
                  [bidi "2.0.9"]
 
                  [proto-repl "0.3.1"]]
-  :main ^:skip-aot meetup.core
+  :main ^:skip-aot meetup.intro
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
