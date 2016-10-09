@@ -50,6 +50,24 @@ Some languages are "pure" functional programming languages, some make it almost 
 
 == !
 
+[source,php]
+----
+    $add3 = function($number) { return $number + 3; };
+    $twice = function($fun, $number) { return $fun($fun($number)); }
+    echo($twice($add3, 5));
+    // 11
+----
+
+[source,clojure]
+----
+    (def add3 [number] (+ number 3))
+    (def twice [fun number] (fun (fun number))
+    (twice add3 5)
+    ; 11
+----
+
+== !
+
 Functional Programming +
 affects the structure of a program +
 [fragment]#and how we program.#
@@ -86,35 +104,6 @@ Describes the result without making the control flow explicit
 - Lazy evaluation
 - Immutable state
 
-== Pure Functions
-
-[%step]
-- no side-effects
-- same arguments evaluate to the same result
-
-== Higher-order Functions
-
-[%step]
-- function as value
-- a function can be an argument to another function
-- a function evaluation can be a function
-
-[source,php]
-----
-    $add3 = function($number) { return $number + 3; };
-    $twice = function($fun, $number) { return $fun($fun($number)); }
-    echo($twice($add3, 5));
-    // 11
-----
-
-[source,clojure]
-----
-    (def add3 [number] (+ number 3))
-    (def twice [fun number] (fun (fun number))
-    (twice add3 5)
-    ; 11
-----
-
 == !
 
 > "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures."
@@ -127,4 +116,9 @@ Source: http://www.cs.yale.edu/homes/perlis-alan/quotes.html
 
 = Links
 
-http://cs.lmu.edu/~ray/notes/paradigms/
+- http://cs.lmu.edu/~ray/notes/paradigms/
+- http://www.tryclj.com/
+- http://himera.herokuapp.com/index.html
+- http://clojurekoans.com/
+- https://www.4clojure.com/
+- http://www.braveclojure.com/clojure-for-the-brave-and-true/
