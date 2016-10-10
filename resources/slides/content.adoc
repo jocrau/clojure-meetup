@@ -7,7 +7,7 @@
 :revealjs_previewLinks: true
 :revealjs_transition: fade
 :revealjs_transitionSpeed: fast
-:revealjs_theme: night
+:revealjs_theme: black
 :source-highlighter: highlightjs
 :imagesdir: img
 :presenter_name: Jochen Rau
@@ -51,26 +51,27 @@ Some languages are "pure" functional programming languages, some make it almost 
 == !
 
 [source,php]
-----
+--
     $add3 = function($number) { return $number + 3; };
     $twice = function($fun, $number) { return $fun($fun($number)); }
     echo($twice($add3, 5));
     // 11
-----
+--
 
 [source,clojure]
-----
+--
     (def add3 [number] (+ number 3))
     (def twice [fun number] (fun (fun number))
     (twice add3 5)
     ; 11
-----
+--
 
 == !
 
 Functional Programming +
 affects the structure of a program +
-[fragment]#and how we program.#
+[fragment]#how we program# +
+[fragment]#and how we think about programming.#
 
 == !
 
@@ -84,18 +85,26 @@ Source: http://www.cs.yale.edu/homes/perlis-alan/quotes.html
 
 == Programming Paradigms
 
-[%step]
-- Non-structured
-- Structured
-  * Block-Oriented
-  * Object-Oriented
-- Imperative +
-Explicit control flow ("first do this and then do that")
-- Declarative +
-Describes the result without making the control flow explicit
+[cols="2*.<"]
+|===
+a|- Non-structured
+ - Structured
+   * Block-Oriented
+   * Object-Oriented
+
+a|- Imperative
+- Declarative
   * Functional
   * Logical
-- Reactive, Event-Driven, Generic, ...
+2+a|- Reactive, Event-Driven, Generic, ...
+|===
+
+[NOTE.speaker]
+--
+- Imperative (explicit control flow: "first do this and then do that")
+- Declarative (describe the logic without making the control flow explicit)
+--
+
 
 == Functional Paradigm
 
@@ -116,9 +125,10 @@ Source: http://www.cs.yale.edu/homes/perlis-alan/quotes.html
 
 = Links
 
-- http://cs.lmu.edu/~ray/notes/paradigms/
-- http://www.tryclj.com/
-- http://himera.herokuapp.com/index.html
-- http://clojurekoans.com/
-- https://www.4clojure.com/
-- http://www.braveclojure.com/clojure-for-the-brave-and-true/
+- link::http://cs.lmu.edu/~ray/notes/paradigms/[Alan Perlis Quotes]
+- link::http://www.tryclj.com/[Browser REPL for Clojure]
+- link::http://himera.herokuapp.com/index.html[Browser REPL for ClojureScript]
+- link::http://clojurekoans.com/[Clojure Learning-by-Doing]
+- link::https://www.4clojure.com/[Clojure Quiz]
+- link::http://www.braveclojure.com/clojure-for-the-brave-and-true/[Free Book about Clojure]
+- link::https://www.youtube.com/watch?v=M3_xnTK6-pA[Larry Garfield: Functional PHP, 2014]

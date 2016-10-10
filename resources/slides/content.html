@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="author" content="Jochen Rau, Infinite Cloud LLC"><meta name="copyright" content="by-sa"><title>Functional Programming</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="revealjs/css/reveal.css" rel="stylesheet"><link rel="stylesheet" href="revealjs/css/theme/night.css" id="theme"><link href="revealjs/lib/css/zenburn.css" rel="stylesheet"><script>document.write( '<link rel="stylesheet" href="revealjs/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );</script></head><body><div class="reveal"><div class="slides"><section class="title"><h1>Functional Programming</h1><div class="preamble"><div class="paragraph"><p>Paradigms and Real-World Use</p></div></div><p class="author"><small>Jochen Rau, Infinite Cloud LLC</small></p></section>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="author" content="Jochen Rau, Infinite Cloud LLC"><meta name="copyright" content="by-sa"><title>Functional Programming</title><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui" name="viewport"><link href="revealjs/css/reveal.css" rel="stylesheet"><link rel="stylesheet" href="revealjs/css/theme/black.css" id="theme"><link href="revealjs/lib/css/zenburn.css" rel="stylesheet"><script>document.write( '<link rel="stylesheet" href="revealjs/css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );</script></head><body><div class="reveal"><div class="slides"><section class="title"><h1>Functional Programming</h1><div class="preamble"><div class="paragraph"><p>Paradigms and Real-World Use</p></div></div><p class="author"><small>Jochen Rau, Infinite Cloud LLC</small></p></section>
 <section><div class="paragraph"><p>Functional Programming doesn&#8217;t prevent you<br>
 from shooting yourself in the foot.</p></div>
 <div class="paragraph"><p><span class="fragment">It just provides you with a more sophisticated gun.</span></p></div>
@@ -18,22 +18,22 @@ is a mindset<br>
     ; 11</code></pre></div></div></section>
 <section><div class="paragraph"><p>Functional Programming<br>
 affects the structure of a program<br>
-<span class="fragment">and how we program.</span></p></div></section>
+<span class="fragment">how we program</span><br>
+<span class="fragment">and how we think about programming.</span></p></div></section>
 <section><div class="quoteblock"><blockquote><div class="paragraph"><p>"A language that doesn&#8217;t affect the way you think about programming, is not worth knowing."</p></div></blockquote></div>
 <div class="paragraph"><p>Alan Perlis</p></div>
 <div class="paragraph"><p><small>
 Source: <a href="http://www.cs.yale.edu/homes/perlis-alan/quotes.html" class="bare">http://www.cs.yale.edu/homes/perlis-alan/quotes.html</a>
 </small></p></div></section>
-<section id="_programming_paradigms"><h2>Programming Paradigms</h2><div class="ulist"><ul><li class="fragment"><p>Non-structured</p></li><li class="fragment"><p>Structured</p><div class="ulist"><ul><li><p>Block-Oriented</p></li><li><p>Object-Oriented</p></li></ul></div></li><li class="fragment"><p>Imperative<br>
-Explicit control flow ("first do this and then do that")</p></li><li class="fragment"><p>Declarative<br>
-Describes the result without making the control flow explicit</p><div class="ulist"><ul><li><p>Functional</p></li><li><p>Logical</p></li></ul></div></li><li class="fragment"><p>Reactive, Event-Driven, Generic, &#8230;&#8203;</p></li></ul></div></section>
+<section id="_programming_paradigms"><h2>Programming Paradigms</h2><table class="tableblock frame-all grid-all" style="width:100%"><colgroup><col style="width:50%"><col style="width:50%"></colgroup><tbody><tr><td class="tableblock halign-left valign-top"><div><div class="ulist"><ul><li><p>Non-structured</p></li><li><p>Structured</p><div class="ulist"><ul><li><p>Block-Oriented</p></li><li><p>Object-Oriented</p></li></ul></div></li></ul></div></div></td><td class="tableblock halign-left valign-top"><div><div class="ulist"><ul><li><p>Imperative</p></li><li><p>Declarative</p><div class="ulist"><ul><li><p>Functional</p></li><li><p>Logical</p></li></ul></div></li></ul></div></div></td></tr><tr><td class="tableblock halign-left valign-top" colspan="2"><div><div class="ulist"><ul><li><p>Reactive, Event-Driven, Generic, &#8230;&#8203;</p></li></ul></div></div></td></tr></tbody></table>
+<aside class="notes"><div class="ulist"><ul><li><p>Imperative (explicit control flow: "first do this and then do that")</p></li><li><p>Declarative (describe the logic without making the control flow explicit)</p></li></ul></div></aside></section>
 <section id="_functional_paradigm"><h2>Functional Paradigm</h2><div class="ulist"><ul><li><p>Pure functions</p></li><li><p>Higher-order functions</p></li><li><p>Lazy evaluation</p></li><li><p>Immutable state</p></li></ul></div></section>
 <section><div class="quoteblock"><blockquote><div class="paragraph"><p>"It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures."</p></div></blockquote></div>
 <div class="paragraph"><p>Alan Perlis</p></div>
 <div class="paragraph"><p><small>
 Source: <a href="http://www.cs.yale.edu/homes/perlis-alan/quotes.html" class="bare">http://www.cs.yale.edu/homes/perlis-alan/quotes.html</a>
 </small></p></div></section>
-<section id="_links"><h2>Links</h2><div class="ulist"><ul><li><p><a href="http://cs.lmu.edu/~ray/notes/paradigms/" class="bare">http://cs.lmu.edu/~ray/notes/paradigms/</a></p></li><li><p><a href="http://www.tryclj.com/" class="bare">http://www.tryclj.com/</a></p></li><li><p><a href="http://himera.herokuapp.com/index.html" class="bare">http://himera.herokuapp.com/index.html</a></p></li><li><p><a href="http://clojurekoans.com/" class="bare">http://clojurekoans.com/</a></p></li><li><p><a href="https://www.4clojure.com/" class="bare">https://www.4clojure.com/</a></p></li><li><p><a href="http://www.braveclojure.com/clojure-for-the-brave-and-true/" class="bare">http://www.braveclojure.com/clojure-for-the-brave-and-true/</a></p></li></ul></div></section></div></div><script src="revealjs/lib/js/head.min.js"></script><script src="revealjs/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+<section id="_links"><h2>Links</h2><div class="ulist"><ul><li><p><a href=":http://cs.lmu.edu/~ray/notes/paradigms/">Alan Perlis Quotes</a></p></li><li><p><a href=":http://www.tryclj.com/">Browser REPL for Clojure</a></p></li><li><p><a href=":http://himera.herokuapp.com/index.html">Browser REPL for ClojureScript</a></p></li><li><p><a href=":http://clojurekoans.com/">Clojure Learning-by-Doing</a></p></li><li><p><a href=":https://www.4clojure.com/">Clojure Quiz</a></p></li><li><p><a href=":http://www.braveclojure.com/clojure-for-the-brave-and-true/">Free Book about Clojure</a></p></li><li><p><a href=":https://www.youtube.com/watch?v=M3_xnTK6-pA">Larry Garfield: Functional PHP, 2014</a></p></li></ul></div></section></div></div><script src="revealjs/lib/js/head.min.js"></script><script src="revealjs/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
 Reveal.initialize({
   // Display controls in the bottom right corner
   controls: false,
@@ -74,7 +74,7 @@ Reveal.initialize({
   previewLinks: true,
   // Theme (e.g., beige, black, league, night, serif, simple, sky, solarized, white)
   // NOTE setting the theme in the config no longer works in reveal.js 3.x
-  //theme: Reveal.getQueryHash().theme || 'night',
+  //theme: Reveal.getQueryHash().theme || 'black',
   // Transition style (e.g., none, fade, slide, convex, concave, zoom)
   transition: Reveal.getQueryHash().transition || 'fade',
   // Transition speed (e.g., default, fast, slow)
