@@ -43,6 +43,7 @@ nil
 
 my-name
 
+; local bindings
 (let [my-name "Shawn"]
   my-name)
 
@@ -139,6 +140,7 @@ my-name
 
 
 (if true "Ok" "Nope")
+(if (> 3 10) "Ok" "Nope")
 
 (conj [:a :b] :c)
 (conj '(:a :b) :c)
@@ -157,21 +159,67 @@ joe
 (rest [:a :b :c])
 
 
+;; lazy evaluation
+
+(range 0 10)
+(range 10)
+(range 10000)
+;(range)
+(def numbers (range))
+;numbers
+(take 10 numbers)
+(time (nth numbers 1000000))
+(time (nth (range) 1000000))
+(time (nth (map inc numbers) 1000000))
+(time (nth (map inc (range)) 1000000))
+
+#_(filter (fn [number]
+          (println number)
+          (= number 20))
+        (map inc (range)))
+
+(first (filter (fn [number]
+                 (println number)
+                 (= number 20))
+               (map inc (range))))
+
 ;; recursion
 
-(loop [names ["Jochen" "Shawn" "Alice"]
-       result []]
-  (if (empty? names)
-    result
-    (recur (rest names)
-           (conj result {:first-name (first names)}))))
+(* 1 2 3 4 5 6 7 8)
+
+(defn factorial [n acc]
+  (if (zero? n)
+    acc
+    (factorial (dec n) (* n acc))))
+
+(factorial 8 1)
+
+(defn factorial [n]
+  (loop [cnt n
+         acc 1]
+    (if (zero? cnt)
+      acc
+      (recur (dec cnt)
+             (* cnt acc)))))
+
+(factorial 8)
+
+(defn factorial [n]
+  (reduce * (range 1 (inc n))))
+
+(factorial 8)
+
 
 ;; 1 1 2 3 5 8 13 21 34 55 ...
 
-(defn fib [n]
-  (loop [a 0 b 1 i n]
+(defn fibonacci [n]
+  (loop [a 0
+         b 1
+         i n]
     (if (zero? i)
       a
-      (recur b (+ a b) (dec i)))))
+      (recur b
+             (+ a b)
+             (dec i)))))
 
-(fib 10)
+(fibonacci 10)
