@@ -25,7 +25,7 @@
                                   :headers {"Content-Type" "text/html"}
                                   :body    (str "<h1>Products Page</h1>" (render-list (find-products)))})}
    :post {:handler (fn [request]
-                     (if (persist (read-string (:body request)))
+                     (if (persist (read-string (slurp (:body request))))
                        {:status 201}
                        {:status 406}))}})
 

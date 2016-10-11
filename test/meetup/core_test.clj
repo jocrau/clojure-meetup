@@ -1,6 +1,7 @@
 (ns meetup.core-test
   (:require [clojure.test :refer :all]
-            [meetup.core :refer :all]))
+            [meetup.core :refer :all])
+  (:import [java.io ByteArrayInputStream]))
 
 (def test-request
   {:scheme         :http
@@ -23,7 +24,7 @@
   (testing "POST request"
     (let [response ((web-app) (assoc test-request
                                 :request-method :post
-                                :body "[{:id 1234 :name \"Stand Mixer\"}]"))]
+                                :body (ByteArrayInputStream. (.getBytes "[{:id 1234 :name \"Stand Mixer\"}]" "UTF-8"))))]
       (is (= (get response :status) 201)))
     (let [response ((web-app) (assoc test-request
                                 :request-method :post
