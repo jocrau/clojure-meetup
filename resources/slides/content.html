@@ -3,7 +3,6 @@
 from shooting yourself in the foot.</p></div>
 <div class="paragraph"><p><span class="fragment">It just provides you with a more sophisticated gun.</span></p></div>
 <div class="openblock fragment"><div class="content"><div class="imageblock" style=""><img src="img/han-solo.jpg" alt="han solo"></div></div></div></section>
-<section><div class="imageblock" style=""><img src="img/blueprint.jpg" alt="blueprint"></div></section>
 <section><div class="paragraph"><p>Functional Programming<br>
 is a mindset<br>
 <span class="fragment">not a set of languages.</span></p></div>
@@ -12,8 +11,8 @@ is a mindset<br>
     $twice = function($fun, $number) { return $fun($fun($number)); }
     echo($twice($add3, 5));
     // 11</code></pre></div></div>
-<div class="listingblock"><div class="content"><pre class="highlight"><code class="clojure language-clojure">    (def add3 [number] (+ number 3))
-    (def twice [fun number] (fun (fun number))
+<div class="listingblock"><div class="content"><pre class="highlight"><code class="clojure language-clojure">    (defn add3 [number] (+ number 3))
+    (defn twice [fun number] (fun (fun number))
     (twice add3 5)
     ; 11</code></pre></div></div></section>
 <section><div class="paragraph"><p>Functional Programming<br>
@@ -33,7 +32,8 @@ Source: <a href="http://www.cs.yale.edu/homes/perlis-alan/quotes.html" class="ba
 <div class="paragraph"><p><small>
 Source: <a href="http://www.cs.yale.edu/homes/perlis-alan/quotes.html" class="bare">http://www.cs.yale.edu/homes/perlis-alan/quotes.html</a>
 </small></p></div></section>
-<section id="_links"><h2>Links</h2><div class="ulist"><ul><li><p><a href=":http://cs.lmu.edu/~ray/notes/paradigms/">Alan Perlis Quotes</a></p></li><li><p><a href=":http://www.tryclj.com/">Browser REPL for Clojure</a></p></li><li><p><a href=":http://himera.herokuapp.com/index.html">Browser REPL for ClojureScript</a></p></li><li><p><a href=":http://clojurekoans.com/">Clojure Learning-by-Doing</a></p></li><li><p><a href=":https://www.4clojure.com/">Clojure Quiz</a></p></li><li><p><a href=":http://www.braveclojure.com/clojure-for-the-brave-and-true/">Free Book about Clojure</a></p></li><li><p><a href=":https://www.youtube.com/watch?v=M3_xnTK6-pA">Larry Garfield: Functional PHP, 2014</a></p></li></ul></div></section></div></div><script src="revealjs/lib/js/head.min.js"></script><script src="revealjs/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
+<section><div class="imageblock" style=""><img src="img/blueprint.jpg" alt="blueprint"></div></section>
+<section id="_links"><h2>Links</h2><div class="ulist"><ul><li><p><a href="http://cs.lmu.edu/~ray/notes/paradigms/">Alan Perlis Quotes</a></p></li><li><p><a href="http://www.tryclj.com/">Browser REPL for Clojure</a></p></li><li><p><a href="http://himera.herokuapp.com/index.html">Browser REPL for ClojureScript</a></p></li><li><p><a href="http://clojurekoans.com/">Clojure Learning-by-Doing</a></p></li><li><p><a href="https://www.4clojure.com/">Clojure Quiz</a></p></li><li><p><a href="http://www.braveclojure.com/clojure-for-the-brave-and-true/">Free Book about Clojure</a></p></li><li><p><a href="https://www.youtube.com/watch?v=M3_xnTK6-pA">Larry Garfield: Functional PHP, 2014</a></p></li><li><p><a href="http://clojure.org/reference/reader">Clojure Docs</a></p></li></ul></div></section></div></div><script src="revealjs/lib/js/head.min.js"></script><script src="revealjs/js/reveal.js"></script><script>// See https://github.com/hakimel/reveal.js#configuration for a full list of configuration options
 Reveal.initialize({
   // Display controls in the bottom right corner
   controls: false,
