@@ -133,3 +133,9 @@ image::blueprint.jpg[]
 - link:http://www.braveclojure.com/clojure-for-the-brave-and-true/[Free Book about Clojure]
 - link:https://www.youtube.com/watch?v=M3_xnTK6-pA[Larry Garfield: Functional PHP, 2014]
 - link:http://clojure.org/reference/reader[Clojure Docs]
+
+= Thanks!
+
+Jochen Rau +
+Infinite Cloud LLC +
+jrau@infinitecloud.com
