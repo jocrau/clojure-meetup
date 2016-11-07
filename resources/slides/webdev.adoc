@@ -8,6 +8,8 @@
 :revealjs_transition: fade
 :revealjs_transitionSpeed: fast
 :revealjs_theme: black
+:revealjs_width: 1440
+:revealjs_height: 900
 :source-highlighter: highlightjs
 :imagesdir: img
 :presenter_name: Jochen Rau
@@ -31,113 +33,228 @@ image::complexity.png[]
 
 == Building Blocks of a Web Application
 
-[cols="2*.<"]
+[cols="2*<.<"]
 |===
-a|- HTTP Server, Web Sockets
-  - Request Handling
-  - Routing
-  - HTML Templating
-  - Persistence
-  - Input Validation
-  - Domain Modeling
-
-a|- HTTP level Security (CORS, CSRF, etc.)
-  - Authentication, Authorisation
-  - Session Handling
-  - Web User Experience (UI, client-side development)
+a|
+- HTTP Server, Web Sockets
+- Request Handling
+- Routing
+- HTML Templating
+- Domain Modeling
+- Persistence
+- Security (Authentication, Authorisation CORS, CSRF, etc.)
+a|
+- Input Validation
+- Session Handling
+- Web User Experience (UI, client-side development)
+- Resource handling, caching
+- Formatting and transformation (JSON, CSV, ...)
+- etc.
 |===
 
 == What to look out for?
 
-[cols="2*.<"]
+[cols="2*<.<"]
 |===
-a|- features
-  - philosophy, architecture
-  - well documented
-    * existent
-    * complete
-    * easy to understand and follow
-    * readable code
-  - well tested
-    * expressive, readable tests
+a|
+- philosophy, architecture, features
+- well documented
+  * existent
+  * complete
+  * easy to understand and follow
+  * readable code
+- well tested
+  * expressive, readable tests
+- up- and downstream dependencies
+  * widely used
+  * up-to-date dependencies
 
-a|- up- and downstream dependencies (see: https://crossclj.info/)
-    * widely used
-    * up-to-date dependencies
-  - developer network
-    * number of collaborators
-    * style of collaboration (pull-requests, core team, etc.)
-    * backing by company or OSS association
-  - issue queue, road map
-  - forums, comparisons, testimonials from colleagues
-  - license, costs
-  - don't forget Java and JavaScript libraries
+a|
+- developer network
+  * number of collaborators
+  * style of collaboration (pull-requests, core team, etc.)
+  * backing by company or OSS association
+- issue queue, road map
+- forums, comparisons, testimonials from colleagues
+- license, costs
+- don't forget Java and JavaScript libraries
 |===
+
+== Web Server
+
+- link:http://www.http-kit.org/[HTTP-Kit]
+  * performant and lightweight
+  * well documented and simple to use
+- link:https://github.com/ztellman/aleph[aleph]
+  * very performant and lightweight
+- link:http://immutant.org/[Immutant]
+  * based on Red Hat JBoss EAP
+  * application server ready
+  * cohesive set of battle tested Java libraries
 
 == HTTP Request Handling
 
-- link:http://clojure-liberator.github.io/liberator/[Liberator]
-    * asdfsdf
-- link:https://github.com/juxt/yada[Yada]
+[cols="3*.<"]
+|===
+a|
+link:https://github.com/ring-clojure/ring[Ring]
+
+ - specification for request and response
+ - set of small libraries (eg. parsing request params, compressing body)
+ - basis for most web applications in Clojure land
+
+a|
+link:http://clojure-liberator.github.io/liberator/[Liberator]
+
+- modeled after Erlang's Webmachine
+- focus on resource definition
+- conforms to HTTP specification
+- batteries included
+
+a|
+link:https://github.com/juxt/yada[Yada]
+
+- new kid on the block
+- well documented
+- easy to use
+- focus on resource definition
+- conforms to HTTP specification
+|===
 
 == Routing
 
 - link:https://github.com/weavejester/compojure[Compojure]
   * well established and maintained
   * built around HTTP verbs
-- link:https://github.com/DomKM/silk[silk]
-- link:https://github.com/juxt/bidi[bidi]
+- link:https://github.com/juxt/bidi[Bidi]
   * simple but powerful
   * well maintained
-  * personal favorite
+  * well documented
 
-Good comparison: https://github.com/juxt/bidi#comparison-with-other-routing-libraries
+Good comparison on the link:https://github.com/juxt/bidi#comparison-with-other-routing-libraries[Bidi page]
 
 == Security
 
 - link:https://github.com/cemerick/friend[Friend]
   * opinionated and relatively complex
   * batteries included
-- link:https://github.com/funcool/buddy[buddy]
+- link:https://github.com/funcool/buddy[Buddy]
   * modular and flexible
   * well maintained
+
+== Persistence
+
+[cols="3*.<"]
+|===
+a|
+link:http://www.datomic.com/[Datomic]
+
+- database = immutable value
+- time-aware
+- granular information model (Datom)
+- flexible schema
+- database functions
+- declarative query language (Datalog)
+- queries = data
+
+a|
+link:https://adambard.com/blog/clojure-sql-libs-compared/[SQL]
+
+- link:https://adambard.com/blog/clojure-sql-libs-compared/[overview over current libraries]
+- all JDBC compliant databases
+a|
+NoSQL
+
+- wrapper for link:http://clojurecassandra.info/[Cassandra]
+- wrapper for link:http://clojuremongodb.info/[Mongo]
+- and many others
+|===
 
 == HTML Templating
 
-- link:https://github.com/cemerick/friend[Friend]
-  * opinionated and relatively complex
-  * batteries included
-- link:https://github.com/funcool/buddy[buddy]
-  * modular and flexible
-  * well maintained
+[cols="3*.<"]
+|===
+a|
+link:https://github.com/weavejester/hiccup[Hiccup]
+
+  - pure Clojure data structure
+  - mixed with application code (developer == designer)
+  - easy to understand
+a|
+link:https://github.com/cgrand/enlive/[Enlive]
+
+  - HTML and application code completely decoupled
+  - fast
+  - CSS3 selector based
+  - difficult to understand
+a|
+link:https://github.com/fhd/clostache[Clostache]
+
+  - Mustache for Clojure
+  - template markers in HTML embedded
+  - easy to understand
+|===
+
+== Front-end Development
+
+link:http://clojurescript.org/[ClojureScript]
+
+- subset of Clojure
+- targets JavaScript engines (browser, node.js, etc.)
+- code-reuse on JVM and JavaScript engines (CLJC)
+
+[cols="3*.<"]
+|===
+a|
+http://reagent-project.github.io/[Reagent]
+
+  - wrapper for link:https://facebook.github.io/react/[Facebook's React]
+  - easy to understand
+  - flexible
+  - actively developed
+
+a|
+link:https://github.com/Day8/re-frame[re-frame]
+
+  - based on Reagent
+  - single-page applications
+  - application state and events
+  - functional-reactive programming
+
+a|
+link:https://github.com/omcljs/om/wiki/Quick-Start-(om.next)[om and om-next]
+
+  - client-server integration
+  - very opinionated
+  - moving target
+|===
 
 == Frameworks
 
-- link:https://github.com/pedestal/pedestal[Pedestal]
 - link:http://www.luminusweb.net/[Luminus]
-- link:http://hoplon.io/[Hoplon]
 - link:http://pedestal.io/[Pedestal]
-  * focuses on APIs
+- link:http://hoplon.io/[Hoplon]
 - link:http://arachne-framework.org/[Arachne]
-  * well known community members behind it
-  * early in development
 
 == Build Your Own Web Stack
 
 image::byob.jpg[]
 
+
 == Build Your Own Web Stack
 
-Recommendation: start with your own simple stack
+Start with your own simple stack
 
 - Clojure/Clojurescript
+- Aleph
 - Ring
 - Yada/Bidi
 - Buddy
 - Hiccup
 - Reagent
+- Datomic
 
-[fragement]#... then extend or switch to exiting framework#
+then extend or switch to exiting framework
 
 == Thanks!
 
