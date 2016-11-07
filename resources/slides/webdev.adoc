@@ -1,0 +1,146 @@
+:revealjsdir: revealjs
+:revealjs_history: true
+:revealjs_controls: false
+:revealjs_progress: false
+:revealjs_showNotes: false
+:revealjs_mouseWheel: false
+:revealjs_previewLinks: true
+:revealjs_transition: fade
+:revealjs_transitionSpeed: fast
+:revealjs_theme: black
+:source-highlighter: highlightjs
+:imagesdir: img
+:presenter_name: Jochen Rau
+:presenter_company: Infinite Cloud LLC
+:presenter_twitter: jocrau
+:presenter_email: jrau@infinitecloud.com
+:copyright: by-sa
+
+= Clojure Web Development
+{presenter_name}, {presenter_company}
+
+Architecture, Libraries, Tools
+
+== !
+
+image::simplicity.png[]
+
+== !
+
+image::complexity.png[]
+
+== Building Blocks of a Web Application
+
+[cols="2*.<"]
+|===
+a|- HTTP Server, Web Sockets
+  - Request Handling
+  - Routing
+  - HTML Templating
+  - Persistence
+  - Input Validation
+  - Domain Modeling
+
+a|- HTTP level Security (CORS, CSRF, etc.)
+  - Authentication, Authorisation
+  - Session Handling
+  - Web User Experience (UI, client-side development)
+|===
+
+== What to look out for?
+
+[cols="2*.<"]
+|===
+a|- features
+  - philosophy, architecture
+  - well documented
+    * existent
+    * complete
+    * easy to understand and follow
+    * readable code
+  - well tested
+    * expressive, readable tests
+
+a|- up- and downstream dependencies (see: https://crossclj.info/)
+    * widely used
+    * up-to-date dependencies
+  - developer network
+    * number of collaborators
+    * style of collaboration (pull-requests, core team, etc.)
+    * backing by company or OSS association
+  - issue queue, road map
+  - forums, comparisons, testimonials from colleagues
+  - license, costs
+  - don't forget Java and JavaScript libraries
+|===
+
+== HTTP Request Handling
+
+- link:http://clojure-liberator.github.io/liberator/[Liberator]
+    * asdfsdf
+- link:https://github.com/juxt/yada[Yada]
+
+== Routing
+
+- link:https://github.com/weavejester/compojure[Compojure]
+  * well established and maintained
+  * built around HTTP verbs
+- link:https://github.com/DomKM/silk[silk]
+- link:https://github.com/juxt/bidi[bidi]
+  * simple but powerful
+  * well maintained
+  * personal favorite
+
+Good comparison: https://github.com/juxt/bidi#comparison-with-other-routing-libraries
+
+== Security
+
+- link:https://github.com/cemerick/friend[Friend]
+  * opinionated and relatively complex
+  * batteries included
+- link:https://github.com/funcool/buddy[buddy]
+  * modular and flexible
+  * well maintained
+
+== HTML Templating
+
+- link:https://github.com/cemerick/friend[Friend]
+  * opinionated and relatively complex
+  * batteries included
+- link:https://github.com/funcool/buddy[buddy]
+  * modular and flexible
+  * well maintained
+
+== Frameworks
+
+- link:https://github.com/pedestal/pedestal[Pedestal]
+- link:http://www.luminusweb.net/[Luminus]
+- link:http://hoplon.io/[Hoplon]
+- link:http://pedestal.io/[Pedestal]
+  * focuses on APIs
+- link:http://arachne-framework.org/[Arachne]
+  * well known community members behind it
+  * early in development
+
+== Build Your Own Web Stack
+
+image::byob.jpg[]
+
+== Build Your Own Web Stack
+
+Recommendation: start with your own simple stack
+
+- Clojure/Clojurescript
+- Ring
+- Yada/Bidi
+- Buddy
+- Hiccup
+- Reagent
+
+[fragement]#... then extend or switch to exiting framework#
+
+== Thanks!
+
+Jochen Rau +
+Infinite Cloud LLC +
+jrau@infinitecloud.com

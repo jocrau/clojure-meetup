@@ -123,7 +123,7 @@ Source: http://www.cs.yale.edu/homes/perlis-alan/quotes.html
 
 image::blueprint.jpg[]
 
-= Links
+== Links
 
 - link:http://cs.lmu.edu/~ray/notes/paradigms/[Alan Perlis Quotes]
 - link:http://www.tryclj.com/[Browser REPL for Clojure]
@@ -134,7 +134,7 @@ image::blueprint.jpg[]
 - link:https://www.youtube.com/watch?v=M3_xnTK6-pA[Larry Garfield: Functional PHP, 2014]
 - link:http://clojure.org/reference/reader[Clojure Docs]
 
-= Thanks!
+== Thanks!
 
 Jochen Rau +
 Infinite Cloud LLC +

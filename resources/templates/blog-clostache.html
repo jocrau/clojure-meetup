@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<h1>{{blog-title}}</h1>
+
+{{#posts}}
+<article>
+    <header>
+        <h1>{{title}}</h1>
+        <p>By <span class="author">{{author}}</span></p>
+    </header>
+    <p>{{content}}</p>
+</article>
+{{/posts}}
+
+</body>
+</html>

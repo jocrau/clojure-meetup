@@ -1,0 +1,8 @@
+# Clojure Meetup
+
+## Generating Slides
+
+The slides are generated using Asciidoc and reveal.js. Follow the instructions on https://github.com/asciidoctor/asciidoctor-reveal.js to render the HTML file from the adoc files in `/resources/slides/`. For example, use the following command to transform all `.adoc` files:
+
+   bundle exec asciidoctor-revealjs *.adoc
+
