@@ -26,7 +26,7 @@
                  [enlive "1.1.6"]
                  [de.ubercode.clostache/clostache "1.4.0"]
 
-                 [proto-repl "0.3.1"]]
+                 [org.clojure/tools.namespace "0.2.11"]]
   :main ^:skip-aot meetup.intro
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
