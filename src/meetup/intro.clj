@@ -20,11 +20,14 @@
 
   [1 2 "foo" :bar]
 
+  ;; tag::simpleMap[]
   {:first-name "Jochen"
    :last-name  "Rau"}
+  ;; end::simpleMap[]
 
   {"first-name" "Jochen" "last-name" "Rau"}
 
+  ;; tag::nestedMap[]
   {:first-name "Jochen"
    :last-name  "Rau"
    :shoe-size  9
@@ -36,25 +39,31 @@
                 {:address "6 North Street"
                  :zip     "01018"
                  :city    "Hatfield"}]}
+  ;; end::nestedMap[]
 
+  ;; tag::set[]
   #{"foo" "bar" "baz"}
+  ;; end::set[]
   ;#{"foo" "bar" "foo" "baz"}
 
   ;; Vars (not variables) and Immutability
 
+  ;; tag::def[]
   (def my-name "Jochen")
-
   my-name
+  ;; end::def[]
 
-  ; local bindings
+  ;; tag::localBinding[]
   (let [my-name "Shawn"]
     my-name)
-
   my-name
+  ;; end::localBinding[]
 
+  ;; tag::reDef[]
   (def my-name "Shawn")
-
   my-name
+  ;; end::reDef[]
+
   ;; Wait, isn't that mutable then?
   ;; see slide 1 ;-)
 

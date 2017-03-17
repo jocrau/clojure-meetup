@@ -57,7 +57,7 @@ Some languages are "pure" functional programming languages, some make it almost 
 [source,clojure]
 --
     (defn add3 [number] (+ number 3))
-    (defn twice [fun number] (fun (fun number))
+    (defn twice [fun number] (fun (fun number)))
     (twice add3 5)
     ; 11
 --

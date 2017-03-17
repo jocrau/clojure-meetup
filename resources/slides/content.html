@@ -12,7 +12,7 @@ is a mindset<br>
     echo($twice($add3, 5));
     // 11</code></pre></div></div>
 <div class="listingblock"><div class="content"><pre class="highlight"><code class="clojure language-clojure">    (defn add3 [number] (+ number 3))
-    (defn twice [fun number] (fun (fun number))
+    (defn twice [fun number] (fun (fun number)))
     (twice add3 5)
     ; 11</code></pre></div></div></section>
 <section><div class="paragraph"><p>Functional Programming<br>
