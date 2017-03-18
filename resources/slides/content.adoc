@@ -106,7 +106,16 @@ a|- Imperative
 
 image::blueprint.jpg[]
 
-link:http://cs.lmu.edu/~ray/notes/paradigms/[Alan Perlis Quotes]
+== !
+
+Download the code to interactively follow the tutorial:
+
+image::github.png[]
+
++++<small>+++
+link:https://github.com/jocrau/clojure-meetup/archive/master.zip[https://github.com/jocrau/clojure-meetup/archive/master.zip]
++++</small>+++
+
 
 == Links
 

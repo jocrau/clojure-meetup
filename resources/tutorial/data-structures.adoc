@@ -64,7 +64,7 @@ Yes, that's weird, but incredibly helpful:
 (first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))
 ----
 
-== Adding and removing elements
+== Adding and removing values
 
 [.eval-clojure]
 ----

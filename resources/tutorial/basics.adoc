@@ -128,7 +128,7 @@ What happens if you change `"boom"` into `"baz"`.
 (conj #{"foo" "bar" "baz"} "boom")
 ----
 
-There is also a sorted set. But it might work a bit different as one might expect.
+There is also a sorted set. But it works a bit different as one might expect.
 
 [.eval-clojure]
 ----
