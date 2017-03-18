@@ -520,13 +520,6 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div id="content">
-<div id="preamble">
-<div class="sectionbody">
-<div class="paragraph">
-<p>Paradigms and Real-World Use</p>
-</div>
-</div>
-</div>
 <div class="sect1">
 <h2 id="_scalar_values">Scalar Values</h2>
 <div class="sectionbody">
@@ -592,7 +585,7 @@ nil</pre>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(conj [1 2 "foo" :bar] "new)</pre>
+<pre>(conj [1 2 "foo" :bar] "new")</pre>
 </div>
 </div>
 </div>
@@ -654,7 +647,7 @@ nil</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Try to change</p>
+<p>What happens if you change <code>"boom"</code> into <code>"baz"</code>.</p>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
@@ -662,7 +655,7 @@ nil</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>There is also a sorted set:</p>
+<p>There is also a sorted set. But it might work a bit different as one might expect.</p>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
@@ -679,8 +672,8 @@ nil</pre>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre> (def my-name "Jochen")
- my-name</pre>
+<pre>(def my-name "Jochen")
+my-name</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -688,9 +681,10 @@ nil</pre>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre> (let [my-name "Shawn"]
-   my-name)
- my-name</pre>
+<pre>(let [my-name "Shawn"]
+  (println my-name)
+  my-name)
+my-name</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -732,7 +726,7 @@ my-name</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-18 09:42:32 EDT
+Last updated 2017-03-18 10:22:25 EDT
 </div>
 </div>
 <link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">

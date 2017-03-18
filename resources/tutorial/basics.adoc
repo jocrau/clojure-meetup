@@ -11,8 +11,6 @@
 = Functional Programming
 {presenter_name}, {presenter_company}
 
-Paradigms and Real-World Use
-
 == Scalar Values
 
 
@@ -71,7 +69,7 @@ Try some expressions yourself:
 
 [.eval-clojure]
 ----
-(conj [1 2 "foo" :bar] "new)
+(conj [1 2 "foo" :bar] "new")
 ----
 
 == Maps (Associative Arrays
@@ -123,14 +121,14 @@ A set of unordered, distinct elements. Try to add "foo" a second time.
 #{"foo" "bar" "baz"}
 ----
 
-Try to change
+What happens if you change `"boom"` into `"baz"`.
 
 [.eval-clojure]
 ----
 (conj #{"foo" "bar" "baz"} "boom")
 ----
 
-There is also a sorted set:
+There is also a sorted set. But it might work a bit different as one might expect.
 
 [.eval-clojure]
 ----
@@ -144,17 +142,18 @@ A Var is a way in clojure to keep a reference to a value. The `def` form creates
 
 [.eval-clojure]
 ----
- (def my-name "Jochen")
- my-name
+(def my-name "Jochen")
+my-name
 ----
 
 The let binding form allows to bind a value to a Var only in the local context. What happens if you remove the last line?
 
 [.eval-clojure]
 ----
- (let [my-name "Shawn"]
-   my-name)
- my-name
+(let [my-name "Shawn"]
+  (println my-name)
+  my-name)
+my-name
 ----
 
 We can define a var again.

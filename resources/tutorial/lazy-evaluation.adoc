@@ -11,8 +11,6 @@
 = Functional Programming
 {presenter_name}, {presenter_company}
 
-Paradigms and Real-World Use
-
 == Lazy Evaluation
 
 [.eval-clojure]

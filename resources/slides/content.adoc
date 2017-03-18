@@ -64,13 +64,6 @@ Some languages are "pure" functional programming languages, some make it almost 
 
 == !
 
-Functional Programming +
-affects the structure of a program +
-[fragment]#how we program# +
-[fragment]#and how we think about programming.#
-
-== !
-
 > "A language that doesn't affect the way you think about programming, is not worth knowing."
 
 Alan Perlis
@@ -111,17 +104,9 @@ a|- Imperative
 
 == !
 
-> "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures."
-
-Alan Perlis
-
-+++<small>+++
-Source: http://www.cs.yale.edu/homes/perlis-alan/quotes.html
-+++</small>+++
-
-== !
-
 image::blueprint.jpg[]
+
+link:http://cs.lmu.edu/~ray/notes/paradigms/[Alan Perlis Quotes]
 
 == Links
 
@@ -139,3 +124,13 @@ image::blueprint.jpg[]
 Jochen Rau +
 Infinite Cloud LLC +
 jrau@infinitecloud.com
+
+== !
+
+> "It is better to have 100 functions operate on one data structure than 10 functions on 10 data structures."
+
+Alan Perlis
+
++++<small>+++
+Source: http://www.cs.yale.edu/homes/perlis-alan/quotes.html
++++</small>+++
