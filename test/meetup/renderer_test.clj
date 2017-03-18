@@ -9,5 +9,6 @@
 (deftest render-test
   (testing "transforming items into a HTML list"
     (let [result (render-list mock-data)]
+      (clojure.pprint/pprint result)
       (is (re-find #"<li>Foo</li>" result))
       (is (re-find #"<li>Bar</li>" result)))))

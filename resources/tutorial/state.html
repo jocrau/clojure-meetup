@@ -528,129 +528,65 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_accessing_a_deeply_nested_data_structure">Accessing a deeply nested data structure</h2>
+<h2 id="_state">State</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>An atom is a reference to a value.</p>
+</div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(def joe {:first-name "Jochen"
-          :last-name  "Rau"
-          :shoe-size  9
-          :birth-date #inst"1971-03-15"
-          :locations  [{:address "120 Pulpit Hill Rd"
-                        :zip     "01002"
-                        :city    "Amherst"
-                        :status  ::current}
-                       {:address "60 North Street"
-                        :zip     "01018"
-                        :city    "Hatfield"}]})</pre>
+<pre>(def balance (atom 100))
+#_(swap! balance + 10)
+(deref balance)</pre>
 </div>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(get joe :first-name)</pre>
+<pre>(reset! balance 100)
+(deref balance)</pre>
 </div>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(get (get (get joe :locations) 0) :city)</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(get-in joe [:locations 0 :city])</pre>
+<pre>(defn slow-fun [n]
+  (nth (map inc (range)) n))
+
+(time (slow-fun 1000000))</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>The <code>get-in</code> function accepts a third argument which is the default value.</p>
-</div>
-<div class="paragraph">
-<p>Keywords are functions:</p>
+<p>Let&#8217;s set up a cache for the function results.</p>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(:first-name joe)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Yes, that&#8217;s weird, but incredibly helpful:</p>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(map :city (:locations joe))</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))</pre>
+<pre>(def mem (atom {}))
+
+(defn cache [fun]
+  (fn [&amp; args]
+    (if-let [cached-value (get @mem args)]
+      cached-value
+      (let [evaluated-value (apply fun args)]
+        (swap! mem assoc args evaluated-value)
+        evaluated-value))))
+
+(def cached-slow-fun (cache slow-fun))</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>(if true "Ok" "Nope")
-(if (&gt; 3 10) "Ok" "Nope")
-(when true "Ok" "Nope")
-;; ??</p>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_adding_and_removing_elements">Adding and removing elements</h2>
-<div class="sectionbody">
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>[(conj [:a :b] :c)
-(conj '(:a :b) :c)
-(conj #{:a :b} :c)
-(conj #{:a :b} :b)
-(conj {:a 1 :b 2} [:c 3])]</pre>
-</div>
+<p>There is no benefit the first time the function is called. Try to change the argument and change it back to the original value. Watch the cache as more cache values are added.</p>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(assoc joe :first-name "Shawn")
-joe</pre>
+<pre>(time (cached-slow-fun 1000000))
+@mem</pre>
 </div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>[(first [:a :b])
-(first '(:a :b))
-(first #{:a :b})
-(first {:a 1 :b 2})]</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(rest [:a :b :c])</pre>
-</div>
-</div>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="syntax.html">Syntax</a></p>
-</li>
-<li>
-<p><a href="functions.html">Functions</a></p>
-</li>
-<li>
-<p><a href="#">Data Structures</a></p>
-</li>
-<li>
-<p><a href="lazy-evaluation.html">Lazy Evaluation</a></p>
-</li>
-<li>
-<p><a href="recursion.html">Recursion</a></p>
-</li>
-<li>
-<p><a href="state.html">State</a></p>
-</li>
-</ol>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-18 05:23:16 EDT
+Last updated 2017-03-18 05:49:10 EDT
 </div>
 </div>
 <link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">
