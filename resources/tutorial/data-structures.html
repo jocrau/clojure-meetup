@@ -584,12 +584,6 @@ table.CodeRay td.code>pre{padding:0}
 <pre>(first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))</pre>
 </div>
 </div>
-<div class="paragraph">
-<p>(if true "Ok" "Nope")
-(if (&gt; 3 10) "Ok" "Nope")
-(when true "Ok" "Nope")
-;; ??</p>
-</div>
 </div>
 </div>
 <div class="sect1">
@@ -612,6 +606,12 @@ joe</pre>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
+<pre>(update-in joe [:locations 0] dissoc :status)
+joe</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
 <pre>[(first [:a :b])
 (first '(:a :b))
 (first #{:a :b})
@@ -626,7 +626,7 @@ joe</pre>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="syntax.html">Syntax</a></p>
+<p><a href="basics.html">Basics</a></p>
 </li>
 <li>
 <p><a href="functions.html">Functions</a></p>
@@ -650,15 +650,15 @@ joe</pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-18 05:23:16 EDT
+Last updated 2017-03-18 10:04:11 EDT
 </div>
 </div>
 <link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">
 
 <script>
     window.klipse_settings = {
-        selector: '.eval-clojure',
-        selector_reagent: '.eval-reagent',
+        selector: '.eval-clojure pre',
+        selector_reagent: '.eval-reagent pre',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,
@@ -674,25 +674,33 @@ Last updated 2017-03-18 05:23:16 EDT
 </script>
 <script src="http://app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <style>
+.listingblock pre {
+    padding: 5px 10px !important;
+}
+
 .CodeMirror {
     padding: 10px;
     border: none !important;
 }
 
-.CodeMirror:last-child::before {
-  content: "Output:";
-  display: block;
+.CodeMirror:nth-child(even)::before {
+  content: "=> ";
+  display: inline;
   margin: -10px;
   padding: 15px 10px 5px 10px;
-  background-color: #272822;
-  color: #aaaaaa;
   font-family: Montserrat, Arial, sans-serif;
-  font-style: italic;
 }
 
 .CodeMirror:last-child {
   background-color: #272822;
   border: 1px solid #2196f3 !important;
+}
+
+
+.klipse-container:not(:empty):before {
+    content: "Out: ";
+    font-weight: bold;
+    font-family: monospace;
 }
 </style>
 </body>

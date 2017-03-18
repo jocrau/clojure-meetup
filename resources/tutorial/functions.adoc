@@ -15,7 +15,7 @@ Paradigms and Real-World Use
 
 == Functions
 
-The preceding apostrophe instructs the Clojure reader not to evaluate
+The preceding apostrophe instructs the Clojure reader not to evaluate the list as function call.
 
 [.eval-clojure]
 ----

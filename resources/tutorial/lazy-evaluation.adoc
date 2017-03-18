@@ -31,34 +31,33 @@ Paradigms and Real-World Use
 
 [.eval-clojure]
 ----
-(def numbers (range))
-(take 10 numbers)
+(take 10 (range))
 ----
 
 [.eval-clojure]
 ----
-(time (nth numbers 1000000))
+(time (nth (range) 1000000))
 ----
 
 [.eval-clojure]
 ----
-#_(time (nth (map inc numbers) 1000000))
-----
-
-[.eval-clojure]
-----
-#_(filter (fn [number]
-          (println number)
-          (= number 20))
-        (map inc (range)))
+#_(time (nth (map inc (range)) 1000000))
 ----
 
 [.eval-clojure]
 ----
 #_(first (filter (fn [number]
+          (println number)
+          (= number 20))
+        (map inc (range))))
+----
+
+[.eval-clojure]
+----
+#_(filter (fn [number]
                  (println number)
                  (= number 20))
-               (map inc (range))))
+               (map inc (range)))
 ----
 
 include::parts.adoc[]

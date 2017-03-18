@@ -2,8 +2,8 @@
 
 <script>
     window.klipse_settings = {
-        selector: '.eval-clojure',
-        selector_reagent: '.eval-reagent',
+        selector: '.eval-clojure pre',
+        selector_reagent: '.eval-reagent pre',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,
@@ -19,24 +19,32 @@
 </script>
 <script src="http://app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <style>
+.listingblock pre {
+    padding: 5px 10px !important;
+}
+
 .CodeMirror {
     padding: 10px;
     border: none !important;
 }
 
-.CodeMirror:last-child::before {
-  content: "Output:";
-  display: block;
+.CodeMirror:nth-child(even)::before {
+  content: "=> ";
+  display: inline;
   margin: -10px;
   padding: 15px 10px 5px 10px;
-  background-color: #272822;
-  color: #aaaaaa;
   font-family: Montserrat, Arial, sans-serif;
-  font-style: italic;
 }
 
 .CodeMirror:last-child {
   background-color: #272822;
   border: 1px solid #2196f3 !important;
+}
+
+
+.klipse-container:not(:empty):before {
+    content: "Out: ";
+    font-weight: bold;
+    font-family: monospace;
 }
 </style>

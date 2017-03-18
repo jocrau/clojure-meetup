@@ -528,63 +528,187 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_state">State</h2>
+<h2 id="_scalar_values">Scalar Values</h2>
+<div class="sectionbody">
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>1
+2.3
+1/3
+"Hello World"
+\a
+:foo
+:my.namespace/foo
+::foo
+#uuid "01a38532-c3d2-4ad8-89fa-3a4f1ea3fe69"
+#inst "2016-10-09"
+true
+false
+nil</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Try some expressions yourself:</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>#inst"2016-10-09"</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_lists">Lists</h2>
+<div class="sectionbody">
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(list 1 2 "foo" :bar)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>'(1 2 "foo" :bar)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(conj '(1 2 "foo" :bar) "new")</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vectors">Vectors</h2>
+<div class="sectionbody">
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(vector 1 2 "foo" :bar)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>[1 2 "foo" :bar]</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(conj [1 2 "foo" :bar] "new)</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_maps_associative_arrays">Maps (Associative Arrays</h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>An atom is a reference to a value.</p>
+<p>A map consists of key-value pairs. Keys and values can be any clojure data (strings, numbers, other maps, etc.).</p>
+</div>
+<div class="paragraph">
+<p>Change the keys to strings.</p>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(def balance (atom 100))
-#_(swap! balance + 10)
-(deref balance)</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(reset! balance 100)
-(deref balance)</pre>
+<pre>{:first-name "Jochen"
+ :last-name  "Rau"}</pre>
 </div>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(defn slow-fun [n]
-  (nth (map inc (range)) n))
-
-(time (slow-fun 1000000))</pre>
+<pre>(conj {:first-name "Jochen" :last-name  "Rau"} [:new "value"])</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s set up a cache for the function results.</p>
+<p>Maps can be deeply nested:</p>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(def mem (atom {}))
-
-(defn cache [fun]
-  (fn [&amp; args]
-    (if-let [cached-value (get @mem args)]
-      cached-value
-      (let [evaluated-value (apply fun args)]
-        (swap! mem assoc args evaluated-value)
-        evaluated-value))))
-
-(def cached-slow-fun (cache slow-fun))</pre>
+<pre>{:first-name "Jochen"
+ :last-name  "Rau"
+ :shoe-size  9
+ :birth-date #inst"1971-03-15"
+ :locations  [{:address "120 Pulpit Hill Rd"
+               :zip     "01002"
+               :city    "Amherst"
+               :status  ::current}
+              {:address "6 North Street"
+               :zip     "01018"
+               :city    "Hatfield"}]}</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_set">Set</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A set of unordered, distinct elements. Try to add "foo" a second time.</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(hash-set "foo" "bar" "baz")</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>#{"foo" "bar" "baz"}</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>There is no benefit the first time the function is called. Try to change the argument and change it back to the original value. Watch the cache as more cache values are added.</p>
+<p>Try to change</p>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(time (cached-slow-fun 1000000))
-@mem</pre>
+<pre>(conj #{"foo" "bar" "baz"} "boom")</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>There is also a sorted set:</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(sorted-set "foo" "bar" "baz")</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_vars_are_not_variables">Vars (are not variables)</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Var is a way in clojure to keep a reference to a value. The <code>def</code> form creates a Var. Vars are namespaced.</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre> (def my-name "Jochen")
+ my-name</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The let binding form allows to bind a value to a Var only in the local context. What happens if you remove the last line?</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre> (let [my-name "Shawn"]
+   my-name)
+ my-name</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can define a var again.</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(def my-name "Shawn")
+my-name</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Wait, isn&#8217;t that mutable then?</p>
 </div>
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p><a href="basics.html">Basics</a></p>
+<p><a href="#">Basics</a></p>
 </li>
 <li>
 <p><a href="functions.html">Functions</a></p>
@@ -599,7 +723,7 @@ table.CodeRay td.code>pre{padding:0}
 <p><a href="recursion.html">Recursion</a></p>
 </li>
 <li>
-<p><a href="#">State</a></p>
+<p><a href="state.html">State</a></p>
 </li>
 </ol>
 </div>
@@ -608,7 +732,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-18 06:21:08 EDT
+Last updated 2017-03-18 09:42:32 EDT
 </div>
 </div>
 <link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">

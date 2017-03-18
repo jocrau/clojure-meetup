@@ -66,11 +66,6 @@ Yes, that's weird, but incredibly helpful:
 (first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))
 ----
 
-(if true "Ok" "Nope")
-(if (> 3 10) "Ok" "Nope")
-(when true "Ok" "Nope")
-;; ??
-
 == Adding and removing elements
 
 [.eval-clojure]
@@ -85,6 +80,12 @@ Yes, that's weird, but incredibly helpful:
 [.eval-clojure]
 ----
 (assoc joe :first-name "Shawn")
+joe
+----
+
+[.eval-clojure]
+----
+(update-in joe [:locations 0] dissoc :status)
 joe
 ----
 
