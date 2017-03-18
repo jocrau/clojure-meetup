@@ -1,0 +1,104 @@
+:docinfo: shared
+:icons: font
+:source-highlighter: coderay
+:imagesdir: img
+:presenter_name: Jochen Rau
+:presenter_company: Infinite Cloud LLC
+:presenter_twitter: jocrau
+:presenter_email: jrau@infinitecloud.com
+:copyright: by-sa
+
+= Functional Programming
+{presenter_name}, {presenter_company}
+
+Paradigms and Real-World Use
+
+== Accessing a deeply nested data structure
+
+[.eval-clojure]
+----
+(def joe {:first-name "Jochen"
+          :last-name  "Rau"
+          :shoe-size  9
+          :birth-date #inst"1971-03-15"
+          :locations  [{:address "120 Pulpit Hill Rd"
+                        :zip     "01002"
+                        :city    "Amherst"
+                        :status  ::current}
+                       {:address "60 North Street"
+                        :zip     "01018"
+                        :city    "Hatfield"}]})
+----
+
+[.eval-clojure]
+----
+(get joe :first-name)
+----
+
+[.eval-clojure]
+----
+(get (get (get joe :locations) 0) :city)
+----
+
+[.eval-clojure]
+----
+(get-in joe [:locations 0 :city])
+----
+
+The `get-in` function accepts a third argument which is the default value.
+
+Keywords are functions:
+
+[.eval-clojure]
+----
+(:first-name joe)
+----
+
+Yes, that's weird, but incredibly helpful:
+
+[.eval-clojure]
+----
+(map :city (:locations joe))
+----
+
+[.eval-clojure]
+----
+(first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))
+----
+
+(if true "Ok" "Nope")
+(if (> 3 10) "Ok" "Nope")
+(when true "Ok" "Nope")
+;; ??
+
+== Adding and removing elements
+
+[.eval-clojure]
+----
+[(conj [:a :b] :c)
+(conj '(:a :b) :c)
+(conj #{:a :b} :c)
+(conj #{:a :b} :b)
+(conj {:a 1 :b 2} [:c 3])]
+----
+
+[.eval-clojure]
+----
+(assoc joe :first-name "Shawn")
+joe
+----
+
+[.eval-clojure]
+----
+[(first [:a :b])
+(first '(:a :b))
+(first #{:a :b})
+(first {:a 1 :b 2})]
+----
+
+[.eval-clojure]
+----
+(rest [:a :b :c])
+----
+
+include::parts.adoc[]

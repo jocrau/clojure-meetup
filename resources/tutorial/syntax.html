@@ -528,11 +528,11 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_basic_expressions_and_evaluation">Basic Expressions and Evaluation</h2>
+<h2 id="_expressions_and_evaluation">Expressions and Evaluation</h2>
 <div class="sectionbody">
-<div class="listingblock">
+<div class="listingblock eval-clojure">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="clojure">    1
+<pre>    1
     2.3
     1/3
     "Hello World"
@@ -540,11 +540,11 @@ table.CodeRay td.code>pre{padding:0}
     :foo
     :my.namespace/foo
     ::foo
-    #uuid"01a38532-c3d2-4ad8-89fa-3a4f1ea3fe69"
-    #inst"2016-10-09"
+    #uuid "01a38532-c3d2-4ad8-89fa-3a4f1ea3fe69"
+    #inst "2016-10-09"
     true
     false
-    nil</code></pre>
+    nil</pre>
 </div>
 </div>
 <div class="paragraph">
@@ -562,23 +562,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_code">Code</h2>
-<div class="sectionbody">
-<div class="openblock eval-clojure">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre>(defn add3 [number] (+ number 3))
-(defn twice [fun number] (fun (fun number)))
-(twice add3 5)</pre>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_vectors">Vectors</h2>
+<h2 id="_vector">Vector</h2>
 <div class="sectionbody">
 <div class="openblock eval-clojure">
 <div class="content">
@@ -592,10 +576,23 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="sect1">
-<h2 id="_maps">Maps</h2>
+<h2 id="_list">List</h2>
+<div class="sectionbody">
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>'(+ 1 2 3 4)</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_map_associative_array">Map (associative array)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A map consists of key-value pairs. Keys and values can be any clojure data (strings, numbers, other maps, etc.).</p>
+</div>
+<div class="paragraph">
+<p>Change the keys to strings.</p>
 </div>
 <div class="openblock eval-clojure">
 <div class="content">
@@ -608,7 +605,7 @@ table.CodeRay td.code>pre{padding:0}
 </div>
 </div>
 <div class="paragraph">
-<p>As a consequence, maps can be deeply nested.</p>
+<p>Maps can be deeply nested:</p>
 </div>
 <div class="openblock eval-clojure">
 <div class="content">
@@ -651,6 +648,9 @@ table.CodeRay td.code>pre{padding:0}
 <div class="sect1">
 <h2 id="_vars_are_not_variables">Vars (are not variables)</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>A Var is a way in clojure to keep a reference to a value. The <code>def</code> form creates a Var. Vars are namespaced.</p>
+</div>
 <div class="openblock eval-clojure">
 <div class="content">
 <div class="literalblock">
@@ -660,6 +660,9 @@ my-name</pre>
 </div>
 </div>
 </div>
+</div>
+<div class="paragraph">
+<p>The let binding form allows to bind a value to a Var only in the local context. What happens if you remove the last line?</p>
 </div>
 <div class="openblock eval-clojure">
 <div class="content">
@@ -672,6 +675,9 @@ my-name</pre>
 </div>
 </div>
 </div>
+<div class="paragraph">
+<p>We can define a var again.</p>
+</div>
 <div class="openblock eval-clojure">
 <div class="content">
 <div class="literalblock">
@@ -682,44 +688,34 @@ my-name</pre>
 </div>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_reagent">Reagent</h2>
-<div class="sectionbody">
 <div class="paragraph">
-<p>First, let&#8217;s require the Reagent library (which includes all the React dependencies).</p>
+<p>Wait, isn&#8217;t that mutable then?</p>
 </div>
-<div class="openblock eval-reagent">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre>(require '[reagent.core :as r])</pre>
-</div>
-</div>
-</div>
-</div>
-<div class="openblock eval-reagent">
-<div class="content">
-<div class="literalblock">
-<div class="content">
-<pre>(defn hello [name]
-  [:p (str "Hello " name "!")])</pre>
-</div>
-</div>
-<div class="literalblock">
-<div class="content">
-<pre>[hello "Klipse"]</pre>
-</div>
-</div>
-</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#">Syntax</a></p>
+</li>
+<li>
+<p><a href="functions.html">Functions</a></p>
+</li>
+<li>
+<p><a href="data-structures.html">Data Structures</a></p>
+</li>
+<li>
+<p><a href="lazy-evaluation.html">Lazy Evaluation</a></p>
+</li>
+<li>
+<p><a href="recursion.html">Recursion</a></p>
+</li>
+</ol>
 </div>
 </div>
 </div>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-17 18:26:27 EDT
+Last updated 2017-03-17 22:08:40 EDT
 </div>
 </div>
 <link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">
@@ -743,6 +739,26 @@ Last updated 2017-03-17 18:26:27 EDT
 </script>
 <script src="http://app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <style>
+.CodeMirror {
+    padding: 10px;
+    border: none !important;
+}
+
+.CodeMirror:last-child::before {
+  content: "Output:";
+  display: block;
+  margin: -10px;
+  padding: 15px 10px 5px 10px;
+  background-color: #272822;
+  color: #aaaaaa;
+  font-family: Montserrat, Arial, sans-serif;
+  font-style: italic;
+}
+
+.CodeMirror:last-child {
+  background-color: #272822;
+  border: 1px solid #2196f3 !important;
+}
 </style>
 </body>
 </html>

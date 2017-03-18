@@ -19,4 +19,24 @@
 </script>
 <script src="http://app.klipse.tech/plugin/js/klipse_plugin.js"></script>
 <style>
+.CodeMirror {
+    padding: 10px;
+    border: none !important;
+}
+
+.CodeMirror:last-child::before {
+  content: "Output:";
+  display: block;
+  margin: -10px;
+  padding: 15px 10px 5px 10px;
+  background-color: #272822;
+  color: #aaaaaa;
+  font-family: Montserrat, Arial, sans-serif;
+  font-style: italic;
+}
+
+.CodeMirror:last-child {
+  background-color: #272822;
+  border: 1px solid #2196f3 !important;
+}
 </style>

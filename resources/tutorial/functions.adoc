@@ -1,0 +1,139 @@
+:docinfo: shared
+:icons: font
+:source-highlighter: coderay
+:imagesdir: img
+:presenter_name: Jochen Rau
+:presenter_company: Infinite Cloud LLC
+:presenter_twitter: jocrau
+:presenter_email: jrau@infinitecloud.com
+:copyright: by-sa
+
+= Functional Programming
+{presenter_name}, {presenter_company}
+
+Paradigms and Real-World Use
+
+== Functions
+
+The preceding apostrophe instructs the Clojure reader not to evaluate
+
+[.eval-clojure]
+----
+'(+ 1 2 3 4)
+----
+
+[.eval-clojure]
+----
+(+ 1 2 3 4)
+----
+
+Clojure uses the prefix notation instead of the more common infix notation `1+2+3+4`.
+
+The form `fn` creates an anonymous function:
+
+[.eval-clojure]
+----
+(fn [number] (+ number 3))
+----
+
+Which can be used as first element in a list:
+
+[.eval-clojure]
+----
+((fn [number] (+ number 3)) 5)
+----
+
+We can bind an anonymous function to a Var to be able to reference it by name:
+
+[.eval-clojure]
+----
+(def add3 (fn [number] (+ number 3)))
+
+(add3 5)
+----
+
+Or shorter:
+
+[.eval-clojure]
+----
+(def add3 (fn [number] (+ number 3)))
+
+(add3 5)
+----
+
+[.eval-clojure]
+----
+(add3 (* 2 4))
+----
+
+The function `adder` is a function that evaluates to another function.
+
+[.eval-clojure]
+----
+(def adder (fn [addend] (fn [number] (+ number addend))))
+
+((adder 10) 5)
+----
+
+[.eval-clojure]
+----
+(def add10 (adder 10))
+
+(add10 5)
+----
+
+[.eval-clojure]
+----
+(add3 (add3 5))
+----
+
+Let's implement a function that takes a function as first argument (higher-order function) and applies it twice to the second argument.
+
+[.eval-clojure]
+----
+(def twice (fn [fun number] (fun (fun number))))
+
+(twice add3 5)
+----
+
+[.eval-clojure]
+----
+(map add3 [1 2 3])
+----
+
+[.eval-clojure]
+----
+(reduce + [1 2 3])
+----
+
+[.eval-clojure]
+----
+(reduce + (map add3 [1 2 3]))
+----
+
+Who needs Hadoop®? ;-)
+
+
+Let's compose two functions into one.
+
+[.eval-clojure]
+----
+((comp str add3) 5)
+----
+
+[.eval-clojure]
+----
+(even? 3)
+----
+
+[.eval-clojure]
+----
+(map even? [1 2 3 4 5 6])
+----
+
+[.eval-clojure]
+----
+(filter even? [1 2 3 4 5 6])
+----
+
+include::parts.adoc[]
