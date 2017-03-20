@@ -1,4 +1,10 @@
-= Clojure Meetup
+= Introduction to Functional Programming in Clojure
+
+This repository contains the ever evolving content of an introduction to functional programming in Clojure (https://clojure.org/), the programming language I fell in love with many years ago (thanks Chas ;-)).
+
+To look at the slides or the tutorial, simply download the repository (or clone it) and open one of the HTML files in `resources/slides` or `resources/tutorial`.
+
+There is also a demo how to step-by-step develop a web application in Clojure from the ground up. Look for the Git tags `demo-start` and `demo-end`. Each commit in-between implements some feature towards a simple web app.
 
 == Slides
 
@@ -24,3 +30,7 @@ The IntelliJ IDEA (https://www.jetbrains.com/idea/) can trigger the rendering on
 The following screenshot shows the settings I use. Each command (one for slides and one for the tutorial) is invoked only within its scope.
 
 image::resources/img/file-watchers.png[]
+
+== Thanks!
+
+I would like to thank all of the developers that spent endless hours to creating all the libraries and tools that this tutorial is based on. Keep up the good work!
