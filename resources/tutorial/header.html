@@ -5,7 +5,9 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
-<title>Untitled</title>
+<meta name="author" content="Jochen Rau, Infinite Cloud LLC">
+<meta name="copyright" content="by-sa">
+<title>Functional Programming</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -417,38 +419,67 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 </head>
 <body class="article">
 <div id="header">
+<h1>Functional Programming</h1>
+<div class="details">
+<span id="author" class="author">Jochen Rau, Infinite Cloud LLC</span><br>
+</div>
 </div>
 <div id="content">
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p><a href="basics.html">Basics</a></p>
-</li>
-<li>
-<p><a href="functions.html">Functions</a></p>
-</li>
-<li>
-<p><a href="data-structures.html">Data Structures</a></p>
-</li>
-<li>
-<p><a href="lazy-evaluation.html">Lazy Evaluation</a></p>
-</li>
-<li>
-<p><a href="recursion.html">Recursion</a></p>
-</li>
-<li>
-<p><a href="state.html">State</a></p>
-</li>
-</ol>
+
 </div>
-</div>
-<div id="footer">
-<div id="footer-text">
-Last updated 2017-03-18 09:04:10 EDT
-</div>
-</div>
+<link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">
+
+<script>
+    window.klipse_settings = {
+        selector: '.eval-clojure pre',
+        selector_reagent: '.eval-reagent pre',
+        eval_idle_msec: 100,
+        codemirror_options_in: {
+            indentUnit: 2,
+            lineWrapping: false,
+            lineNumbers: false,
+            autoCloseBrackets: true
+        },
+        codemirror_options_out: {
+            lineWrapping: false,
+            lineNumbers: false
+        }
+    };
+</script>
+<script src="http://app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<style>
+.listingblock pre {
+    padding: 5px 10px !important;
+}
+
+.CodeMirror {
+    padding: 10px;
+    border: none !important;
+}
+
+.CodeMirror:nth-child(even)::before {
+  content: "=> ";
+  display: inline;
+  margin: -10px;
+  padding: 15px 10px 5px 10px;
+  font-family: Montserrat, Arial, sans-serif;
+}
+
+.CodeMirror:last-child {
+  background-color: #272822;
+  border: 1px solid #2196f3 !important;
+}
+
+
+.klipse-container:not(:empty):before {
+    content: "Out: ";
+    font-weight: bold;
+    font-family: monospace;
+}
+</style>
 </body>
 </html>

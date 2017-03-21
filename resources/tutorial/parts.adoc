@@ -1,6 +1,0 @@
-1. <<basics.adoc#,Basics>>
-1. <<functions.adoc#,Functions>>
-1. <<data-structures.adoc#,Data Structures>>
-1. <<lazy-evaluation.adoc#,Lazy Evaluation>>
-1. <<recursion.adoc#,Recursion>>
-1. <<state.adoc#,State>>
