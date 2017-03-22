@@ -7,14 +7,12 @@ from shooting yourself in the foot.</p></div>
 is a mindset<br>
 <span class="fragment">not a set of languages.</span></p></div>
 <aside class="notes"><div class="paragraph"><p>Some languages are "pure" functional programming languages, some make it almost impossible to work with functions. Most languages are somewhat inbetween.</p></div></aside></section>
-<section><div class="listingblock"><div class="content"><pre class="highlight"><code class="php language-php">    $add3 = function($number) { return $number + 3; };
-    $twice = function($fun, $number) { return $fun($fun($number)); }
-    echo($twice($add3, 5));
-    // 11</code></pre></div></div>
-<div class="listingblock"><div class="content"><pre class="highlight"><code class="clojure language-clojure">    (defn add3 [number] (+ number 3))
-    (defn twice [fun number] (fun (fun number)))
-    (twice add3 5)
-    ; 11</code></pre></div></div></section>
+<section id="_javascript"><h2>JavaScript</h2><div class="openblock eval-js"><div class="content"><div class="literalblock"><div class="content"><pre>$add3 = function($number) { return $number + 3; };
+$twice = function($fun, $number) { return $fun($fun($number)); }
+$twice($add3, 5);</pre></div></div></div></div></section>
+<section id="_clojure"><h2>Clojure</h2><div class="openblock eval-clojure"><div class="content"><div class="literalblock"><div class="content"><pre>(defn add3 [number] (+ number 3))
+(defn twice [fun number] (fun (fun number)))
+(twice add3 5)</pre></div></div></div></div></section>
 <section><div class="quoteblock"><blockquote><div class="paragraph"><p>"A language that doesn&#8217;t affect the way you think about programming, is not worth knowing."</p></div></blockquote></div>
 <div class="paragraph"><p>Alan Perlis</p></div>
 <div class="paragraph"><p><small>
@@ -114,4 +112,59 @@ Reveal.initialize({
       { src: 'revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
       { src: 'revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
   ]
-});</script></body></html>
+});</script><link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">
+
+<script>
+    window.klipse_settings = {
+        selector: '.eval-clojure pre',
+        selector_reagent: '.eval-reagent pre',
+        selector_eval_js: '.eval-js pre',
+        eval_idle_msec: 100,
+        codemirror_options_in: {
+            indentUnit: 2,
+            lineWrapping: false,
+            lineNumbers: false,
+            autoCloseBrackets: true
+        },
+        codemirror_options_out: {
+            lineWrapping: false,
+            lineNumbers: false
+        }
+    };
+</script>
+<script src="http://app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<style>
+.listingblock pre {
+    padding: 5px 10px !important;
+}
+
+.CodeMirror {
+    padding: 10px;
+    border: none !important;
+}
+
+.CodeMirror:last-child {
+  background-color: #272822;
+  border: 1px solid #2196f3 !important;
+}
+
+.reveal pre {
+  display: inherit;
+  width: 100%;
+  margin: auto;
+  text-align: left;
+  box-shadow: none;
+  }
+
+.reveal code {
+  font-family: monospace; }
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+  }
+
+</style></body></html>

@@ -1,0 +1,56 @@
+<link rel="stylesheet" type="text/css" href="http://app.klipse.tech/css/codemirror.css">
+
+<script>
+    window.klipse_settings = {
+        selector: '.eval-clojure pre',
+        selector_reagent: '.eval-reagent pre',
+        selector_eval_js: '.eval-js pre',
+        eval_idle_msec: 100,
+        codemirror_options_in: {
+            indentUnit: 2,
+            lineWrapping: false,
+            lineNumbers: false,
+            autoCloseBrackets: true
+        },
+        codemirror_options_out: {
+            lineWrapping: false,
+            lineNumbers: false
+        }
+    };
+</script>
+<script src="http://app.klipse.tech/plugin/js/klipse_plugin.js"></script>
+<style>
+.listingblock pre {
+    padding: 5px 10px !important;
+}
+
+.CodeMirror {
+    padding: 10px;
+    border: none !important;
+}
+
+.CodeMirror:last-child {
+  background-color: #272822;
+  border: 1px solid #2196f3 !important;
+}
+
+.reveal pre {
+  display: inherit;
+  width: 100%;
+  margin: auto;
+  text-align: left;
+  box-shadow: none;
+  }
+
+.reveal code {
+  font-family: monospace; }
+
+.reveal pre code {
+  display: block;
+  padding: 5px;
+  overflow: auto;
+  max-height: 400px;
+  word-wrap: normal;
+  }
+
+</style>
