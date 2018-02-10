@@ -27,6 +27,7 @@
                  [de.ubercode.clostache/clostache "1.4.0"]
 
                  [org.clojure/tools.namespace "0.2.11"]]
+  :plugins [[lein-gorilla "0.4.0"]]
   :main ^:skip-aot meetup.intro
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
