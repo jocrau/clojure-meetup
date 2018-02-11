@@ -2,7 +2,7 @@
 
 This repository contains the ever evolving content of an introduction to functional programming in Clojure (https://clojure.org/), the programming language I fell in love with many years ago (thanks Chas ;-)).
 
-To look at the slides or the tutorial, simply download the repository (or clone it) and open one of the HTML files in `resources/slides` or `resources/tutorial`.
+To look at the slides or the tutorial, simply download the repository (or clone it) and open one of the HTML files in `slides/` or `tutorials`.
 
 There is also a demo how to step-by-step develop a web application in Clojure from the ground up. Look for the Git tags `demo-start` and `demo-end`. Each commit in-between implements some feature towards a simple web app.
 
@@ -12,15 +12,15 @@ The slides use the Reveal.js presentation framework (http://lab.hakim.se/reveal-
 
 Render the HTML file from the `*.adoc` files in `resources/slides` (invoked from the project folder) using
 
-   bundle exec asciidoctor-revealjs resources/slides/*.adoc
+   bundle exec asciidoctor-revealjs slides/**/*.adoc
 
 == Tutorial
 
 The HTML pages of the tutorial are also written in Asciidoc using the Asciidoctor toolchain. The interactive code evaluation is done by the KLIPSE framework (https://github.com/viebel/klipse).
 
-Render the HTML file from the `*.adoc` files in `resources/tutorial` (invoked from the project folder) using
+Render the HTML file from the `*.adoc` files in `tutorials/` (invoked from the project folder) using
 
-   asciidoctor resources/tutorial/*.adoc
+   asciidoctor tutorials/**/*.adoc
 
 == IntelliJ Workflow
 

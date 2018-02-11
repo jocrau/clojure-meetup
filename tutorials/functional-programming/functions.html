@@ -429,9 +429,169 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div id="content">
-
+<div class="sect1">
+<h2 id="_functions">Functions</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The preceding apostrophe instructs the Clojure reader not to evaluate the list as function call.</p>
 </div>
-<link rel="stylesheet" type="text/css" href="../css/codemirror.css">
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>'(+ 1 2 3 4)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(+ 1 2 3 4)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Clojure uses the prefix notation instead of the more common infix notation <code>1+2+3+4</code>.</p>
+</div>
+<div class="paragraph">
+<p>The form <code>fn</code> creates an anonymous function:</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(fn [number] (+ number 3))</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Which can be used as first element in a list:</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>((fn [number] (+ number 3)) 5)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>We can bind an anonymous function to a Var to be able to reference it by name:</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(def add3 (fn [number] (+ number 3)))
+
+(add3 5)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or shorter:</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(def add3 (fn [number] (+ number 3)))
+
+(add3 5)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(add3 (* 2 4))</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The function <code>adder</code> is a function that evaluates to another function.</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(def adder (fn [addend] (fn [number] (+ number addend))))
+
+((adder 10) 5)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(def add10 (adder 10))
+
+(add10 5)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(add3 (add3 5))</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s implement a function that takes a function as first argument (higher-order function) and applies it twice to the second argument.</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(def twice (fn [fun number] (fun (fun number))))
+
+(twice add3 5)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(map add3 [1 2 3])</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(reduce + [1 2 3])</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(reduce + (map add3 [1 2 3]))</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Who needs Hadoop®? ;-)</p>
+</div>
+<div class="paragraph">
+<p>Let&#8217;s compose two functions into one.</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>((comp str add3) 5)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(even? 3)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(map even? [1 2 3 4 5 6])</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(filter even? [1 2 3 4 5 6])</pre>
+</div>
+</div>
+<div class="olist arabic">
+<div class="title">Chapters</div>
+<ol class="arabic">
+<li>
+<p><a href="basics.html">Basics</a></p>
+</li>
+<li>
+<p><a href="#">Functions</a></p>
+</li>
+<li>
+<p><a href="data-structures.html">Data Structures</a></p>
+</li>
+<li>
+<p><a href="lazy-evaluation.html">Lazy Evaluation</a></p>
+</li>
+<li>
+<p><a href="recursion.html">Recursion</a></p>
+</li>
+<li>
+<p><a href="state.html">State</a></p>
+</li>
+<li>
+<p><a href="reagent.html">Reagent (React)</a></p>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+<link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 
 <script>
     window.klipse_settings = {
@@ -450,14 +610,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         }
     };
 </script>
-<script src="../js/klipse_plugin.js"></script>
+<script src="../../resources/js/klipse/klipse_plugin.js"></script>
 <style>
 .listingblock pre {
     padding: 5px 10px !important;
 }
 
 .CodeMirror {
-    padding: 10px;
     border: none !important;
 }
 
@@ -469,10 +628,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   font-family: Montserrat, Arial, sans-serif;
 }
 
+.klipse-container:not(:empty) {
+    border: 2px #eee solid;
+}
 
 .klipse-container:not(:empty):before {
-    content: "Out: ";
+    content: "Render result";
     font-weight: bold;
+    color: #aaa;
     font-family: monospace;
 }
 </style>

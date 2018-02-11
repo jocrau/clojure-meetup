@@ -429,94 +429,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_recursion">Recursion</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Straight forward calculation of the factorial of 8 (or in mathematical notation 8!):</p>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>  (* 1 2 3 4 5 6 7 8)</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The same as function <code>factorial</code> calling itself (recursive function call, or short recursion). What is the reason for the second argument <code>acc</code>? Can we get rid of it?</p>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>  (defn factorial [n acc]
-    (if (zero? n)
-      acc
-      (factorial (dec n) (* n acc))))
 
-  (factorial 8 1)</pre>
 </div>
-</div>
-<div class="paragraph">
-<p>Clojure provides the form <code>recur</code> to make sure we recur from the "tail".</p>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>  (defn factorial [n acc]
-    (if (zero? n)
-      acc
-      (recur (dec n) (* n acc))))
-
-  (factorial 8 1)</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>  (defn factorial [n]
-    (loop [cnt n
-           acc 1]
-      (if (zero? cnt)
-        acc
-        (recur (dec cnt)
-               (* cnt acc)))))
-
-  (factorial 8)</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>  (defn factorial [n]
-    (reduce * (range 1 (inc n))))
-
-  (factorial 8)</pre>
-</div>
-</div>
-<div class="olist arabic">
-<div class="title">Chapters</div>
-<ol class="arabic">
-<li>
-<p><a href="basics.html">Basics</a></p>
-</li>
-<li>
-<p><a href="functions.html">Functions</a></p>
-</li>
-<li>
-<p><a href="data-structures.html">Data Structures</a></p>
-</li>
-<li>
-<p><a href="lazy-evaluation.html">Lazy Evaluation</a></p>
-</li>
-<li>
-<p><a href="#">Recursion</a></p>
-</li>
-<li>
-<p><a href="state.html">State</a></p>
-</li>
-<li>
-<p><a href="reagent.html">Reagent (React)</a></p>
-</li>
-</ol>
-</div>
-</div>
-</div>
-</div>
-<link rel="stylesheet" type="text/css" href="../css/codemirror.css">
+<link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 
 <script>
     window.klipse_settings = {
@@ -535,14 +450,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         }
     };
 </script>
-<script src="../js/klipse_plugin.js"></script>
+<script src="../../resources/js/klipse/klipse_plugin.js"></script>
 <style>
 .listingblock pre {
     padding: 5px 10px !important;
 }
 
 .CodeMirror {
-    padding: 10px;
     border: none !important;
 }
 
@@ -554,10 +468,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   font-family: Montserrat, Arial, sans-serif;
 }
 
+.klipse-container:not(:empty) {
+    border: 2px #eee solid;
+}
 
 .klipse-container:not(:empty):before {
-    content: "Out: ";
+    content: "Render result";
     font-weight: bold;
+    color: #aaa;
     font-family: monospace;
 }
 </style>

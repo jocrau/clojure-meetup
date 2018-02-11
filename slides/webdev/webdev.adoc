@@ -1,4 +1,4 @@
-:revealjsdir: revealjs
+:revealjsdir: ../../resources/js/revealjs
 :revealjs_history: true
 :revealjs_controls: false
 :revealjs_progress: false
@@ -17,6 +17,8 @@
 :presenter_twitter: jocrau
 :presenter_email: jrau@infinitecloud.com
 :copyright: by-sa
+:docinfo: shared
+:docinfodir: ..
 
 = Clojure Web Development
 {presenter_name}, {presenter_company}

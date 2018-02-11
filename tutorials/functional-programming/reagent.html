@@ -430,57 +430,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_state">State</h2>
+<h2 id="_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>An atom is a reference to a value.</p>
-</div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(def balance (atom 100))
-#_(swap! balance + 10)
-(deref balance)</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(reset! balance 100)
-(deref balance)</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(defn slow-fun [n]
-  (nth (map inc (range)) n))
-
-(time (slow-fun 1000000))</pre>
+<pre>(require '[reagent.core :as r])</pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Let&#8217;s set up a cache for the function results.</p>
+<p>Create some elements yourself:</p>
+</div>
+<div class="listingblock eval-reagent">
+<div class="content">
+<pre>(defn hello [name]
+  [:p (str "Hello " name "!")])
+
+[hello "Jochen"]</pre>
+</div>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(def mem (atom {}))
-
-(defn cache [fun]
-  (fn [&amp; args]
-    (if-let [cached-value (get @mem args)]
-      cached-value
-      (let [evaluated-value (apply fun args)]
-        (swap! mem assoc args evaluated-value)
-        evaluated-value))))
-
-(def cached-slow-fun (cache slow-fun))</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>There is no benefit the first time the function is called. Try to change the argument and change it back to the original value. Watch the cache as more cache values are added.</p>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(time (cached-slow-fun 1000000))
-@mem</pre>
+<pre>(reagent.core/render-component [hello "World!"] js/klipse-container)</pre>
 </div>
 </div>
 <div class="olist arabic">
@@ -502,17 +472,17 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="recursion.html">Recursion</a></p>
 </li>
 <li>
-<p><a href="#">State</a></p>
+<p><a href="state.html">State</a></p>
 </li>
 <li>
-<p><a href="reagent.html">Reagent (React)</a></p>
+<p><a href="#">Reagent (React)</a></p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 </div>
-<link rel="stylesheet" type="text/css" href="../css/codemirror.css">
+<link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 
 <script>
     window.klipse_settings = {
@@ -531,14 +501,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         }
     };
 </script>
-<script src="../js/klipse_plugin.js"></script>
+<script src="../../resources/js/klipse/klipse_plugin.js"></script>
 <style>
 .listingblock pre {
     padding: 5px 10px !important;
 }
 
 .CodeMirror {
-    padding: 10px;
     border: none !important;
 }
 
@@ -550,10 +519,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   font-family: Montserrat, Arial, sans-serif;
 }
 
+.klipse-container:not(:empty) {
+    border: 2px #eee solid;
+}
 
 .klipse-container:not(:empty):before {
-    content: "Out: ";
+    content: "Render result";
     font-weight: bold;
+    color: #aaa;
     font-family: monospace;
 }
 </style>

@@ -430,52 +430,57 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_lazy_evaluation">Lazy Evaluation</h2>
+<h2 id="_state">State</h2>
 <div class="sectionbody">
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(range 0 10)</pre>
-</div>
+<div class="paragraph">
+<p>An atom is a reference to a value.</p>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(range 10)</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>#_(range)</pre>
+<pre>(def balance (atom 100))
+#_(swap! balance + 10)
+(deref balance)</pre>
 </div>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(take 10 (range))</pre>
+<pre>(reset! balance 100)
+(deref balance)</pre>
 </div>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(time (nth (range) 1000000))</pre>
+<pre>(defn slow-fun [n]
+  (nth (map inc (range)) n))
+
+(time (slow-fun 1000000))</pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>#_(time (nth (map inc (range)) 1000000))</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>#_(first (filter (fn [number]
-          (println number)
-          (= number 20))
-        (map inc (range))))</pre>
-</div>
+<div class="paragraph">
+<p>Let&#8217;s set up a cache for the function results.</p>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>#_(filter (fn [number]
-                 (println number)
-                 (= number 20))
-               (map inc (range)))</pre>
+<pre>(def mem (atom {}))
+
+(defn cache [fun]
+  (fn [&amp; args]
+    (if-let [cached-value (get @mem args)]
+      cached-value
+      (let [evaluated-value (apply fun args)]
+        (swap! mem assoc args evaluated-value)
+        evaluated-value))))
+
+(def cached-slow-fun (cache slow-fun))</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>There is no benefit the first time the function is called. Try to change the argument and change it back to the original value. Watch the cache as more cache values are added.</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(time (cached-slow-fun 1000000))
+@mem</pre>
 </div>
 </div>
 <div class="olist arabic">
@@ -491,13 +496,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="data-structures.html">Data Structures</a></p>
 </li>
 <li>
-<p><a href="#">Lazy Evaluation</a></p>
+<p><a href="lazy-evaluation.html">Lazy Evaluation</a></p>
 </li>
 <li>
 <p><a href="recursion.html">Recursion</a></p>
 </li>
 <li>
-<p><a href="state.html">State</a></p>
+<p><a href="#">State</a></p>
 </li>
 <li>
 <p><a href="reagent.html">Reagent (React)</a></p>
@@ -507,7 +512,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
-<link rel="stylesheet" type="text/css" href="../css/codemirror.css">
+<link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 
 <script>
     window.klipse_settings = {
@@ -526,14 +531,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         }
     };
 </script>
-<script src="../js/klipse_plugin.js"></script>
+<script src="../../resources/js/klipse/klipse_plugin.js"></script>
 <style>
 .listingblock pre {
     padding: 5px 10px !important;
 }
 
 .CodeMirror {
-    padding: 10px;
     border: none !important;
 }
 
@@ -545,10 +549,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   font-family: Montserrat, Arial, sans-serif;
 }
 
+.klipse-container:not(:empty) {
+    border: 2px #eee solid;
+}
 
 .klipse-container:not(:empty):before {
-    content: "Out: ";
+    content: "Render result";
     font-weight: bold;
+    color: #aaa;
     font-family: monospace;
 }
 </style>

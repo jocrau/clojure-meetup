@@ -430,27 +430,99 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="content">
 <div class="sect1">
-<h2 id="_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h2>
+<h2 id="_accessing_a_deeply_nested_data_structure">Accessing a deeply nested data structure</h2>
 <div class="sectionbody">
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(require '[reagent.core :as r])</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Create some elements yourself:</p>
-</div>
-<div class="listingblock eval-reagent">
-<div class="content">
-<pre>(defn hello [name]
-  [:p (str "Hello " name "!")])
-
-[hello "Jochen"]</pre>
+<pre>(def joe {:first-name "Jochen"
+          :last-name  "Rau"
+          :shoe-size  9
+          :birth-date #inst"1971-03-15"
+          :locations  [{:address "120 Pulpit Hill Rd"
+                        :zip     "01002"
+                        :city    "Amherst"
+                        :status  ::current}
+                       {:address "60 North Street"
+                        :zip     "01018"
+                        :city    "Hatfield"}]})</pre>
 </div>
 </div>
 <div class="listingblock eval-clojure">
 <div class="content">
-<pre>(reagent.core/render-component [hello "World!"] js/klipse-container)</pre>
+<pre>(get joe :first-name)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(get (get (get joe :locations) 0) :city)</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(get-in joe [:locations 0 :city])</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <code>get-in</code> function accepts a third argument which is the default value.</p>
+</div>
+<div class="paragraph">
+<p>Keywords are functions:</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(:first-name joe)</pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Yes, that&#8217;s weird, but incredibly helpful:</p>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(map :city (:locations joe))</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))</pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_adding_and_removing_values">Adding and removing values</h2>
+<div class="sectionbody">
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>[(conj [:a :b] :c)
+(conj '(:a :b) :c)
+(conj #{:a :b} :c)
+(conj #{:a :b} :b)
+(conj {:a 1 :b 2} [:c 3])]</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(assoc joe :first-name "Shawn")
+joe</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(update-in joe [:locations 0] dissoc :status)
+joe</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>[(first [:a :b])
+(first '(:a :b))
+(first #{:a :b})
+(first {:a 1 :b 2})]</pre>
+</div>
+</div>
+<div class="listingblock eval-clojure">
+<div class="content">
+<pre>(rest [:a :b :c])</pre>
 </div>
 </div>
 <div class="olist arabic">
@@ -463,7 +535,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="functions.html">Functions</a></p>
 </li>
 <li>
-<p><a href="data-structures.html">Data Structures</a></p>
+<p><a href="#">Data Structures</a></p>
 </li>
 <li>
 <p><a href="lazy-evaluation.html">Lazy Evaluation</a></p>
@@ -475,14 +547,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p><a href="state.html">State</a></p>
 </li>
 <li>
-<p><a href="#">Reagent (React)</a></p>
+<p><a href="reagent.html">Reagent (React)</a></p>
 </li>
 </ol>
 </div>
 </div>
 </div>
 </div>
-<link rel="stylesheet" type="text/css" href="../css/codemirror.css">
+<link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 
 <script>
     window.klipse_settings = {
@@ -501,14 +573,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         }
     };
 </script>
-<script src="../js/klipse_plugin.js"></script>
+<script src="../../resources/js/klipse/klipse_plugin.js"></script>
 <style>
 .listingblock pre {
     padding: 5px 10px !important;
 }
 
 .CodeMirror {
-    padding: 10px;
     border: none !important;
 }
 
@@ -520,10 +591,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
   font-family: Montserrat, Arial, sans-serif;
 }
 
+.klipse-container:not(:empty) {
+    border: 2px #eee solid;
+}
 
 .klipse-container:not(:empty):before {
-    content: "Out: ";
+    content: "Render result";
     font-weight: bold;
+    color: #aaa;
     font-family: monospace;
 }
 </style>

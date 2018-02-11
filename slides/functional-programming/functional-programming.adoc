@@ -1,4 +1,4 @@
-:revealjsdir: revealjs
+:revealjsdir: ../../resources/js/revealjs
 :revealjs_history: true
 :revealjs_controls: false
 :revealjs_progress: false
@@ -8,6 +8,8 @@
 :revealjs_transition: fade
 :revealjs_transitionSpeed: fast
 :revealjs_theme: black
+:revealjs_width: 1440
+:revealjs_height: 900
 :source-highlighter: highlightjs
 :imagesdir: img
 :presenter_name: Jochen Rau
@@ -16,6 +18,7 @@
 :presenter_email: jrau@infinitecloud.com
 :copyright: by-sa
 :docinfo: shared
+:docinfodir: ..
 
 = Functional Programming
 {presenter_name}, {presenter_company}
@@ -121,7 +124,6 @@ link:https://github.com/jocrau/clojure-meetup/archive/master.zip[https://github.
 == Links
 
 - link:http://cs.lmu.edu/~ray/notes/paradigms/[Alan Perlis Quotes]
-- link:http://www.tryclj.com/[Browser REPL for Clojure]
 - link:http://himera.herokuapp.com/index.html[Browser REPL for ClojureScript]
 - link:http://clojurekoans.com/[Clojure Learning-by-Doing]
 - link:https://www.4clojure.com/[Clojure Quiz]
