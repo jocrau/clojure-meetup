@@ -5,9 +5,7 @@
 <!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
-<meta name="author" content="Jochen Rau, Infinite Cloud LLC">
-<meta name="copyright" content="by-sa">
-<title>Functional Programming</title>
+<title>Untitled</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -419,130 +417,27 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .hide-for-print{display:none!important}
 .show-for-print{display:inherit!important}}
 </style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
-<style>
-.CodeMirror {
-    border: none !important;
-}
-
-.CodeMirror pre {
-  width: 100%;
-  margin: auto;
-  text-align: left;
-  box-shadow: none;
-  font-family: 'FiraCode', monospace !important;
-}
-.CodeMirror-measure {
-  position: relative;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.listingblock  pre {
-    padding: 5px 10px;
-    margin-bottom: 3.45em;
-}
-
-.listingblock  pre.CodeMirror-line {
-    padding: 5px 10px;
-    margin: 0;
-}
-
-.klipse-container:not(:empty) {
-    border: 2px #eee solid;
-    padding: 5px 10px;
-}
-
-.klipse-container:not(:empty):before {
-    content: "Rendered DOM:";
-    font-weight: bold;
-    color: #aaa;
-    font-family: 'FiraCode', monospace;
-}
-</style>
 </head>
 <body class="article">
 <div id="header">
-<h1>Functional Programming</h1>
-<div class="details">
-<span id="author" class="author">Jochen Rau, Infinite Cloud LLC</span><br>
-</div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h2>
-<div class="sectionbody">
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(require '[reagent.core :as r])</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Create some elements yourself:</p>
-</div>
-<div class="listingblock eval-reagent">
-<div class="content">
-<pre>(defn hello [name]
-  [:p (str "Hello " name "!")])
-
-[hello "Jochen"]</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(reagent.core/render-component [hello "World!"] js/klipse-container)</pre>
-</div>
-</div>
 <div class="olist arabic">
 <div class="title">Chapters</div>
 <ol class="arabic">
 <li>
-<p><a href="basics.html">Basics</a></p>
+<p><a href="index.html">Intro</a></p>
 </li>
 <li>
-<p><a href="functions.html">Functions</a></p>
-</li>
-<li>
-<p><a href="data-structures.html">Data Structures</a></p>
-</li>
-<li>
-<p><a href="lazy-evaluation.html">Lazy Evaluation</a></p>
-</li>
-<li>
-<p><a href="recursion.html">Recursion</a></p>
-</li>
-<li>
-<p><a href="state.html">State</a></p>
-</li>
-<li>
-<p><a href="#">Reagent (React)</a></p>
+<p><a href="folds.html">Folds</a></p>
 </li>
 </ol>
 </div>
 </div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2018-02-11 12:09:02 EST
 </div>
 </div>
-<script>
-    window.klipse_settings = {
-        selector: '.eval-clojure pre',
-        selector_reagent: '.eval-reagent pre',
-        selector_eval_js: '.eval-js pre',
-        eval_idle_msec: 100,
-        codemirror_options_in: {
-            indentUnit: 2,
-            lineWrapping: false,
-            lineNumbers: false,
-            autoCloseBrackets: true
-        },
-        codemirror_options_out: {
-            lineWrapping: false,
-            lineNumbers: false
-        }
-    };
-</script>
-<script src="../../resources/js/klipse/klipse_plugin.js"></script>
 </body>
 </html>

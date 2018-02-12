@@ -1,0 +1,158 @@
+include::header.adoc[]
+
+== Scalar Values
+
+
+[.eval-clojure]
+----
+1
+2.3
+1/3
+"Hello World"
+\a
+:foo
+:my.namespace/foo
+::foo
+#uuid "01a38532-c3d2-4ad8-89fa-3a4f1ea3fe69"
+#inst "2016-10-09"
+true
+false
+nil
+----
+
+Try some expressions yourself:
+
+[.eval-clojure]
+----
+#inst"2016-10-09"
+----
+
+== Lists
+
+[.eval-clojure]
+----
+(list 1 2 "foo" :bar)
+----
+
+[.eval-clojure]
+----
+'(1 2 "foo" :bar)
+----
+
+[.eval-clojure]
+----
+(conj '(1 2 "foo" :bar) "new")
+----
+
+== Vectors
+
+[.eval-clojure]
+----
+(vector 1 2 "foo" :bar)
+----
+
+[.eval-clojure]
+----
+[1 2 "foo" :bar]
+----
+
+[.eval-clojure]
+----
+(conj [1 2 "foo" :bar] "new")
+----
+
+== Maps (Associative Arrays
+
+A map consists of key-value pairs. Keys and values can be any clojure data (strings, numbers, other maps, etc.).
+
+Change the keys to strings.
+
+[.eval-clojure]
+----
+{:first-name "Jochen"
+ :last-name  "Rau"}
+----
+
+[.eval-clojure]
+----
+(conj {:first-name "Jochen" :last-name  "Rau"} [:new "value"])
+----
+
+
+Maps can be deeply nested:
+
+[.eval-clojure]
+----
+{:first-name "Jochen"
+ :last-name  "Rau"
+ :shoe-size  9
+ :birth-date #inst"1971-03-15"
+ :locations  [{:address "120 Pulpit Hill Rd"
+               :zip     "01002"
+               :city    "Amherst"
+               :status  ::current}
+              {:address "6 North Street"
+               :zip     "01018"
+               :city    "Hatfield"}]}
+----
+
+== Set
+
+A set of unordered, distinct elements. Try to add "foo" a second time.
+
+[.eval-clojure]
+----
+(hash-set "foo" "bar" "baz")
+----
+
+[.eval-clojure]
+----
+#{"foo" "bar" "baz"}
+----
+
+What happens if you change `"boom"` into `"baz"`.
+
+[.eval-clojure]
+----
+(conj #{"foo" "bar" "baz"} "boom")
+----
+
+There is also a sorted set. But it works a bit different as one might expect.
+
+[.eval-clojure]
+----
+(sorted-set "foo" "bar" "baz")
+----
+
+
+== Vars (are not variables)
+
+A Var is a way in clojure to keep a reference to a value. The `def` form creates a Var. Vars are namespaced.
+
+[.eval-clojure]
+----
+(def my-name "Jochen")
+my-name
+----
+
+The let binding form allows to bind a value to a Var only in the local context. What happens if you remove the last line?
+
+[.eval-clojure]
+----
+(let [my-name "Shawn"]
+  (println my-name)
+  my-name)
+my-name
+----
+
+We can define a var again.
+
+[.eval-clojure]
+----
+(def my-name "Shawn")
+my-name
+----
+
+Wait, isn't that mutable then?
+
+include::footer.adoc[]

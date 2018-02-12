@@ -7,7 +7,7 @@
 <meta name="generator" content="Asciidoctor 1.5.5">
 <meta name="author" content="Jochen Rau, Infinite Cloud LLC">
 <meta name="copyright" content="by-sa">
-<title>Functional Programming</title>
+<title>Data Processing Building Blocks</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -466,64 +466,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </head>
 <body class="article">
 <div id="header">
-<h1>Functional Programming</h1>
+<h1>Data Processing Building Blocks</h1>
 <div class="details">
 <span id="author" class="author">Jochen Rau, Infinite Cloud LLC</span><br>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h2>
-<div class="sectionbody">
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(require '[reagent.core :as r])</pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Create some elements yourself:</p>
-</div>
-<div class="listingblock eval-reagent">
-<div class="content">
-<pre>(defn hello [name]
-  [:p (str "Hello " name "!")])
 
-[hello "Jochen"]</pre>
-</div>
-</div>
-<div class="listingblock eval-clojure">
-<div class="content">
-<pre>(reagent.core/render-component [hello "World!"] js/klipse-container)</pre>
-</div>
-</div>
-<div class="olist arabic">
-<div class="title">Chapters</div>
-<ol class="arabic">
-<li>
-<p><a href="basics.html">Basics</a></p>
-</li>
-<li>
-<p><a href="functions.html">Functions</a></p>
-</li>
-<li>
-<p><a href="data-structures.html">Data Structures</a></p>
-</li>
-<li>
-<p><a href="lazy-evaluation.html">Lazy Evaluation</a></p>
-</li>
-<li>
-<p><a href="recursion.html">Recursion</a></p>
-</li>
-<li>
-<p><a href="state.html">State</a></p>
-</li>
-<li>
-<p><a href="#">Reagent (React)</a></p>
-</li>
-</ol>
-</div>
-</div>
-</div>
 </div>
 <script>
     window.klipse_settings = {

@@ -420,6 +420,49 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
+<style>
+.CodeMirror {
+    border: none !important;
+}
+
+.CodeMirror pre {
+  width: 100%;
+  margin: auto;
+  text-align: left;
+  box-shadow: none;
+  font-family: 'FiraCode', monospace !important;
+}
+.CodeMirror-measure {
+  position: relative;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.listingblock  pre {
+    padding: 5px 10px;
+    margin-bottom: 3.45em;
+}
+
+.listingblock  pre.CodeMirror-line {
+    padding: 5px 10px;
+    margin: 0;
+}
+
+.klipse-container:not(:empty) {
+    border: 2px #eee solid;
+    padding: 5px 10px;
+}
+
+.klipse-container:not(:empty):before {
+    content: "Rendered DOM:";
+    font-weight: bold;
+    color: #aaa;
+    font-family: 'FiraCode', monospace;
+}
+</style>
 </head>
 <body class="article">
 <div id="header">
@@ -516,12 +559,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 </div>
 </div>
-<link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
-
 <script>
     window.klipse_settings = {
         selector: '.eval-clojure pre',
         selector_reagent: '.eval-reagent pre',
+        selector_eval_js: '.eval-js pre',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,
@@ -536,33 +578,5 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     };
 </script>
 <script src="../../resources/js/klipse/klipse_plugin.js"></script>
-<style>
-.listingblock pre {
-    padding: 5px 10px !important;
-}
-
-.CodeMirror {
-    border: none !important;
-}
-
-.CodeMirror:nth-child(even)::before {
-  content: "=> ";
-  display: inline;
-  margin: -10px;
-  padding: 15px 10px 5px 10px;
-  font-family: Montserrat, Arial, sans-serif;
-}
-
-.klipse-container:not(:empty) {
-    border: 2px #eee solid;
-}
-
-.klipse-container:not(:empty):before {
-    content: "Render result";
-    font-weight: bold;
-    color: #aaa;
-    font-family: monospace;
-}
-</style>
 </body>
 </html>

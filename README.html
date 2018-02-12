@@ -429,7 +429,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>This repository contains the ever evolving content of an introduction to functional programming in Clojure (<a href="https://clojure.org/" class="bare">https://clojure.org/</a>), the programming language I fell in love with many years ago (thanks Chas ;-)).</p>
 </div>
 <div class="paragraph">
-<p>To look at the slides or the tutorial, simply download the repository (or clone it) and open one of the HTML files in <code>resources/slides</code> or <code>resources/tutorial</code>.</p>
+<p>To look at the slides or the tutorial, simply download the repository (or clone it) and open one of the HTML files in <code>slides/</code> or <code>tutorials</code>.</p>
 </div>
 <div class="paragraph">
 <p>There is also a demo how to step-by-step develop a web application in Clojure from the ground up. Look for the Git tags <code>demo-start</code> and <code>demo-end</code>. Each commit in-between implements some feature towards a simple web app.</p>
@@ -447,7 +447,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>bundle exec asciidoctor-revealjs resources/slides/*.adoc</pre>
+<pre>bundle exec asciidoctor-revealjs slides/**/*.adoc</pre>
 </div>
 </div>
 </div>
@@ -459,11 +459,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <p>The HTML pages of the tutorial are also written in Asciidoc using the Asciidoctor toolchain. The interactive code evaluation is done by the KLIPSE framework (<a href="https://github.com/viebel/klipse" class="bare">https://github.com/viebel/klipse</a>).</p>
 </div>
 <div class="paragraph">
-<p>Render the HTML file from the <code>*.adoc</code> files in <code>resources/tutorial</code> (invoked from the project folder) using</p>
+<p>Render the HTML file from the <code>*.adoc</code> files in <code>tutorials/</code> (invoked from the project folder) using</p>
 </div>
 <div class="literalblock">
 <div class="content">
-<pre>asciidoctor resources/tutorial/*.adoc</pre>
+<pre>asciidoctor tutorials/**/*.adoc</pre>
 </div>
 </div>
 </div>
@@ -495,7 +495,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2017-03-21 12:14:46 EDT
+Last updated 2018-02-11 11:26:48 EST
 </div>
 </div>
 </body>

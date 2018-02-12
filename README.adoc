@@ -26,7 +26,6 @@ Render the HTML file from the `*.adoc` files in `tutorials/` (invoked from the p
 
 The IntelliJ IDEA (https://www.jetbrains.com/idea/) can trigger the rendering on file change. Make sure you have the File Watchers plugin installed (available directly from JetBrains).
 
-
 The following screenshot shows the settings I use. Each command (one for slides and one for the tutorial) is invoked only within its scope.
 
 image::resources/img/file-watchers.png[]

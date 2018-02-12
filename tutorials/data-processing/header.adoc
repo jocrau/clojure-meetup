@@ -9,5 +9,5 @@
 :docinfo: shared
 :docinfodir: ..
 
-= Functional Programming
+= Data Processing Building Blocks
 {presenter_name}, {presenter_company}
