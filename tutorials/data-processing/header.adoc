@@ -1,14 +1,4 @@
-:presenter_name: Jochen Rau
-:presenter_company: Infinite Cloud LLC
-:presenter_twitter: jocrau
-:presenter_email: jrau@infinitecloud.com
-:copyright: by-sa
-:icons: font
-:imagesdir: img
-:source-language: clojure
-:nofooter:
-:docinfo: shared
-:docinfodir: ..
+include::../settings.adoc[]
 
 = Data Processing Building Blocks
 {presenter_name}, {presenter_company}

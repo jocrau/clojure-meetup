@@ -1,41 +1,107 @@
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
-.CodeMirror pre {
-  width: 100%;
-  margin: auto;
-  text-align: left;
-  box-shadow: none;
-  font-family: 'FiraCode', monospace !important;
+
+.CodeMirror {
+    border: none !important;
+    background: transparent;
 }
 
 .CodeMirror-measure {
   position: relative;
 }
 
-.listingblock pre {
-    padding: 5px 10px !important;
+.CodeMirror {
+  /* Set height, width, borders, and global font properties here */
+  font-family: 'FiraCode', monospace;
+  height: 100%;
+  color: black;
+  border: solid 1px #90B4FE;
 }
 
-.content .klipse-result {
-  margin-top: 5px !important;
+.reveal .CodeMirror-lines {
+  padding: 4px 0; /* Vertical padding around content */
 }
 
-.CodeMirror:nth-child(even)::before {
-  content: "=> ";
-  display: inline;
-  margin: -10px;
-  padding: 15px 10px 5px 10px;
-  font-family: Montserrat, Arial, sans-serif;
+.CodeMirror-selected { background: transparent; }
+.CodeMirror-focused .CodeMirror-selected { background: #d7d4f0; }
+
+.reveal .listingblock div,
+.reveal .listingblock span,
+.reveal .listingblock pre,
+.reveal .listingblock pre[class],
+.reveal .listingblock pre>code,
+.reveal .listingblock pre[class]>code {
+	width: unset;
+ 	font-size: unset;
+	line-height: unset;
+    letter-spacing: unset;
+	word-spacing: unset;
+    text-align: left;
+    box-shadow: none;
+    font-family: 'FiraCode', monospace !important;
+    padding: 0;
+    margin: 0;
+}
+
+.reveal .CodeMirror pre {
+  /* Reset some styles that the rest of the page might have set */
+  -moz-border-radius: 0; -webkit-border-radius: 0; border-radius: 0;
+  border-width: 0;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 0;
+  white-space: pre;
+  word-wrap: normal;
+  line-height: inherit;
+  color: inherit;
+  z-index: 2;
+  position: relative;
+  overflow: visible;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.reveal .listingblock pre,
+.reveal .listingblock pre[class],
+.reveal .listingblock pre>code,
+.reveal .listingblock pre[class]>code {
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+
+.reveal .CodeMirror pre {
+  padding: 0 4px;
+  background: inherit;
+}
+
+.klipse-snippet {
+    background: #f7f7f8;
+    padding: 4px;
+}
+
+.klipse-result {
+    padding: 4px;
+    margin-top: 5px !important;
+    font-family: 'FiraCode', monospace;
+    background: #f7f7f8;
+}
+
+.klipse-result:not(:empty):before {
+    content: "=>";
+    color: #ba3925;
+    float: left;
+    width: 2em;
 }
 
 .klipse-container:not(:empty) {
-    border: 2px #eee solid;
+    border: 2px #f7f7f8 solid;
+    padding: 5px 10px;
 }
 
 .klipse-container:not(:empty):before {
-    content: "Render result";
-    font-weight: bold;
+    content: "Rendered DOM:";
     color: #aaa;
-    font-family: monospace;
 }
 </style>

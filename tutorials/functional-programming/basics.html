@@ -422,7 +422,62 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
+.CodeMirror {
+    border: none !important;
+    background: transparent;
+}
 
+.CodeMirror-selected { background: transparent; }
+.CodeMirror-focused .CodeMirror-selected { background: #d7d4f0; }
+
+.CodeMirror-lines {
+    padding: 0px;
+}
+
+.listingblock pre,
+.listingblock pre[class],
+.listingblock pre>code,
+.listingblock pre[class]>code {
+ 	font-size: 1em;
+	line-height: 1.5em;
+    font-family: 'FiraCode', monospace !important;
+	letter-spacing: 0.3px;
+	word-spacing: 1px;
+	color: #586E75;
+    padding: 0px;
+    margin: 0px;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    background: transparent;
+}
+
+.klipse-snippet {
+    background: #f7f7f8;
+    padding: 4px;
+}
+
+.klipse-result {
+    padding: 4px;
+    margin-top: 5px !important;
+    font-family: 'FiraCode', monospace;
+}
+
+.klipse-result:not(:empty):before {
+    content: "=>";
+    color: #ba3925;
+    float: left;
+    width: 2em;
+}
+
+.klipse-container:not(:empty) {
+    border: 2px #f7f7f8 solid;
+    padding: 5px 10px;
+}
+
+.klipse-container:not(:empty):before {
+    content: "Rendered DOM:";
+    color: #aaa;
+}
 </style>
 </head>
 <body class="article">
@@ -646,7 +701,6 @@ my-name</code></pre>
         selector: '.listingblock:not(.do-not-eval) .language-clojure',
         selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
         selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
-        eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,
             lineWrapping: false,
