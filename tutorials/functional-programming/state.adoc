@@ -4,20 +4,20 @@ include::header.adoc[]
 
 An atom is a reference to a value.
 
-[.eval-clojure]
+[source,clojure]
 ----
 (def balance (atom 100))
 #_(swap! balance + 10)
 (deref balance)
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (reset! balance 100)
 (deref balance)
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (defn slow-fun [n]
   (nth (map inc (range)) n))
@@ -27,7 +27,7 @@ An atom is a reference to a value.
 
 Let's set up a cache for the function results.
 
-[.eval-clojure]
+[source,clojure]
 ----
 (def mem (atom {}))
 
@@ -44,7 +44,7 @@ Let's set up a cache for the function results.
 
 There is no benefit the first time the function is called. Try to change the argument and change it back to the original value. Watch the cache as more cache values are added.
 
-[.eval-clojure]
+[source,clojure]
 ----
 (time (cached-slow-fun 1000000))
 @mem

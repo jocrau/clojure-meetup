@@ -7,10 +7,7 @@
 :revealjs_previewLinks: true
 :revealjs_transition: fade
 :revealjs_transitionSpeed: fast
-:revealjs_theme: black
-:revealjs_width: 1440
-:revealjs_height: 900
-:source-highlighter: highlightjs
+:revealjs_theme: moon
 :imagesdir: img
 :presenter_name: Jochen Rau
 :presenter_company: Infinite Cloud LLC
@@ -50,7 +47,7 @@ Some languages are "pure" functional programming languages, some make it almost 
 
 == JavaScript
 
-[.eval-js]
+[source,js]
 --
     $add3 = function($number) { return $number + 3; };
     $twice = function($fun, $number) { return $fun($fun($number)); }
@@ -59,7 +56,7 @@ Some languages are "pure" functional programming languages, some make it almost 
 
 == Clojure
 
-[.eval-clojure]
+[source,clojure]
 --
     (defn add3 [number] (+ number 3))
     (defn twice [fun number] (fun (fun number)))
@@ -126,7 +123,7 @@ link:https://github.com/jocrau/clojure-meetup/archive/master.zip[https://github.
 - link:http://cs.lmu.edu/~ray/notes/paradigms/[Alan Perlis Quotes]
 - link:http://himera.herokuapp.com/index.html[Browser REPL for ClojureScript]
 - link:http://clojurekoans.com/[Clojure Learning-by-Doing]
-- link:https://www.4clojure.com/[Clojure Quiz]
+- link:http://www.4clojure.com/[Clojure Quiz]
 - link:http://www.braveclojure.com/clojure-for-the-brave-and-true/[Free Book about Clojure]
 - link:https://www.youtube.com/watch?v=M3_xnTK6-pA[Larry Garfield: Functional PHP, 2014]
 - link:http://clojure.org/reference/reader[Clojure Docs]

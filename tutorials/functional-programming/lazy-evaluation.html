@@ -422,46 +422,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
-.CodeMirror {
-    border: none !important;
-}
 
-.CodeMirror pre {
-  width: 100%;
-  margin: auto;
-  text-align: left;
-  box-shadow: none;
-  font-family: 'FiraCode', monospace !important;
-}
-.CodeMirror-measure {
-  position: relative;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.listingblock  pre {
-    padding: 5px 10px;
-    margin-bottom: 3.45em;
-}
-
-.listingblock  pre.CodeMirror-line {
-    padding: 5px 10px;
-    margin: 0;
-}
-
-.klipse-container:not(:empty) {
-    border: 2px #eee solid;
-    padding: 5px 10px;
-}
-
-.klipse-container:not(:empty):before {
-    content: "Rendered DOM:";
-    font-weight: bold;
-    color: #aaa;
-    font-family: 'FiraCode', monospace;
-}
 </style>
 </head>
 <body class="article">
@@ -475,50 +436,50 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_lazy_evaluation">Lazy Evaluation</h2>
 <div class="sectionbody">
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(range 0 10)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(range 0 10)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(range 10)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(range 10)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>#_(range)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">#_(range)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(take 10 (range))</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(take 10 (range))</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(time (nth (range) 1000000))</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(time (nth (range) 1000000))</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>#_(time (nth (map inc (range)) 1000000))</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">#_(time (nth (map inc (range)) 1000000))</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>#_(first (filter (fn [number]
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">#_(first (filter (fn [number]
           (println number)
           (= number 20))
-        (map inc (range))))</pre>
+        (map inc (range))))</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>#_(filter (fn [number]
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">#_(filter (fn [number]
                  (println number)
                  (= number 20))
-               (map inc (range)))</pre>
+               (map inc (range)))</code></pre>
 </div>
 </div>
 <div class="olist arabic">
@@ -552,9 +513,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <script>
     window.klipse_settings = {
-        selector: '.eval-clojure pre',
-        selector_reagent: '.eval-reagent pre',
-        selector_eval_js: '.eval-js pre',
+        selector: '.listingblock:not(.do-not-eval) .language-clojure',
+        selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
+        selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,

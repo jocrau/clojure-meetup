@@ -2,36 +2,36 @@ include::header.adoc[]
 
 == Lazy Evaluation
 
-[.eval-clojure]
+[source,clojure]
 ----
 (range 0 10)
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (range 10)
 ----
-[.eval-clojure]
+[source,clojure]
 ----
 #_(range)
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (take 10 (range))
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (time (nth (range) 1000000))
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 #_(time (nth (map inc (range)) 1000000))
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 #_(first (filter (fn [number]
           (println number)
@@ -39,7 +39,7 @@ include::header.adoc[]
         (map inc (range))))
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 #_(filter (fn [number]
                  (println number)

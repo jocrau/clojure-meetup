@@ -5,6 +5,7 @@
 :copyright: by-sa
 :icons: font
 :imagesdir: img
+:source-language: clojure
 :nofooter:
 :docinfo: shared
 :docinfodir: ..

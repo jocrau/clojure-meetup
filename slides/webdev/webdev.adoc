@@ -8,9 +8,6 @@
 :revealjs_transition: fade
 :revealjs_transitionSpeed: fast
 :revealjs_theme: black
-:revealjs_width: 1440
-:revealjs_height: 900
-:source-highlighter: highlightjs
 :imagesdir: img
 :presenter_name: Jochen Rau
 :presenter_company: Infinite Cloud LLC

@@ -2,14 +2,14 @@ include::header.adoc[]
 
 == Reagent -- A Wrapper around Facebook React
 
-[.eval-clojure]
+[source,clojure]
 ----
 (require '[reagent.core :as r])
 ----
 
 Create some elements yourself:
 
-[.eval-reagent]
+[source,reagent]
 ----
 (defn hello [name]
   [:p (str "Hello " name "!")])
@@ -17,7 +17,7 @@ Create some elements yourself:
 [hello "Jochen"]
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (reagent.core/render-component [hello "World!"] js/klipse-container)
 ----

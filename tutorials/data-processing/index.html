@@ -422,46 +422,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
-.CodeMirror {
-    border: none !important;
-}
 
-.CodeMirror pre {
-  width: 100%;
-  margin: auto;
-  text-align: left;
-  box-shadow: none;
-  font-family: 'FiraCode', monospace !important;
-}
-.CodeMirror-measure {
-  position: relative;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.listingblock  pre {
-    padding: 5px 10px;
-    margin-bottom: 3.45em;
-}
-
-.listingblock  pre.CodeMirror-line {
-    padding: 5px 10px;
-    margin: 0;
-}
-
-.klipse-container:not(:empty) {
-    border: 2px #eee solid;
-    padding: 5px 10px;
-}
-
-.klipse-container:not(:empty):before {
-    content: "Rendered DOM:";
-    font-weight: bold;
-    color: #aaa;
-    font-family: 'FiraCode', monospace;
-}
 </style>
 </head>
 <body class="article">
@@ -475,9 +436,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_scalar_values">Scalar Values</h2>
 <div class="sectionbody">
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>1
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">1
 2.3
 1/3
 "Hello World"
@@ -489,15 +450,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 #inst "2016-10-09"
 true
 false
-nil</pre>
+nil</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Try some expressions yourself:</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>#inst"2016-10-09"</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">#inst"2016-10-09"</code></pre>
 </div>
 </div>
 </div>
@@ -505,19 +466,19 @@ nil</pre>
 <div class="sect1">
 <h2 id="_lists">Lists</h2>
 <div class="sectionbody">
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(list 1 2 "foo" :bar)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(list 1 2 "foo" :bar)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>'(1 2 "foo" :bar)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">'(1 2 "foo" :bar)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(conj '(1 2 "foo" :bar) "new")</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj '(1 2 "foo" :bar) "new")</code></pre>
 </div>
 </div>
 </div>
@@ -525,19 +486,19 @@ nil</pre>
 <div class="sect1">
 <h2 id="_vectors">Vectors</h2>
 <div class="sectionbody">
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(vector 1 2 "foo" :bar)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(vector 1 2 "foo" :bar)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>[1 2 "foo" :bar]</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">[1 2 "foo" :bar]</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(conj [1 2 "foo" :bar] "new")</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj [1 2 "foo" :bar] "new")</code></pre>
 </div>
 </div>
 </div>
@@ -551,23 +512,23 @@ nil</pre>
 <div class="paragraph">
 <p>Change the keys to strings.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>{:first-name "Jochen"
- :last-name  "Rau"}</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">{:first-name "Jochen"
+ :last-name  "Rau"}</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(conj {:first-name "Jochen" :last-name  "Rau"} [:new "value"])</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj {:first-name "Jochen" :last-name  "Rau"} [:new "value"])</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Maps can be deeply nested:</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>{:first-name "Jochen"
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">{:first-name "Jochen"
  :last-name  "Rau"
  :shoe-size  9
  :birth-date #inst"1971-03-15"
@@ -577,7 +538,7 @@ nil</pre>
                :status  ::current}
               {:address "6 North Street"
                :zip     "01018"
-               :city    "Hatfield"}]}</pre>
+               :city    "Hatfield"}]}</code></pre>
 </div>
 </div>
 </div>
@@ -588,30 +549,30 @@ nil</pre>
 <div class="paragraph">
 <p>A set of unordered, distinct elements. Try to add "foo" a second time.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(hash-set "foo" "bar" "baz")</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(hash-set "foo" "bar" "baz")</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>#{"foo" "bar" "baz"}</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">#{"foo" "bar" "baz"}</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>What happens if you change <code>"boom"</code> into <code>"baz"</code>.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(conj #{"foo" "bar" "baz"} "boom")</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj #{"foo" "bar" "baz"} "boom")</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>There is also a sorted set. But it works a bit different as one might expect.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(sorted-set "foo" "bar" "baz")</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(sorted-set "foo" "bar" "baz")</code></pre>
 </div>
 </div>
 </div>
@@ -622,30 +583,30 @@ nil</pre>
 <div class="paragraph">
 <p>A Var is a way in clojure to keep a reference to a value. The <code>def</code> form creates a Var. Vars are namespaced.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def my-name "Jochen")
-my-name</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def my-name "Jochen")
+my-name</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The let binding form allows to bind a value to a Var only in the local context. What happens if you remove the last line?</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(let [my-name "Shawn"]
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(let [my-name "Shawn"]
   (println my-name)
   my-name)
-my-name</pre>
+my-name</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>We can define a var again.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def my-name "Shawn")
-my-name</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def my-name "Shawn")
+my-name</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -667,9 +628,9 @@ my-name</pre>
 </div>
 <script>
     window.klipse_settings = {
-        selector: '.eval-clojure pre',
-        selector_reagent: '.eval-reagent pre',
-        selector_eval_js: '.eval-js pre',
+        selector: '.listingblock:not(.do-not-eval) .language-clojure',
+        selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
+        selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,

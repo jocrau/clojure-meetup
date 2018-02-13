@@ -2,7 +2,7 @@ include::header.adoc[]
 
 == Accessing a deeply nested data structure
 
-[.eval-clojure]
+[source,clojure]
 ----
 (def joe {:first-name "Jochen"
           :last-name  "Rau"
@@ -17,17 +17,17 @@ include::header.adoc[]
                         :city    "Hatfield"}]})
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (get joe :first-name)
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (get (get (get joe :locations) 0) :city)
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (get-in joe [:locations 0 :city])
 ----
@@ -36,26 +36,26 @@ The `get-in` function accepts a third argument which is the default value.
 
 Keywords are functions:
 
-[.eval-clojure]
+[source,clojure]
 ----
 (:first-name joe)
 ----
 
 Yes, that's weird, but incredibly helpful:
 
-[.eval-clojure]
+[source,clojure]
 ----
 (map :city (:locations joe))
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))
 ----
 
 == Adding and removing values
 
-[.eval-clojure]
+[source,clojure]
 ----
 [(conj [:a :b] :c)
 (conj '(:a :b) :c)
@@ -64,19 +64,19 @@ Yes, that's weird, but incredibly helpful:
 (conj {:a 1 :b 2} [:c 3])]
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (assoc joe :first-name "Shawn")
 joe
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (update-in joe [:locations 0] dissoc :status)
 joe
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 [(first [:a :b])
 (first '(:a :b))
@@ -84,7 +84,7 @@ joe
 (first {:a 1 :b 2})]
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (rest [:a :b :c])
 ----

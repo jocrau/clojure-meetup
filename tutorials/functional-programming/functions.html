@@ -422,46 +422,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
-.CodeMirror {
-    border: none !important;
-}
 
-.CodeMirror pre {
-  width: 100%;
-  margin: auto;
-  text-align: left;
-  box-shadow: none;
-  font-family: 'FiraCode', monospace !important;
-}
-.CodeMirror-measure {
-  position: relative;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.listingblock  pre {
-    padding: 5px 10px;
-    margin-bottom: 3.45em;
-}
-
-.listingblock  pre.CodeMirror-line {
-    padding: 5px 10px;
-    margin: 0;
-}
-
-.klipse-container:not(:empty) {
-    border: 2px #eee solid;
-    padding: 5px 10px;
-}
-
-.klipse-container:not(:empty):before {
-    content: "Rendered DOM:";
-    font-weight: bold;
-    color: #aaa;
-    font-family: 'FiraCode', monospace;
-}
 </style>
 </head>
 <body class="article">
@@ -478,14 +439,14 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>The preceding apostrophe instructs the Clojure reader not to evaluate the list as function call.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>'(+ 1 2 3 4)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">'(+ 1 2 3 4)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(+ 1 2 3 4)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(+ 1 2 3 4)</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -494,89 +455,89 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>The form <code>fn</code> creates an anonymous function:</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(fn [number] (+ number 3))</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(fn [number] (+ number 3))</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Which can be used as first element in a list:</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>((fn [number] (+ number 3)) 5)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">((fn [number] (+ number 3)) 5)</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>We can bind an anonymous function to a Var to be able to reference it by name:</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def add3 (fn [number] (+ number 3)))
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def add3 (fn [number] (+ number 3)))
 
-(add3 5)</pre>
+(add3 5)</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Or shorter:</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def add3 (fn [number] (+ number 3)))
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def add3 (fn [number] (+ number 3)))
 
-(add3 5)</pre>
+(add3 5)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(add3 (* 2 4))</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(add3 (* 2 4))</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>The function <code>adder</code> is a function that evaluates to another function.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def adder (fn [addend] (fn [number] (+ number addend))))
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def adder (fn [addend] (fn [number] (+ number addend))))
 
-((adder 10) 5)</pre>
+((adder 10) 5)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def add10 (adder 10))
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def add10 (adder 10))
 
-(add10 5)</pre>
+(add10 5)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(add3 (add3 5))</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(add3 (add3 5))</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s implement a function that takes a function as first argument (higher-order function) and applies it twice to the second argument.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def twice (fn [fun number] (fun (fun number))))
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def twice (fn [fun number] (fun (fun number))))
 
-(twice add3 5)</pre>
+(twice add3 5)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(map add3 [1 2 3])</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(map add3 [1 2 3])</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(reduce + [1 2 3])</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(reduce + [1 2 3])</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(reduce + (map add3 [1 2 3]))</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(reduce + (map add3 [1 2 3]))</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -585,24 +546,24 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Let&#8217;s compose two functions into one.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>((comp str add3) 5)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">((comp str add3) 5)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(even? 3)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(even? 3)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(map even? [1 2 3 4 5 6])</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(map even? [1 2 3 4 5 6])</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(filter even? [1 2 3 4 5 6])</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(filter even? [1 2 3 4 5 6])</code></pre>
 </div>
 </div>
 <div class="olist arabic">
@@ -636,9 +597,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <script>
     window.klipse_settings = {
-        selector: '.eval-clojure pre',
-        selector_reagent: '.eval-reagent pre',
-        selector_eval_js: '.eval-js pre',
+        selector: '.listingblock:not(.do-not-eval) .language-clojure',
+        selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
+        selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,

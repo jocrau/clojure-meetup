@@ -422,46 +422,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
-.CodeMirror {
-    border: none !important;
-}
 
-.CodeMirror pre {
-  width: 100%;
-  margin: auto;
-  text-align: left;
-  box-shadow: none;
-  font-family: 'FiraCode', monospace !important;
-}
-.CodeMirror-measure {
-  position: relative;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.listingblock  pre {
-    padding: 5px 10px;
-    margin-bottom: 3.45em;
-}
-
-.listingblock  pre.CodeMirror-line {
-    padding: 5px 10px;
-    margin: 0;
-}
-
-.klipse-container:not(:empty) {
-    border: 2px #eee solid;
-    padding: 5px 10px;
-}
-
-.klipse-container:not(:empty):before {
-    content: "Rendered DOM:";
-    font-weight: bold;
-    color: #aaa;
-    font-family: 'FiraCode', monospace;
-}
 </style>
 </head>
 <body class="article">
@@ -475,25 +436,25 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h2>
 <div class="sectionbody">
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(require '[reagent.core :as r])</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Create some elements yourself:</p>
 </div>
-<div class="listingblock eval-reagent">
+<div class="listingblock">
 <div class="content">
-<pre>(defn hello [name]
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">(defn hello [name]
   [:p (str "Hello " name "!")])
 
-[hello "Jochen"]</pre>
+[hello "Jochen"]</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(reagent.core/render-component [hello "World!"] js/klipse-container)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(reagent.core/render-component [hello "World!"] js/klipse-container)</code></pre>
 </div>
 </div>
 <div class="olist arabic">
@@ -527,9 +488,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <script>
     window.klipse_settings = {
-        selector: '.eval-clojure pre',
-        selector_reagent: '.eval-reagent pre',
-        selector_eval_js: '.eval-js pre',
+        selector: '.listingblock:not(.do-not-eval) .language-clojure',
+        selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
+        selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,

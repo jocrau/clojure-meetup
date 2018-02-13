@@ -422,46 +422,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
-.CodeMirror {
-    border: none !important;
-}
 
-.CodeMirror pre {
-  width: 100%;
-  margin: auto;
-  text-align: left;
-  box-shadow: none;
-  font-family: 'FiraCode', monospace !important;
-}
-.CodeMirror-measure {
-  position: relative;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.listingblock  pre {
-    padding: 5px 10px;
-    margin-bottom: 3.45em;
-}
-
-.listingblock  pre.CodeMirror-line {
-    padding: 5px 10px;
-    margin: 0;
-}
-
-.klipse-container:not(:empty) {
-    border: 2px #eee solid;
-    padding: 5px 10px;
-}
-
-.klipse-container:not(:empty):before {
-    content: "Rendered DOM:";
-    font-weight: bold;
-    color: #aaa;
-    font-family: 'FiraCode', monospace;
-}
 </style>
 </head>
 <body class="article">
@@ -478,33 +439,33 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>An atom is a reference to a value.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def balance (atom 100))
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def balance (atom 100))
 #_(swap! balance + 10)
-(deref balance)</pre>
+(deref balance)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(reset! balance 100)
-(deref balance)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(reset! balance 100)
+(deref balance)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(defn slow-fun [n]
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn slow-fun [n]
   (nth (map inc (range)) n))
 
-(time (slow-fun 1000000))</pre>
+(time (slow-fun 1000000))</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Let&#8217;s set up a cache for the function results.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def mem (atom {}))
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def mem (atom {}))
 
 (defn cache [fun]
   (fn [&amp; args]
@@ -514,16 +475,16 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
         (swap! mem assoc args evaluated-value)
         evaluated-value))))
 
-(def cached-slow-fun (cache slow-fun))</pre>
+(def cached-slow-fun (cache slow-fun))</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>There is no benefit the first time the function is called. Try to change the argument and change it back to the original value. Watch the cache as more cache values are added.</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(time (cached-slow-fun 1000000))
-@mem</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(time (cached-slow-fun 1000000))
+@mem</code></pre>
 </div>
 </div>
 <div class="olist arabic">
@@ -557,9 +518,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </div>
 <script>
     window.klipse_settings = {
-        selector: '.eval-clojure pre',
-        selector_reagent: '.eval-reagent pre',
-        selector_eval_js: '.eval-js pre',
+        selector: '.listingblock:not(.do-not-eval) .language-clojure',
+        selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
+        selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,

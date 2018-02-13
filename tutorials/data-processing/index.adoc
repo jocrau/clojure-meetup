@@ -3,7 +3,7 @@ include::header.adoc[]
 == Scalar Values
 
 
-[.eval-clojure]
+[source,clojure]
 ----
 1
 2.3
@@ -22,41 +22,41 @@ nil
 
 Try some expressions yourself:
 
-[.eval-clojure]
+[source,clojure]
 ----
 #inst"2016-10-09"
 ----
 
 == Lists
 
-[.eval-clojure]
+[source,clojure]
 ----
 (list 1 2 "foo" :bar)
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 '(1 2 "foo" :bar)
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (conj '(1 2 "foo" :bar) "new")
 ----
 
 == Vectors
 
-[.eval-clojure]
+[source,clojure]
 ----
 (vector 1 2 "foo" :bar)
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 [1 2 "foo" :bar]
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (conj [1 2 "foo" :bar] "new")
 ----
@@ -67,13 +67,13 @@ A map consists of key-value pairs. Keys and values can be any clojure data (stri
 
 Change the keys to strings.
 
-[.eval-clojure]
+[source,clojure]
 ----
 {:first-name "Jochen"
  :last-name  "Rau"}
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 (conj {:first-name "Jochen" :last-name  "Rau"} [:new "value"])
 ----
@@ -81,7 +81,7 @@ Change the keys to strings.
 
 Maps can be deeply nested:
 
-[.eval-clojure]
+[source,clojure]
 ----
 {:first-name "Jochen"
  :last-name  "Rau"
@@ -100,26 +100,26 @@ Maps can be deeply nested:
 
 A set of unordered, distinct elements. Try to add "foo" a second time.
 
-[.eval-clojure]
+[source,clojure]
 ----
 (hash-set "foo" "bar" "baz")
 ----
 
-[.eval-clojure]
+[source,clojure]
 ----
 #{"foo" "bar" "baz"}
 ----
 
 What happens if you change `"boom"` into `"baz"`.
 
-[.eval-clojure]
+[source,clojure]
 ----
 (conj #{"foo" "bar" "baz"} "boom")
 ----
 
 There is also a sorted set. But it works a bit different as one might expect.
 
-[.eval-clojure]
+[source,clojure]
 ----
 (sorted-set "foo" "bar" "baz")
 ----
@@ -129,7 +129,7 @@ There is also a sorted set. But it works a bit different as one might expect.
 
 A Var is a way in clojure to keep a reference to a value. The `def` form creates a Var. Vars are namespaced.
 
-[.eval-clojure]
+[source,clojure]
 ----
 (def my-name "Jochen")
 my-name
@@ -137,7 +137,7 @@ my-name
 
 The let binding form allows to bind a value to a Var only in the local context. What happens if you remove the last line?
 
-[.eval-clojure]
+[source,clojure]
 ----
 (let [my-name "Shawn"]
   (println my-name)
@@ -147,7 +147,7 @@ my-name
 
 We can define a var again.
 
-[.eval-clojure]
+[source,clojure]
 ----
 (def my-name "Shawn")
 my-name

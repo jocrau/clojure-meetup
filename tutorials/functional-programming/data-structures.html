@@ -422,46 +422,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
-.CodeMirror {
-    border: none !important;
-}
 
-.CodeMirror pre {
-  width: 100%;
-  margin: auto;
-  text-align: left;
-  box-shadow: none;
-  font-family: 'FiraCode', monospace !important;
-}
-.CodeMirror-measure {
-  position: relative;
-}
-
-.text-left {
-  text-align: left;
-}
-
-.listingblock  pre {
-    padding: 5px 10px;
-    margin-bottom: 3.45em;
-}
-
-.listingblock  pre.CodeMirror-line {
-    padding: 5px 10px;
-    margin: 0;
-}
-
-.klipse-container:not(:empty) {
-    border: 2px #eee solid;
-    padding: 5px 10px;
-}
-
-.klipse-container:not(:empty):before {
-    content: "Rendered DOM:";
-    font-weight: bold;
-    color: #aaa;
-    font-family: 'FiraCode', monospace;
-}
 </style>
 </head>
 <body class="article">
@@ -475,9 +436,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_accessing_a_deeply_nested_data_structure">Accessing a deeply nested data structure</h2>
 <div class="sectionbody">
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(def joe {:first-name "Jochen"
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def joe {:first-name "Jochen"
           :last-name  "Rau"
           :shoe-size  9
           :birth-date #inst"1971-03-15"
@@ -487,22 +448,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
                         :status  ::current}
                        {:address "60 North Street"
                         :zip     "01018"
-                        :city    "Hatfield"}]})</pre>
+                        :city    "Hatfield"}]})</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(get joe :first-name)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(get joe :first-name)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(get (get (get joe :locations) 0) :city)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(get (get (get joe :locations) 0) :city)</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(get-in joe [:locations 0 :city])</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(get-in joe [:locations 0 :city])</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -511,22 +472,22 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="paragraph">
 <p>Keywords are functions:</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(:first-name joe)</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(:first-name joe)</code></pre>
 </div>
 </div>
 <div class="paragraph">
 <p>Yes, that&#8217;s weird, but incredibly helpful:</p>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(map :city (:locations joe))</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(map :city (:locations joe))</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))</code></pre>
 </div>
 </div>
 </div>
@@ -534,38 +495,38 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div class="sect1">
 <h2 id="_adding_and_removing_values">Adding and removing values</h2>
 <div class="sectionbody">
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>[(conj [:a :b] :c)
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">[(conj [:a :b] :c)
 (conj '(:a :b) :c)
 (conj #{:a :b} :c)
 (conj #{:a :b} :b)
-(conj {:a 1 :b 2} [:c 3])]</pre>
+(conj {:a 1 :b 2} [:c 3])]</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(assoc joe :first-name "Shawn")
-joe</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(assoc joe :first-name "Shawn")
+joe</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(update-in joe [:locations 0] dissoc :status)
-joe</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(update-in joe [:locations 0] dissoc :status)
+joe</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>[(first [:a :b])
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">[(first [:a :b])
 (first '(:a :b))
 (first #{:a :b})
-(first {:a 1 :b 2})]</pre>
+(first {:a 1 :b 2})]</code></pre>
 </div>
 </div>
-<div class="listingblock eval-clojure">
+<div class="listingblock">
 <div class="content">
-<pre>(rest [:a :b :c])</pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(rest [:a :b :c])</code></pre>
 </div>
 </div>
 <div class="olist arabic">
@@ -599,9 +560,9 @@ joe</pre>
 </div>
 <script>
     window.klipse_settings = {
-        selector: '.eval-clojure pre',
-        selector_reagent: '.eval-reagent pre',
-        selector_eval_js: '.eval-js pre',
+        selector: '.listingblock:not(.do-not-eval) .language-clojure',
+        selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
+        selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,

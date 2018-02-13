@@ -7,11 +7,35 @@
   box-shadow: none;
   font-family: 'FiraCode', monospace !important;
 }
+
 .CodeMirror-measure {
   position: relative;
 }
 
-.text-left {
-  text-align: left;
+.listingblock pre {
+    padding: 5px 10px !important;
+}
+
+.content .klipse-result {
+  margin-top: 5px !important;
+}
+
+.CodeMirror:nth-child(even)::before {
+  content: "=> ";
+  display: inline;
+  margin: -10px;
+  padding: 15px 10px 5px 10px;
+  font-family: Montserrat, Arial, sans-serif;
+}
+
+.klipse-container:not(:empty) {
+    border: 2px #eee solid;
+}
+
+.klipse-container:not(:empty):before {
+    content: "Render result";
+    font-weight: bold;
+    color: #aaa;
+    font-family: monospace;
 }
 </style>

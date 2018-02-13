@@ -7,12 +7,36 @@
   box-shadow: none;
   font-family: 'FiraCode', monospace !important;
 }
+
 .CodeMirror-measure {
   position: relative;
 }
 
-.text-left {
-  text-align: left;
+.listingblock pre {
+    padding: 5px 10px !important;
+}
+
+.content .klipse-result {
+  margin-top: 5px !important;
+}
+
+.CodeMirror:nth-child(even)::before {
+  content: "=> ";
+  display: inline;
+  margin: -10px;
+  padding: 15px 10px 5px 10px;
+  font-family: Montserrat, Arial, sans-serif;
+}
+
+.klipse-container:not(:empty) {
+    border: 2px #eee solid;
+}
+
+.klipse-container:not(:empty):before {
+    content: "Render result";
+    font-weight: bold;
+    color: #aaa;
+    font-family: monospace;
 }
 </style></head><body><div class="reveal"><div class="slides"><section class="title"><h1>Clojure Web Development</h1><div class="preamble"><div class="paragraph"><p>Architecture, Libraries, Tools</p></div></div><p class="author"><small>Jochen Rau, Infinite Cloud LLC</small></p></section>
 <section><div class="imageblock" style=""><img src="img/simplicity.png" alt="simplicity"></div></section>
@@ -106,8 +130,8 @@ Reveal.initialize({
   // The "normal" size of the presentation, aspect ratio will be preserved
   // when the presentation is scaled to fit different resolutions. Can be
   // specified using percentage units.
-  width: 1440,
-  height: 900,
+  width: 960,
+  height: 700,
 
   // Factor of the display size that should remain empty around the content
   margin: 0.1,
@@ -121,17 +145,15 @@ Reveal.initialize({
       { src: '../../resources/js/revealjs/lib/js/classList.js', condition: function() { return !document.body.classList; } },
       { src: '../../resources/js/revealjs/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
       { src: '../../resources/js/revealjs/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
-      { src: '../../resources/js/revealjs/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      
       { src: '../../resources/js/revealjs/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
       { src: '../../resources/js/revealjs/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
   ]
-});</script><link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
-
-<script>
+});</script><script>
     window.klipse_settings = {
-        selector: '.eval-clojure pre',
-        selector_reagent: '.eval-reagent pre',
-        selector_eval_js: '.eval-js pre',
+       selector: '.listingblock:not(.do-not-eval) .language-clojure',
+        selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
+        selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         eval_idle_msec: 100,
         codemirror_options_in: {
             indentUnit: 2,
@@ -145,32 +167,4 @@ Reveal.initialize({
         }
     };
 </script>
-<script src="../../resources/js/klipse/klipse_plugin.js"></script>
-<style>
-.listingblock pre {
-    padding: 5px 10px !important;
-}
-
-.CodeMirror {
-    border: none !important;
-}
-
-.CodeMirror:nth-child(even)::before {
-  content: "=> ";
-  display: inline;
-  margin: -10px;
-  padding: 15px 10px 5px 10px;
-  font-family: Montserrat, Arial, sans-serif;
-}
-
-.klipse-container:not(:empty) {
-    border: 2px #eee solid;
-}
-
-.klipse-container:not(:empty):before {
-    content: "Render result";
-    font-weight: bold;
-    color: #aaa;
-    font-family: monospace;
-}
-</style></body></html>
+<script src="../../resources/js/klipse/klipse_plugin.js"></script></body></html>
