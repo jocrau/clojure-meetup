@@ -1,3 +1,6 @@
+(ns tutorials.react-frontend.todo
+  (:require [reagent.core :as r]))
+
 ;; tag::content[]
 (defonce todos (r/atom (sorted-map)))
 

@@ -1,3 +1,6 @@
+(ns tutorials.react-frontend.echarts
+  (:require [reagent.core :as r]))
+
 ;; tag::content[]
 (defn chart [spec]
       (let [element (atom nil)]

@@ -2,10 +2,10 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :license {:name "Eclipse Public License"
-            :url "http://www.eclipse.org/legal/epl-v10.html"}
+            :url  "http://www.eclipse.org/legal/epl-v10.html"}
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
-  :dependencies [[org.clojure/clojure "1.8.0"]
-
+  :dependencies [[org.clojure/clojure "1.9.0"]
+                 [org.clojure/clojurescript "1.9.946"]
                  ; web server
                  [http-kit "2.1.19"]
                  [aleph "0.4.1"]
@@ -27,8 +27,27 @@
                  [enlive "1.1.6"]
                  [de.ubercode.clostache/clostache "1.4.0"]
 
+                 [reagent "0.8.0-alpha1"]
+
                  [org.clojure/tools.namespace "0.2.11"]]
-  :plugins [[lein-gorilla "0.4.0"]]
+
+  :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.14"]
+                                  [binaryage/devtools "0.9.8"]]
+                   :plugins      [[lein-cljsbuild "1.1.7"]
+                                  [lein-figwheel "0.5.14" :exclusions [org.clojure/clojure org.clojure/clojurescript]]]}}
+
+  :cljsbuild {:builds {:dev {:figwheel     true
+                             :source-paths ["src/cljs" "src/cljc"]
+                             :compiler     {:main                 tutorials.react_frontend.bmi
+                                            :asset-path           "js/compiled"
+                                            :output-to            "resources/js/reagent_frontend.js"
+                                            :output-dir           "resources/js/compiled"
+                                            :optimizations        :none
+                                            :preloads             [devtools.preload]
+                                            :source-map-timestamp true
+                                            :pretty-print         true}}}}
+
+  :figwheel {:css-dirs ["resources/css"]}
+
   :main ^:skip-aot meetup.intro
-  :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :target-path "target/%s")

@@ -1,4 +1,6 @@
 /target
+resources/js/compiled
+resources/js/reagent_frontend.js
 /classes
 /checkouts
 pom.xml
