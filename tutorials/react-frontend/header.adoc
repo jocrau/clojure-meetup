@@ -1,0 +1,4 @@
+include::../settings.adoc[]
+
+= Front-End Development with React and ClojureScript
+{presenter_name}, {presenter_company}

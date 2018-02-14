@@ -1,0 +1,25 @@
+include::header.adoc[]
+
+== Reagent -- A Wrapper around Facebook React
+
+[source,clojure]
+----
+(require '[reagent.core :as r])
+----
+
+Create some elements yourself:
+
+[source,reagent]
+----
+(defn hello [name]
+  [:p (str "Hello " name "!")])
+
+[hello "Jochen"]
+----
+
+[source,clojure]
+----
+(reagent.core/render-component [hello "World!"] js/klipse-container)
+----
+
+include::footer.adoc[]

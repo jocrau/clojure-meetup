@@ -7,5 +7,5 @@
 :imagesdir: img
 :source-language: clojure
 :nofooter:
-:docinfo: shared
+:docinfo: shared,private-footer,private-header
 :docinfodir: ..
