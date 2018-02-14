@@ -7,7 +7,7 @@
 <meta name="generator" content="Asciidoctor 1.5.5">
 <meta name="author" content="Jochen Rau, Infinite Cloud LLC">
 <meta name="copyright" content="by-sa">
-<title>Front-End Development with React and ClojureScript</title>
+<title>React and ClojureScript</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -420,6 +420,9 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.2/react.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.2/react-dom.min.js"></script>
+<script src="../../resources/js/echarts/echarts.common.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
 .CodeMirror {
@@ -479,192 +482,629 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     color: #aaa;
 }
 </style>
+
+<style>
+
+#todoapp button,
+#todoapp input[type="checkbox"] {
+  outline: none;
+}
+
+#todoapp {
+	background: #fff;
+	background: rgba(255, 255, 255, 0.9);
+	margin: 130px 0 40px 0;
+	border: 1px solid #ccc;
+	position: relative;
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.2),
+				0 25px 50px 0 rgba(0, 0, 0, 0.15);
+}
+
+#todoapp:before {
+	content: '';
+	border-left: 1px solid #f5d6d6;
+	border-right: 1px solid #f5d6d6;
+	width: 2px;
+	position: absolute;
+	top: 0;
+	left: 40px;
+	height: 100%;
+}
+
+#todoapp input::-webkit-input-placeholder {
+	font-style: italic;
+}
+
+#todoapp input::-moz-placeholder {
+	font-style: italic;
+	color: #a9a9a9;
+}
+
+#todoapp h1 {
+	position: absolute;
+	top: -120px;
+	width: 100%;
+	font-size: 70px;
+	font-weight: bold;
+	text-align: center;
+	color: #b3b3b3;
+	color: rgba(255, 255, 255, 0.3);
+	text-shadow: -1px -1px rgba(0, 0, 0, 0.2);
+	-webkit-text-rendering: optimizeLegibility;
+	-moz-text-rendering: optimizeLegibility;
+	-ms-text-rendering: optimizeLegibility;
+	-o-text-rendering: optimizeLegibility;
+	text-rendering: optimizeLegibility;
+}
+
+#header {
+	padding-top: 15px;
+	border-radius: inherit;
+}
+
+#header:before {
+	content: '';
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	height: 15px;
+	z-index: 2;
+	border-bottom: 1px solid #6c615c;
+	background: #8d7d77;
+	background: -webkit-gradient(linear, left top, left bottom, from(rgba(132, 110, 100, 0.8)),to(rgba(101, 84, 76, 0.8)));
+	background: -webkit-linear-gradient(top, rgba(132, 110, 100, 0.8), rgba(101, 84, 76, 0.8));
+	background: linear-gradient(top, rgba(132, 110, 100, 0.8), rgba(101, 84, 76, 0.8));
+	/* filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,StartColorStr='#9d8b83', EndColorStr='#847670'); */
+	border-top-left-radius: 1px;
+	border-top-right-radius: 1px;
+}
+
+#new-todo,
+.edit {
+	position: relative;
+	margin: 0;
+	width: 100%;
+	font-size: 24px;
+	font-family: inherit;
+	line-height: 1.4em;
+	border: 0;
+	outline: none;
+	color: inherit;
+	padding: 6px;
+	border: 1px solid #999;
+	box-shadow: inset 0 -1px 5px 0 rgba(0, 0, 0, 0.2);
+	-moz-box-sizing: border-box;
+	-ms-box-sizing: border-box;
+	-o-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-font-smoothing: antialiased;
+	-ms-font-smoothing: antialiased;
+	-o-font-smoothing: antialiased;
+	font-smoothing: antialiased;
+}
+
+#new-todo {
+	padding: 16px 16px 16px 60px;
+	border: none;
+	background: rgba(0, 0, 0, 0.02);
+	z-index: 2;
+	box-shadow: none;
+}
+
+#main {
+	position: relative;
+	z-index: 2;
+	border-top: 1px dotted #adadad;
+}
+
+label[for='toggle-all'] {
+	display: none;
+}
+
+#toggle-all {
+	position: absolute;
+	top: -42px;
+	left: -4px;
+	width: 40px;
+	text-align: center;
+	/* Mobile Safari */
+	border: none;
+}
+
+#toggle-all:before {
+	content: '»';
+	font-size: 28px;
+	color: #d9d9d9;
+	padding: 0 25px 7px;
+}
+
+#toggle-all:checked:before {
+	color: #737373;
+}
+
+#todo-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+#todo-list li {
+	position: relative;
+	font-size: 24px;
+	border-bottom: 1px dotted #ccc;
+}
+
+#todo-list li:last-child {
+	border-bottom: none;
+}
+
+#todo-list li.editing {
+	border-bottom: none;
+	padding: 0;
+}
+
+#todo-list li.editing .edit {
+	display: block;
+	width: 506px;
+	padding: 13px 17px 12px 17px;
+	margin: 0 0 0 43px;
+}
+
+#todo-list li.editing .view {
+	display: none;
+}
+
+#todo-list li .toggle {
+	text-align: center;
+	width: 40px;
+	/* auto, since non-WebKit browsers doesn't support input styling */
+	height: auto;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	margin: auto 0;
+	/* Mobile Safari */
+	border: none;
+	-webkit-appearance: none;
+	-ms-appearance: none;
+	-o-appearance: none;
+	appearance: none;
+}
+
+#todo-list li .toggle:after {
+	content: '✔';
+	/* 40 + a couple of pixels visual adjustment */
+	line-height: 43px;
+	font-size: 20px;
+	color: #d9d9d9;
+	text-shadow: 0 -1px 0 #bfbfbf;
+}
+
+#todo-list li .toggle:checked:after {
+	color: #85ada7;
+	text-shadow: 0 1px 0 #669991;
+	bottom: 1px;
+	position: relative;
+}
+
+#todo-list li label {
+	white-space: pre;
+	word-break: break-word;
+	padding: 15px 60px 15px 15px;
+	margin-left: 45px;
+	display: block;
+	line-height: 1.2;
+	-webkit-transition: color 0.4s;
+	transition: color 0.4s;
+}
+
+#todo-list li.completed label {
+	color: #a9a9a9;
+	text-decoration: line-through;
+}
+
+#todo-list li .destroy {
+	display: none;
+	position: absolute;
+	top: 0;
+	right: 10px;
+	bottom: 0;
+	width: 40px;
+	height: 40px;
+	margin: auto 0;
+	font-size: 22px;
+	color: #a88a8a;
+	-webkit-transition: all 0.2s;
+	transition: all 0.2s;
+}
+
+#todo-list li .destroy:hover {
+	text-shadow: 0 0 1px #000,
+				 0 0 10px rgba(199, 107, 107, 0.8);
+	-webkit-transform: scale(1.3);
+	-ms-transform: scale(1.3);
+	transform: scale(1.3);
+}
+
+#todo-list li .destroy:after {
+	content: '✖';
+}
+
+#todo-list li:hover .destroy {
+	display: block;
+}
+
+#todo-list li .edit {
+	display: none;
+}
+
+#todo-list li.editing:last-child {
+	margin-bottom: -1px;
+}
+
+#footer {
+	color: #777;
+	padding: 0 15px;
+	position: absolute;
+	right: 0;
+	bottom: -31px;
+	left: 0;
+	height: 20px;
+	z-index: 1;
+	text-align: center;
+	background: transparent;
+}
+
+#footer:before {
+	content: '';
+	position: absolute;
+	right: 0;
+	bottom: 31px;
+	left: 0;
+	height: 50px;
+	z-index: -1;
+	box-shadow: 0 1px 1px rgba(0, 0, 0, 0.3),
+				0 6px 0 -3px rgba(255, 255, 255, 0.8),
+				0 7px 1px -3px rgba(0, 0, 0, 0.3),
+				0 43px 0 -6px rgba(255, 255, 255, 0.8),
+				0 44px 2px -6px rgba(0, 0, 0, 0.2);
+}
+
+#todo-count {
+	float: left;
+	text-align: left;
+}
+
+#filters {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	position: absolute;
+	right: 0;
+	left: 0;
+}
+
+#filters li {
+	display: inline;
+}
+
+#filters li a {
+	color: #83756f;
+	margin: 2px;
+	text-decoration: none;
+}
+
+#filters li a.selected {
+	font-weight: bold;
+}
+
+#clear-completed {
+	float: right;
+	position: relative;
+	line-height: 20px;
+	text-decoration: none;
+	background: rgba(0, 0, 0, 0.1);
+	font-size: 11px;
+	padding: 0 10px;
+	border-radius: 3px;
+	box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.2);
+}
+
+#clear-completed:hover {
+	background: rgba(0, 0, 0, 0.15);
+	box-shadow: 0 -1px 0 0 rgba(0, 0, 0, 0.3);
+}
+
+#info {
+	margin: 65px auto 0;
+	color: #a6a6a6;
+	font-size: 12px;
+	text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+	text-align: center;
+}
+
+#info a {
+	color: inherit;
+}
+
+</style>
 </head>
 <body class="article">
 <div id="header">
-<h1>Front-End Development with React and ClojureScript</h1>
+<h1>React and ClojureScript</h1>
 <div class="details">
 <span id="author" class="author">Jochen Rau, Infinite Cloud LLC</span><br>
 </div>
 </div>
 <div id="content">
-<div class="sect1">
-<h2 id="_react">React</h2>
+<div id="preamble">
 <div class="sectionbody">
+<div id="toc" class="toc">
+<div id="toctitle" class="title">Table of Contents</div>
+<ul class="sectlevel0">
+<li><a href="#_clojure_basics">Clojure Basics</a></li>
+<li><a href="#_react">React</a></li>
+<li><a href="#_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</a></li>
+<li><a href="#_bmi_calculator">BMI Calculator</a></li>
+<li><a href="#_todo_app">ToDo App</a></li>
+<li><a href="#_react_and_clojurescript">React and ClojureScript</a></li>
+<li><a href="#_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</a></li>
+</ul>
+</div>
+</div>
+</div>
+<h1 id="_clojure_basics" class="sect0">Clojure Basics</h1>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure"></code></pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">:foo ;; Try something here</code></pre>
+</div>
+</div>
+<h1 id="_react" class="sect0">React</h1>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-react" data-lang="react">class HelloMessage extends React.Component {
+  render() {
+    return (
+      &lt;div&gt;
+        Hello {this.props.name}
+      &lt;/div&gt;
+    );
+  }
+}
+
+ReactDOM.render(
+  &lt;HelloMessage name="Taylor" /&gt;,
+  klipse_container
+);
+null</code></pre>
+</div>
+</div>
+<h1 id="_reagent_a_wrapper_around_facebook_react" class="sect0">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h1>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">[:div "Hello World!!"]</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">[:ul (map (fn [name] [:li name])
+          ["Jochen" "Alice" "Bob"])]</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Try some expressions yourself:</p>
+<p>Create some elements yourself:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">#inst"2016-10-09"</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_lists">Lists</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(list 1 2 "foo" :bar)</code></pre>
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">(defn hello [name]
+  [:p (str "Hello " name "!")])
+
+[hello "Jochen"]</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">'(1 2 "foo" :bar)</code></pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(reagent.core/render-component [hello "World!"] js/klipse-container)</code></pre>
 </div>
 </div>
+<h1 id="_bmi_calculator" class="sect0">BMI Calculator</h1>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj '(1 2 "foo" :bar) "new")</code></pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
+
+(defonce bmi-data (r/atom {:height 180 :weight 80}))
+
+(defn calc-bmi [data]
+      (let [{:keys [height weight bmi]} data
+            h (/ height 100)]
+           (if (nil? bmi)
+             (assoc data :bmi (/ weight (Math/pow h 2)))
+             (assoc data :weight (* bmi h h)))))
+
+(defn slider [attribute value min max]
+      [:input {:type      "range" :value value :min min :max max
+               :style     {:width "100%"}
+               :on-change (fn [e]
+                              (swap! bmi-data assoc attribute (.. e -target -value))
+                              (when-not (= :bmi attribute)
+                                        (swap! bmi-data dissoc :bmi)))}])
+
+(defn bmi-component []
+      (let [{:keys [weight height bmi]} (calc-bmi @bmi-data)
+            [color diagnose] (cond
+                               (&lt; bmi 18.5) ["orange" "usssnderweight"]
+                               (&lt; bmi 25) ["inherit" "normal"]
+                               (&lt; bmi 30) ["orange" "overweight"]
+                               :else ["red" "obese"])]
+           [:div
+            [:h3 "BMI calculator"]
+            [:div
+             "Height: " (int height) "cm"
+             [slider :height height 100 220]]
+            [:div
+             "Weight: " (int weight) "kg"
+             [slider :weight weight 30 150]]
+            [:div
+             "BMI: " (int bmi) " "
+             [:span {:style {:color color}} diagnose]
+             [slider :bmi bmi 10 50]]]))
+
+(reagent.core/render-component [bmi-component] js/klipse-container)</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_vectors">Vectors</h2>
-<div class="sectionbody">
+<h1 id="_todo_app" class="sect0">ToDo App</h1>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(vector 1 2 "foo" :bar)</code></pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
+
+(defonce todos (r/atom (sorted-map)))
+
+(defonce counter (r/atom 0))
+
+(defn add-todo [text]
+      (let [id (swap! counter inc)]
+           (swap! todos assoc id {:id id :title text :done false})))
+
+(defn toggle [id] (swap! todos update-in [id :done] not))
+(defn save [id title] (swap! todos assoc-in [id :title] title))
+(defn delete [id] (swap! todos dissoc id))
+
+(defn mmap [m f a] (-&gt;&gt; m (f a) (into (empty m))))
+(defn complete-all [v] (swap! todos mmap map #(assoc-in % [1 :done] v)))
+(defn clear-done [] (swap! todos mmap remove #(get-in % [1 :done])))
+
+(defonce init (do
+                (add-todo "Rename Cloact to Reagent")
+                (add-todo "Add undo demo")
+                (add-todo "Make all rendering async")
+                (add-todo "Allow any arguments to component functions")
+                (complete-all true)))
+
+(defn todo-input [{:keys [title on-save on-stop]}]
+      (let [val (r/atom title)
+            stop #(do (reset! val "")
+                      (if on-stop (on-stop)))
+            save #(let [v (-&gt; @val str clojure.string/trim)]
+                       (if-not (empty? v) (on-save v))
+                       (stop))]
+           (fn [{:keys [id class placeholder]}]
+               [:input {:type "text" :value @val
+                        :id id :class class :placeholder placeholder
+                        :on-blur save
+                        :on-change #(reset! val (-&gt; % .-target .-value))
+                        :on-key-down #(case (.-which %)
+                                            13 (save)
+                                            27 (stop)
+                                            nil)}])))
+
+(def todo-edit (with-meta todo-input
+                          {:component-did-mount #(.focus (r/dom-node %))}))
+
+(defn todo-stats [{:keys [filt active done]}]
+      (let [props-for (fn [name]
+                          {:class (if (= name @filt) "selected")
+                           :on-click #(reset! filt name)})]
+           [:div
+            [:span#todo-count
+             [:strong active] " " (case active 1 "item" "items") " left"]
+            [:ul#filters
+             [:li [:a (props-for :all) "All"]]
+             [:li [:a (props-for :active) "Active"]]
+             [:li [:a (props-for :done) "Completed"]]]
+            (when (pos? done)
+                  [:button#clear-completed {:on-click clear-done}
+                   "Clear completed " done])]))
+
+(defn todo-item []
+      (let [editing (r/atom false)]
+           (fn [{:keys [id done title]}]
+               [:li {:class (str (if done "completed ")
+                                 (if @editing "editing"))}
+                [:div.view
+                 [:input.toggle {:type "checkbox" :checked done
+                                 :on-change #(toggle id)}]
+                 [:label {:on-double-click #(reset! editing true)} title]
+                 [:button.destroy {:on-click #(delete id)}]]
+                (when @editing
+                      [todo-edit {:class "edit" :title title
+                                  :on-save #(save id %)
+                                  :on-stop #(reset! editing false)}])])))
+
+(defn todo-app [props]
+      (let [filt (r/atom :all)]
+           (fn []
+               (let [items (vals @todos)
+                     done (-&gt;&gt; items (filter :done) count)
+                     active (- (count items) done)]
+                    [:div
+                     [:section#todoapp
+                      [:header#header
+                       [:h1 "todos"]
+                       [todo-input {:id "new-todo"
+                                    :placeholder "What needs to be done?"
+                                    :on-save add-todo}]]
+                      (when (-&gt; items count pos?)
+                            [:div
+                             [:section#main
+                              [:input#toggle-all {:type "checkbox" :checked (zero? active)
+                                                  :on-change #(complete-all (pos? active))}]
+                              [:label {:for "toggle-all"} "Mark all as complete"]
+                              [:ul#todo-list
+                               (for [todo (filter (case @filt
+                                                        :active (complement :done)
+                                                        :done :done
+                                                        :all identity) items)]
+                                    ^{:key (:id todo)} [todo-item todo])]]
+                             [:footer#footer
+                              [todo-stats {:active active :done done :filt filt}]]])]
+                     [:footer#info
+                      [:p "Double-click to edit a todo"]]]))))
+
+(r/render [todo-app] js/klipse-container)</code></pre>
 </div>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">[1 2 "foo" :bar]</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj [1 2 "foo" :bar] "new")</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_maps_associative_arrays">Maps (Associative Arrays</h2>
-<div class="sectionbody">
+<div class="sect-1">
+<h0 id="_react_and_clojurescript">React and ClojureScript</h0>
 <div class="paragraph">
-<p>A map consists of key-value pairs. Keys and values can be any clojure data (strings, numbers, other maps, etc.).</p>
+<p>Jochen Rau, Infinite Cloud LLC</p>
 </div>
-<div class="paragraph">
-<p>Change the keys to strings.</p>
 </div>
+<div class="sect-1">
+<h0 id="_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</h0>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">{:first-name "Jochen"
- :last-name  "Rau"}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj {:first-name "Jochen" :last-name  "Rau"} [:new "value"])</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Maps can be deeply nested:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">{:first-name "Jochen"
- :last-name  "Rau"
- :shoe-size  9
- :birth-date #inst"1971-03-15"
- :locations  [{:address "120 Pulpit Hill Rd"
-               :zip     "01002"
-               :city    "Amherst"
-               :status  ::current}
-              {:address "6 North Street"
-               :zip     "01018"
-               :city    "Hatfield"}]}</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_set">Set</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A set of unordered, distinct elements. Try to add "foo" a second time.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(hash-set "foo" "bar" "baz")</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">#{"foo" "bar" "baz"}</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>What happens if you change <code>"boom"</code> into <code>"baz"</code>.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj #{"foo" "bar" "baz"} "boom")</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>There is also a sorted set. But it works a bit different as one might expect.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(sorted-set "foo" "bar" "baz")</code></pre>
-</div>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_vars_are_not_variables">Vars (are not variables)</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>A Var is a way in clojure to keep a reference to a value. The <code>def</code> form creates a Var. Vars are namespaced.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def my-name "Jochen")
-my-name</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The let binding form allows to bind a value to a Var only in the local context. What happens if you remove the last line?</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(let [my-name "Shawn"]
-  (println my-name)
-  my-name)
-my-name</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>We can define a var again.</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def my-name "Shawn")
-my-name</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Wait, isn&#8217;t that mutable then?</p>
-</div>
-<div class="olist arabic">
-<div class="title">Chapters</div>
-<ol class="arabic">
-<li>
-<p><a href="#">Intro</a></p>
-</li>
-<li>
-<p><a href="components.html">React Components</a></p>
-</li>
-</ol>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
+
+(defn chart [spec]
+      (let [element (atom nil)]
+           (r/create-class
+             {:reagent-render      (fn [this]
+                                       [:div {:styles "display: block; width: 1000px; height: 800px;"}])
+              :component-did-mount (fn [this]
+                                       (let [node (r/dom-node this)]
+                                            (doto (js/echarts.init node)
+                                                  (.setOption (clj-&gt;js spec)))))})))
+
+(def specification
+  {:title   {:text "ECharts entry example"}
+   :tooltip {}
+   :legend  {:data ["Sales"]}
+   :xAxis   {:data ["shirt" "cardign" "chiffon shirt" "pants" "heels" "socks"]}
+   :yAxis   {}
+   :series  [{:name "Sales"
+              :type "bar"
+              :data [5 20 36 10 10 20]}]})
+
+(reagent.core/render-component [chart specification] js/klipse-container)</code></pre>
 </div>
 </div>
 </div>
@@ -673,6 +1113,7 @@ my-name</code></pre>
     window.klipse_settings = {
         selector: '.listingblock:not(.do-not-eval) .language-clojure',
         selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
+        selector_jsx: '.listingblock:not(.do-not-eval) .language-react',
         selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         codemirror_options_in: {
             indentUnit: 2,

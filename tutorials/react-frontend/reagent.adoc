@@ -1,11 +1,21 @@
-include::header.adoc[]
-
 == Reagent -- A Wrapper around Facebook React
 
-[source,clojure]
+[source]
 ----
 (require '[reagent.core :as r])
 ----
+
+[source,reagent]
+----
+[:div "Hello World!!"]
+----
+
+[source,reagent]
+----
+[:ul (map (fn [name] [:li name])
+          ["Jochen" "Alice" "Bob"])]
+----
+
 
 Create some elements yourself:
 
@@ -17,9 +27,7 @@ Create some elements yourself:
 [hello "Jochen"]
 ----
 
-[source,clojure]
+[source]
 ----
 (reagent.core/render-component [hello "World!"] js/klipse-container)
 ----
-
-include::footer.adoc[]

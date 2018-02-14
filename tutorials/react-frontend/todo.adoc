@@ -1,0 +1,10 @@
+== ToDo App
+
+[source]
+----
+(require '[reagent.core :as r])
+
+include::{cljsdir}/tutorials/react_frontend/todo.cljs[tag=content]
+
+(r/render [todo-app] js/klipse-container)
+----

@@ -1,5 +1,3 @@
-include::header.adoc[]
-
 == Lazy Evaluation
 
 [source,clojure]
@@ -47,4 +45,4 @@ include::header.adoc[]
                (map inc (range)))
 ----
 
-include::footer.adoc[]
+

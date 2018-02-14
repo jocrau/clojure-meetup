@@ -114,7 +114,7 @@ Download the code to interactively follow the tutorial:
 image::github.png[]
 
 +++<small>+++
-link:https://github.com/jocrau/clojure-meetup/archive/master.zip[https://github.com/jocrau/clojure-meetup/archive/master.zip]
+link:https://github.com/jocrau/clojure-clj.meetup/archive/master.zip[https://github.com/jocrau/clojure-clj.meetup/archive/master.zip]
 +++</small>+++
 
 

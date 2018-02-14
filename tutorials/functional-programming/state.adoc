@@ -1,5 +1,3 @@
-include::header.adoc[]
-
 == State
 
 An atom is a reference to a value.
@@ -49,6 +47,4 @@ There is no benefit the first time the function is called. Try to change the arg
 (time (cached-slow-fun 1000000))
 @mem
 ----
-
-include::footer.adoc[]
 

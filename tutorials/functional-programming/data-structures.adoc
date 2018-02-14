@@ -1,5 +1,3 @@
-include::header.adoc[]
-
 == Accessing a deeply nested data structure
 
 [source,clojure]
@@ -89,4 +87,4 @@ joe
 (rest [:a :b :c])
 ----
 
-include::footer.adoc[]
+

@@ -1,5 +1,3 @@
-include::header.adoc[]
-
 == Map, Reduce, Folds
 
 The process called "mapping" applies a given function to each element of a sequence of values producing a sequence of values of the same length. Let's take a look at the Clojure function `map`:
@@ -16,7 +14,7 @@ The function `inc` is applied to 1, 2, and 3. Any function that takes one argume
 (map str [1 2 3])
 ----
 
-And we can use anny collection of values that can be turned into a sequence, like a list
+And we can use any collection of values that can be turned into a sequence, like a list
 
 [source.do-not-eval]
 ----
@@ -29,5 +27,3 @@ or a set
 ----
 (map inc #{1 2 3})
 ----
-
-include::footer.adoc[]

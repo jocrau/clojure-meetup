@@ -1,5 +1,3 @@
-include::header.adoc[]
-
 == Reagent -- A Wrapper around Facebook React
 
 [source,clojure]
@@ -22,4 +20,3 @@ Create some elements yourself:
 (reagent.core/render-component [hello "World!"] js/klipse-container)
 ----
 
-include::footer.adoc[]

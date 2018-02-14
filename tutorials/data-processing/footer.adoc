@@ -1,3 +1,0 @@
-.Chapters
-1. <<index.adoc#,Intro>>
-2. <<folds.adoc#,Folds>>

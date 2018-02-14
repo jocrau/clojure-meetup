@@ -1,5 +1,3 @@
-include::header.adoc[]
-
 == Scalar Values
 
 
@@ -155,4 +153,4 @@ my-name
 
 Wait, isn't that mutable then?
 
-include::footer.adoc[]
+

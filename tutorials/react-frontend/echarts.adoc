@@ -1,27 +1,14 @@
 include::header.adoc[]
 
-== ECharts as an example of a JS library
+= ECharts as an example of a JS library
 
 [source,clojure]
 ----
 (require '[reagent.core :as r])
 
-(defn my-component
-  [spec]
-  (let [element (atom nil)]
-     (r/create-class
-       {:component-did-mount (fn [this]
-                               (let [node (r/dom-node this)]
-                                 (reset! element (js/echarts.init node))
-                                 (.setOption @element (clj->js spec))))
-        :reagent-render (fn [spec] [:div])})))
+include::{cljsdir}/tutorials/react_frontend/echarts.cljs[tag=content]
 
-(r/render [my-component {:title  {:text "Line Chart Demo"}
-                         :xAxis  {:type "category" :data ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]}
-                         :yAxis  {:type "value"}
-                         :series [{:type "line" :data [7.03 7.02 6.79 6.60 6.36 6.21 5.93]}]}]
-                        js/klipse-container)
-
+(reagent.core/render-component [chart specification] js/klipse-container)
 ----
 
 include::footer.adoc[]

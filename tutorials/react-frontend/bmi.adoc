@@ -1,0 +1,11 @@
+== BMI Calculator
+
+
+[source]
+----
+(require '[reagent.core :as r])
+
+include::{cljsdir}/tutorials/react_frontend/bmi.cljs[tag=content]
+
+(reagent.core/render-component [bmi-component] js/klipse-container)
+----
