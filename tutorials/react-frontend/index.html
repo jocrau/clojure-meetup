@@ -420,8 +420,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.2/react.min.js"></script>
-<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.2/react-dom.min.js"></script>
+<script src="../../resources/js/react/react.min.js"></script>
+<script src="../../resources/js/react/react-dom.min.js"></script>
 <script src="../../resources/js/echarts/echarts.common.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
@@ -845,7 +845,7 @@ label[for='toggle-all'] {
 <div class="sectionbody">
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Table of Contents</div>
-<ul class="sectlevel0">
+<ul class="sectlevel1">
 <li><a href="#_clojure_basics">Clojure Basics</a></li>
 <li><a href="#_react">React</a></li>
 <li><a href="#_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</a></li>
@@ -857,13 +857,19 @@ label[for='toggle-all'] {
 </div>
 </div>
 </div>
-<h1 id="_clojure_basics" class="sect0">Clojure Basics</h1>
+<div class="sect1">
+<h2 id="_clojure_basics">Clojure Basics</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">:foo ;; Try something here</code></pre>
 </div>
 </div>
-<h1 id="_react" class="sect0">React</h1>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_react">React</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-react" data-lang="react">class HelloMessage extends React.Component {
@@ -883,7 +889,11 @@ ReactDOM.render(
 null</code></pre>
 </div>
 </div>
-<h1 id="_reagent_a_wrapper_around_facebook_react" class="sect0">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h1>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])</code></pre>
@@ -916,7 +926,11 @@ null</code></pre>
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(reagent.core/render-component [hello "World!"] js/klipse-container)</code></pre>
 </div>
 </div>
-<h1 id="_bmi_calculator" class="sect0">BMI Calculator</h1>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_bmi_calculator">BMI Calculator</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
@@ -941,7 +955,7 @@ null</code></pre>
 (defn bmi-component []
       (let [{:keys [weight height bmi]} (calc-bmi @bmi-data)
             [color diagnose] (cond
-                               (&lt; bmi 18.5) ["orange" "usssnderweight"]
+                               (&lt; bmi 18.5) ["orange" "underweight"]
                                (&lt; bmi 25) ["inherit" "normal"]
                                (&lt; bmi 30) ["orange" "overweight"]
                                :else ["red" "obese"])]
@@ -961,7 +975,11 @@ null</code></pre>
 (reagent.core/render-component [bmi-component] js/klipse-container)</code></pre>
 </div>
 </div>
-<h1 id="_todo_app" class="sect0">ToDo App</h1>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_todo_app">ToDo App</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
@@ -1072,14 +1090,13 @@ null</code></pre>
 (r/render [todo-app] js/klipse-container)</code></pre>
 </div>
 </div>
-<div class="sect-1">
-<h0 id="_react_and_clojurescript">React and ClojureScript</h0>
+</div>
+</div>
+<h1 id="_react_and_clojurescript" class="sect0">React and ClojureScript</h1>
 <div class="paragraph">
 <p>Jochen Rau, Infinite Cloud LLC</p>
 </div>
-</div>
-<div class="sect-1">
-<h0 id="_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</h0>
+<h1 id="_echarts_as_an_example_of_a_js_library" class="sect0">ECharts as an example of a JS library</h1>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
@@ -1105,7 +1122,6 @@ null</code></pre>
               :data [5 20 36 10 10 20]}]})
 
 (reagent.core/render-component [chart specification] js/klipse-container)</code></pre>
-</div>
 </div>
 </div>
 </div>

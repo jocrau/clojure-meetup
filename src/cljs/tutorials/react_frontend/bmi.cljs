@@ -19,7 +19,7 @@
 (defn bmi-component []
       (let [{:keys [weight height bmi]} (calc-bmi @bmi-data)
             [color diagnose] (cond
-                               (< bmi 18.5) ["orange" "usssnderweight"]
+                               (< bmi 18.5) ["orange" "underweight"]
                                (< bmi 25) ["inherit" "normal"]
                                (< bmi 30) ["orange" "overweight"]
                                :else ["red" "obese"])]
