@@ -3,18 +3,7 @@
     [reagent.core :as r]))
 
 ;; tag::content[]
-(defonce specification
-         (r/atom
-           {:canvas {:width  "600px"
-                     :height "400px"}
-            :chart  {:title   {:text "ECharts Example"}
-                     :tooltip {}
-                     :legend  {:data ["Sales"]}
-                     :xAxis   {:data ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"]}
-                     :yAxis   {}
-                     :series  [{:name "Sales"
-                                :type "bar"
-                                :data [6 17 36 10 10 20 25]}]}}))
+(declare specification)
 
 (defn chart []
   (let [canvas (atom nil)]
@@ -27,4 +16,17 @@
        :component-did-update (fn [this]
                                (.setOption @canvas (clj->js (:chart @specification))))})))
 
+(def specification
+  (r/atom
+    {:canvas {:width  "600px"
+              :height "400px"}
+     :chart  {:title     {:text "ECharts Example"}
+              :tooltip   {}
+              :animation false
+              :legend    {:data ["Sales"]}
+              :xAxis     {:data ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"]}
+              :yAxis     {}
+              :series    [{:name "Sales"
+                           :type "bar"
+                           :data [6 17 36 10 10 20 25]}]}}))
 ;; end::content[]

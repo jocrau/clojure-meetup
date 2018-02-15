@@ -851,7 +851,6 @@ label[for='toggle-all'] {
 <li><a href="#_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</a></li>
 <li><a href="#_bmi_calculator">BMI Calculator</a></li>
 <li><a href="#_todo_app">ToDo App</a></li>
-<li><a href="#_react_and_clojurescript">React and ClojureScript</a></li>
 <li><a href="#_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</a></li>
 </ul>
 </div>
@@ -960,7 +959,7 @@ null</code></pre>
                                (&lt; bmi 30) ["orange" "overweight"]
                                :else ["red" "obese"])]
            [:div
-            [:h1 "BMI Calculator"]
+            [:h4 "BMI Calculator"]
             [:div
              "Height: " (int height) "cm"
              [slider :height height 100 220]]
@@ -1092,27 +1091,13 @@ null</code></pre>
 </div>
 </div>
 </div>
-<h1 id="_react_and_clojurescript" class="sect0">React and ClojureScript</h1>
-<div class="paragraph">
-<p>Jochen Rau, Infinite Cloud LLC</p>
-</div>
-<h1 id="_echarts_as_an_example_of_a_js_library" class="sect0">ECharts as an example of a JS library</h1>
+<div class="sect1">
+<h2 id="_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</h2>
+<div class="sectionbody">
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
-
-(defonce specification
-         (r/atom
-           {:canvas {:width  "600px"
-                     :height "400px"}
-            :chart  {:title   {:text "ECharts Example"}
-                     :tooltip {}
-                     :legend  {:data ["Sales"]}
-                     :xAxis   {:data ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"]}
-                     :yAxis   {}
-                     :series  [{:name "Sales"
-                                :type "bar"
-                                :data [6 17 36 10 10 20 25]}]}}))
+(declare specification)
 
 (defn chart []
   (let [canvas (atom nil)]
@@ -1125,8 +1110,23 @@ null</code></pre>
        :component-did-update (fn [this]
                                (.setOption @canvas (clj-&gt;js (:chart @specification))))})))
 
+(def specification
+  (r/atom
+    {:canvas {:width  "600px"
+              :height "400px"}
+     :chart  {:title     {:text "ECharts Example"}
+              :tooltip   {}
+              :animation false
+              :legend    {:data ["Sales"]}
+              :xAxis     {:data ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"]}
+              :yAxis     {}
+              :series    [{:name "Sales"
+                           :type "bar"
+                           :data [6 17 36 10 10 20 25]}]}}))
 
 (reagent.core/render-component [chart specification] js/klipse-container)</code></pre>
+</div>
+</div>
 </div>
 </div>
 </div>

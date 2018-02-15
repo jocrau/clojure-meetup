@@ -1,14 +1,9 @@
-include::header.adoc[]
-
-= ECharts as an example of a JS library
+== ECharts as an example of a JS library
 
 [source,clojure]
 ----
 (require '[reagent.core :as r])
-
 include::{cljsdir}/tutorials/react_frontend/echarts.cljs[tag=content]
 
 (reagent.core/render-component [chart specification] js/klipse-container)
 ----
-
-include::footer.adoc[]
