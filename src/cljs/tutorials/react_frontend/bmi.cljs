@@ -1,5 +1,6 @@
 (ns tutorials.react-frontend.bmi
-  (:require [reagent.core :as r]))
+  (:require
+    [reagent.core :as r]))
 
 ;; tag::content[]
 (defonce bmi-data (r/atom {:height 180 :weight 80}))
@@ -27,7 +28,7 @@
                                (< bmi 30) ["orange" "overweight"]
                                :else ["red" "obese"])]
            [:div
-            [:h1 "BMI calculator"]
+            [:h1 "BMI Calculator"]
             [:div
              "Height: " (int height) "cm"
              [slider :height height 100 220]]
@@ -39,8 +40,3 @@
              [:span {:style {:color color}} diagnose]
              [slider :bmi bmi 10 50]]]))
 ;; end::content[]
-
-(defn ^:export init []
-  (r/render-component
-    [bmi-component]
-    (js/document.getElementById "container")))

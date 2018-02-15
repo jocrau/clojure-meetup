@@ -6,20 +6,21 @@
   :source-paths ["src/clj" "src/cljs" "src/cljc"]
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [org.clojure/clojurescript "1.9.946"]
+
                  ; web server
-                 [http-kit "2.1.19"]
-                 [aleph "0.4.1"]
+                 [http-kit "2.2.0"]
+                 [aleph "0.4.4"]
 
                  ; request handling
-                 [yada "1.1.37"]
+                 [yada "1.2.11"]
                  [liberator "0.14.1"]
 
                  ; routing
-                 [bidi "2.0.9"]
+                 [bidi "2.1.3"]
                  [compojure "1.5.1"]
 
                  ; security
-                 [buddy/buddy "1.1.0"]
+                 [buddy/buddy "2.0.0"]
                  [com.cemerick/friend "0.2.3"]
 
                  ; templating
@@ -32,13 +33,13 @@
                  [org.clojure/tools.namespace "0.2.11"]]
 
   :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.14"]
-                                  [binaryage/devtools "0.9.8"]]
+                                  [binaryage/devtools "0.9.9"]]
                    :plugins      [[lein-cljsbuild "1.1.7"]
                                   [lein-figwheel "0.5.14" :exclusions [org.clojure/clojure org.clojure/clojurescript]]]}}
 
-  :cljsbuild {:builds {:dev {:figwheel     true
+  :cljsbuild {:builds {:dev {:figwheel     {:on-jsload "tutorials.react_frontend.app/init"}
                              :source-paths ["src/cljs" "src/cljc"]
-                             :compiler     {:main                 tutorials.react_frontend.bmi
+                             :compiler     {:main                 tutorials.react_frontend.app
                                             :asset-path           "js/compiled"
                                             :output-to            "resources/js/reagent_frontend.js"
                                             :output-dir           "resources/js/compiled"

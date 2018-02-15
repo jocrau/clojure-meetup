@@ -960,7 +960,7 @@ null</code></pre>
                                (&lt; bmi 30) ["orange" "overweight"]
                                :else ["red" "obese"])]
            [:div
-            [:h1 "BMI calculator"]
+            [:h1 "BMI Calculator"]
             [:div
              "Height: " (int height) "cm"
              [slider :height height 100 220]]
@@ -1057,7 +1057,7 @@ null</code></pre>
                                   :on-save #(save id %)
                                   :on-stop #(reset! editing false)}])])))
 
-(defn todo-app [props]
+(defn todo-app []
       (let [filt (r/atom :all)]
            (fn []
                (let [items (vals @todos)
@@ -1101,25 +1101,30 @@ null</code></pre>
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
 
-(defn chart [spec]
-      (let [element (atom nil)]
-           (r/create-class
-             {:reagent-render      (fn [this]
-                                       [:div {:styles "display: block; width: 1000px; height: 800px;"}])
-              :component-did-mount (fn [this]
-                                       (let [node (r/dom-node this)]
-                                            (doto (js/echarts.init node)
-                                                  (.setOption (clj-&gt;js spec)))))})))
+(defonce specification
+         (r/atom
+           {:canvas {:width  "600px"
+                     :height "400px"}
+            :chart  {:title   {:text "ECharts Example"}
+                     :tooltip {}
+                     :legend  {:data ["Sales"]}
+                     :xAxis   {:data ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"]}
+                     :yAxis   {}
+                     :series  [{:name "Sales"
+                                :type "bar"
+                                :data [6 17 36 10 10 20 25]}]}}))
 
-(def specification
-  {:title   {:text "ECharts entry example"}
-   :tooltip {}
-   :legend  {:data ["Sales"]}
-   :xAxis   {:data ["shirt" "cardign" "chiffon shirt" "pants" "heels" "socks"]}
-   :yAxis   {}
-   :series  [{:name "Sales"
-              :type "bar"
-              :data [5 20 36 10 10 20]}]})
+(defn chart []
+  (let [canvas (atom nil)]
+    (r/create-class
+      {:reagent-render       (fn [this]
+                               [:div {:style (:canvas @specification)}])
+       :component-did-mount  (fn [this]
+                               (reset! canvas (js/echarts.init (r/dom-node this)))
+                               (.setOption @canvas (clj-&gt;js (:chart @specification))))
+       :component-did-update (fn [this]
+                               (.setOption @canvas (clj-&gt;js (:chart @specification))))})))
+
 
 (reagent.core/render-component [chart specification] js/klipse-container)</code></pre>
 </div>

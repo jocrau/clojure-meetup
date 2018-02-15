@@ -1,5 +1,6 @@
 (ns tutorials.react-frontend.todo
-  (:require [reagent.core :as r]))
+  (:require
+    [reagent.core :as r]))
 
 ;; tag::content[]
 (defonce todos (r/atom (sorted-map)))
@@ -75,7 +76,7 @@
                                   :on-save #(save id %)
                                   :on-stop #(reset! editing false)}])])))
 
-(defn todo-app [props]
+(defn todo-app []
       (let [filt (r/atom :all)]
            (fn []
                (let [items (vals @todos)
@@ -105,4 +106,3 @@
                      [:footer#info
                       [:p "Double-click to edit a todo"]]]))))
 ;; end::content[]
-
