@@ -1,5 +1,7 @@
-<script src="../../resources/js/react/react.min.js"></script>
-<script src="../../resources/js/react/react-dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.production.min.js"></script>
+<!--<script src="../../resources/js/react/react.min.js"></script>-->
+<!--<script src="../../resources/js/react/react-dom.min.js"></script>-->
 <script src="../../resources/js/echarts/echarts.common.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
@@ -59,6 +61,15 @@
     content: "Rendered DOM:";
     color: #aaa;
 }
+
+table tr.even,
+table tr.alt,
+table tr:nth-of-type(even),
+table tr th,
+table tr td {
+    background: transparent;
+}
+
 </style>
 
 <style>

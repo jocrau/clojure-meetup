@@ -1,6 +1,6 @@
 == Accessing a deeply nested data structure
 
-[source,clojure]
+[source]
 ----
 (def joe {:first-name "Jochen"
           :last-name  "Rau"
@@ -15,17 +15,17 @@
                         :city    "Hatfield"}]})
 ----
 
-[source,clojure]
+[source]
 ----
 (get joe :first-name)
 ----
 
-[source,clojure]
+[source]
 ----
 (get (get (get joe :locations) 0) :city)
 ----
 
-[source,clojure]
+[source]
 ----
 (get-in joe [:locations 0 :city])
 ----
@@ -34,26 +34,26 @@ The `get-in` function accepts a third argument which is the default value.
 
 Keywords are functions:
 
-[source,clojure]
+[source]
 ----
 (:first-name joe)
 ----
 
 Yes, that's weird, but incredibly helpful:
 
-[source,clojure]
+[source]
 ----
 (map :city (:locations joe))
 ----
 
-[source,clojure]
+[source]
 ----
 (first (filter (fn [location] (= (:status location) ::current)) (get joe :locations)))
 ----
 
 == Adding and removing values
 
-[source,clojure]
+[source]
 ----
 [(conj [:a :b] :c)
 (conj '(:a :b) :c)
@@ -62,19 +62,19 @@ Yes, that's weird, but incredibly helpful:
 (conj {:a 1 :b 2} [:c 3])]
 ----
 
-[source,clojure]
+[source]
 ----
 (assoc joe :first-name "Shawn")
 joe
 ----
 
-[source,clojure]
+[source]
 ----
 (update-in joe [:locations 0] dissoc :status)
 joe
 ----
 
-[source,clojure]
+[source]
 ----
 [(first [:a :b])
 (first '(:a :b))
@@ -82,7 +82,7 @@ joe
 (first {:a 1 :b 2})]
 ----
 
-[source,clojure]
+[source]
 ----
 (rest [:a :b :c])
 ----

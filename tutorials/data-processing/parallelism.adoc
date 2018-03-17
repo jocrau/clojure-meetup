@@ -1,0 +1,16 @@
+== Concurrency and Parallelism
+
+Parallelism and Concurrency describe different concerns.footnoteref:[,Definitely take a look at https://talks.golang.org/2012/waza.slide and https://existentialtype.wordpress.com/2011/03/17/parallelism-is-not-concurrency/ for more background, or even http://www.usingcsp.com/cspbook.pdf for a very detailed mathematical introduction.]
+
+Concurrency::
+    How to *structure* a computation into independent processes and coordinate between them.
+
+Parallelism::
+    How to *execute* (dependent or independent) processes at the same time.
+
+To execute code in parallel, it needs to be concurrent. But that also is true for sequential execution (eg. using the CPU clock for coordination).
+
+== Distributed Systems
+
+"A distributed system is one in which the failure of a computer you didn't even know existed can render your own computer unusable.footnoteref:[,See https://www.microsoft.com/en-us/research/publication/distribution/]"
+-- Leslie Lamport, May 1987

@@ -1,0 +1,42 @@
+== An Illustrated Example
+
+Let's take a look at some real life example.footnoteref:[disclaimer,Inspired by http://www.modernescpp.com/index.php/higher-order-functions]
+
+[source]
+----
+(defn cook [thing]
+  (condp = thing
+    '🐄 '🍔
+    '🥔 '🍟
+    '🐓 '🍗
+    '🌽 '🍿
+    '🥒 '🥗))
+
+(map cook ['🐄 '🥔 '🐓 '🌽])
+----
+
+[source]
+----
+(defn vegetarian? [thing]
+  (some #{thing} ['🍎 '🍐 '🥔 '🍌 '🌽 '🍇 '🥕 '🥒]))
+
+(filter vegetarian? ['🐄 '🥔 '🐓 '🌽 '🥒])
+----
+
+[source]
+----
+(defn eat [acc thing]
+  (str thing acc))
+
+(reduce eat " ⟹ 💩" (map cook (filter vegetarian? ['🐄 '🥔 '🐓 '🌽 '🥒])))
+----
+
+or more readable
+
+[source]
+----
+(->> ['🐄 '🥔 '🐓 '🌽 '🥒]
+    (filter vegetarian?)
+    (map cook)
+    (reduce eat " ⟹ 💩"))
+----

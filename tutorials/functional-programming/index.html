@@ -420,8 +420,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<script src="../../resources/js/react/react.min.js"></script>
-<script src="../../resources/js/react/react-dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.production.min.js"></script>
+<!--<script src="../../resources/js/react/react.min.js"></script>-->
+<!--<script src="../../resources/js/react/react-dom.min.js"></script>-->
 <script src="../../resources/js/echarts/echarts.common.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
@@ -481,6 +483,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     content: "Rendered DOM:";
     color: #aaa;
 }
+
+table tr.even,
+table tr.alt,
+table tr:nth-of-type(even),
+table tr th,
+table tr td {
+    background: transparent;
+}
+
 </style>
 
 <style>
@@ -847,9 +858,8 @@ label[for='toggle-all'] {
 <div id="toctitle" class="title">Table of Contents</div>
 <ul class="sectlevel1">
 <li><a href="#_scalar_values">Scalar Values</a></li>
-<li><a href="#_lists">Lists</a></li>
-<li><a href="#_vectors">Vectors</a></li>
-<li><a href="#_maps_associative_arrays">Maps (Associative Arrays</a></li>
+<li><a href="#_lists_vectors">Lists &amp; Vectors</a></li>
+<li><a href="#_maps_associative_arrays">Maps (Associative Arrays)</a></li>
 <li><a href="#_set">Set</a></li>
 <li><a href="#_vars_are_not_variables">Vars (are not variables)</a></li>
 <li><a href="#_functions">Functions</a></li>
@@ -858,7 +868,6 @@ label[for='toggle-all'] {
 <li><a href="#_lazy_evaluation">Lazy Evaluation</a></li>
 <li><a href="#_recursion">Recursion</a></li>
 <li><a href="#_state">State</a></li>
-<li><a href="#_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</a></li>
 </ul>
 </div>
 </div>
@@ -894,9 +903,20 @@ nil</code></pre>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_lists">Lists</h2>
+<h2 id="_lists_vectors">Lists &amp; Vectors</h2>
 <div class="sectionbody">
-<div class="listingblock">
+<table class="tableblock frame-none grid-none spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Lists</p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Vectors</p></th>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(list 1 2 "foo" :bar)</code></pre>
 </div>
@@ -911,12 +931,17 @@ nil</code></pre>
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj '(1 2 "foo" :bar) "new")</code></pre>
 </div>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_vectors">Vectors</h2>
-<div class="sectionbody">
 <div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(nth '(1 2 "foo" :bar) 2)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(get '(1 2 "foo" :bar) 2)</code></pre>
+</div>
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(vector 1 2 "foo" :bar)</code></pre>
 </div>
@@ -931,26 +956,34 @@ nil</code></pre>
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj [1 2 "foo" :bar] "new")</code></pre>
 </div>
 </div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(nth [1 2 "foo" :bar] 2)</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(get [1 2 "foo" :bar] 2)</code></pre>
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_maps_associative_arrays">Maps (Associative Arrays</h2>
+<h2 id="_maps_associative_arrays">Maps (Associative Arrays)</h2>
 <div class="sectionbody">
 <div class="paragraph">
 <p>A map consists of key-value pairs. Keys and values can be any clojure data (strings, numbers, other maps, etc.).</p>
 </div>
 <div class="paragraph">
-<p>Change the keys to strings.</p>
+<p>Try to change the keys to strings.</p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">{:first-name "Jochen"
  :last-name  "Rau"}</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(conj {:first-name "Jochen" :last-name  "Rau"} [:new "value"])</code></pre>
 </div>
 </div>
 <div class="paragraph">
@@ -1444,38 +1477,14 @@ joe</code></pre>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>Create some elements yourself:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-reagent" data-lang="reagent">(defn hello [name]
-  [:p (str "Hello " name "!")])
-
-[hello "Jochen"]</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(reagent.core/render-component [hello "World!"] js/klipse-container)</code></pre>
-</div>
-</div>
-</div>
-</div>
 </div>
 <script>
     window.klipse_settings = {
         selector: '.listingblock:not(.do-not-eval) .language-clojure',
         selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
-        selector_jsx: '.listingblock:not(.do-not-eval) .language-react',
+        selector_jsx: '.listingblock:not(.do-not-eval) .language-jsx',
+        selector_render_jsx: '.listingblock:not(.do-not-eval) .language-render-jsx',
+        selector_transpile_jsx: '.listingblock:not(.do-not-eval) .language-transpile-jsx',
         selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         codemirror_options_in: {
             indentUnit: 2,
@@ -1489,6 +1498,8 @@ joe</code></pre>
         }
     };
 </script>
+<!--<script src="../../resources/js/klipse_plugin.js"></script>-->
 <script src="../../resources/js/klipse/klipse_plugin.js"></script>
+<!--<script src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>-->
 </body>
 </html>

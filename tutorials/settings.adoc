@@ -5,10 +5,12 @@
 :copyright: by-sa
 :icons: font
 :imagesdir: img
+:imagesoutdir: img
 :source-language: clojure
 :nofooter:
 :docinfo: shared-head,shared-footer,private-head,private-footer
 :docinfodir: ..
+:mermaid-css: ../../resources/css/mermaid.neutral.css
 :cljdir: ../../src/clj
 :cljsdir: ../../src/cljs
 :toc: macro

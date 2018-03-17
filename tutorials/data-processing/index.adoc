@@ -2,8 +2,11 @@ include::header.adoc[]
 
 toc::[]
 
-:leveloffset: -1
+:leveloffset: 0
 
+include::functions.adoc[]
 include::folds.adoc[]
+include::emoticons.adoc[]
+include::parallelism.adoc[]
 
 include::footer.adoc[]

@@ -10,6 +10,5 @@ include::data-structures.adoc[]
 include::lazy-evaluation.adoc[]
 include::recursion.adoc[]
 include::state.adoc[]
-include::reagent.adoc[]
 
 include::footer.adoc[]

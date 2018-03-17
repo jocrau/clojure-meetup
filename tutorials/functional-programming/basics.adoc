@@ -1,7 +1,7 @@
 == Scalar Values
 
 
-[source,clojure]
+[source]
 ----
 1
 2.3
@@ -20,66 +20,88 @@ nil
 
 Try some expressions yourself:
 
-[source,clojure]
+[source]
 ----
 #inst"2016-10-09"
 ----
 
-== Lists
+== Lists & Vectors
 
-[source,clojure]
+[cols=2,frame=none,grid=none,stripes=none]
+|===
+h|Lists
+h|Vectors
+a|
+
+[source]
 ----
 (list 1 2 "foo" :bar)
 ----
 
-[source,clojure]
+[source]
 ----
 '(1 2 "foo" :bar)
 ----
 
-[source,clojure]
+[source]
 ----
 (conj '(1 2 "foo" :bar) "new")
 ----
 
-== Vectors
+[source]
+----
+(nth '(1 2 "foo" :bar) 2)
+----
 
-[source,clojure]
+[source]
+----
+(get '(1 2 "foo" :bar) 2)
+----
+
+a|
+
+[source]
 ----
 (vector 1 2 "foo" :bar)
 ----
 
-[source,clojure]
+[source]
 ----
 [1 2 "foo" :bar]
 ----
 
-[source,clojure]
+[source]
 ----
 (conj [1 2 "foo" :bar] "new")
 ----
 
-== Maps (Associative Arrays
+[source]
+----
+(nth [1 2 "foo" :bar] 2)
+----
+
+[source]
+----
+(get [1 2 "foo" :bar] 2)
+----
+
+|===
+
+== Maps (Associative Arrays)
 
 A map consists of key-value pairs. Keys and values can be any clojure data (strings, numbers, other maps, etc.).
 
-Change the keys to strings.
+Try to change the keys to strings.
 
-[source,clojure]
+[source]
 ----
 {:first-name "Jochen"
  :last-name  "Rau"}
 ----
 
-[source,clojure]
-----
-(conj {:first-name "Jochen" :last-name  "Rau"} [:new "value"])
-----
-
-
 Maps can be deeply nested:
 
-[source,clojure]
+[source]
 ----
 {:first-name "Jochen"
  :last-name  "Rau"
@@ -98,26 +120,26 @@ Maps can be deeply nested:
 
 A set of unordered, distinct elements. Try to add "foo" a second time.
 
-[source,clojure]
+[source]
 ----
 (hash-set "foo" "bar" "baz")
 ----
 
-[source,clojure]
+[source]
 ----
 #{"foo" "bar" "baz"}
 ----
 
 What happens if you change `"boom"` into `"baz"`.
 
-[source,clojure]
+[source]
 ----
 (conj #{"foo" "bar" "baz"} "boom")
 ----
 
 There is also a sorted set. But it works a bit different as one might expect.
 
-[source,clojure]
+[source]
 ----
 (sorted-set "foo" "bar" "baz")
 ----
@@ -127,7 +149,7 @@ There is also a sorted set. But it works a bit different as one might expect.
 
 A Var is a way in clojure to keep a reference to a value. The `def` form creates a Var. Vars are namespaced.
 
-[source,clojure]
+[source]
 ----
 (def my-name "Jochen")
 my-name
@@ -135,7 +157,7 @@ my-name
 
 The let binding form allows to bind a value to a Var only in the local context. What happens if you remove the last line?
 
-[source,clojure]
+[source]
 ----
 (let [my-name "Shawn"]
   (println my-name)
@@ -145,7 +167,7 @@ my-name
 
 We can define a var again.
 
-[source,clojure]
+[source]
 ----
 (def my-name "Shawn")
 my-name

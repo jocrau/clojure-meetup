@@ -1,4 +1,4 @@
-== Reagent -- A Wrapper around Facebook React
+== Reagent
 
 [source]
 ----
@@ -16,18 +16,33 @@
           ["Jochen" "Alice" "Bob"])]
 ----
 
-
 Create some elements yourself:
 
-[source,reagent]
+[cols=2,frame=none,grid=none,stripes=none]
+|===
+h|React JSX
+h|Reagent
+a|
+[source,jsx]
 ----
-(defn hello [name]
-  [:p (str "Hello " name "!")])
+function HelloMessage(props) {
+    return <div>Hello {props.name}</div>;
+}
 
-[hello "Jochen"]
+ReactDOM.render(
+  <HelloMessage name="Taylor" />,
+  klipse_container
+);
 ----
-
+a|
 [source]
 ----
-(reagent.core/render-component [hello "World!"] js/klipse-container)
+(defn hello-message [props]
+  [:div "Hello " (:name props)])
+
+
+(reagent.core/render-component
+    [hello-message {:name "Taylor"}]
+    js/klipse-container)
 ----
+|===

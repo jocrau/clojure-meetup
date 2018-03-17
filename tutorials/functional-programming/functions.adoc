@@ -2,12 +2,12 @@
 
 The preceding apostrophe instructs the Clojure reader not to evaluate the list as function call.
 
-[source,clojure]
+[source]
 ----
 '(+ 1 2 3 4)
 ----
 
-[source,clojure]
+[source]
 ----
 (+ 1 2 3 4)
 ----
@@ -16,21 +16,21 @@ Clojure uses the prefix notation instead of the more common infix notation `1+2+
 
 The form `fn` creates an anonymous function:
 
-[source,clojure]
+[source]
 ----
 (fn [number] (+ number 3))
 ----
 
 Which can be used as first element in a list:
 
-[source,clojure]
+[source]
 ----
 ((fn [number] (+ number 3)) 5)
 ----
 
 We can bind an anonymous function to a Var to be able to reference it by name:
 
-[source,clojure]
+[source]
 ----
 (def add3 (fn [number] (+ number 3)))
 
@@ -39,59 +39,59 @@ We can bind an anonymous function to a Var to be able to reference it by name:
 
 Or shorter:
 
-[source,clojure]
+[source]
 ----
 (def add3 (fn [number] (+ number 3)))
 
 (add3 5)
 ----
 
-[source,clojure]
+[source]
 ----
 (add3 (* 2 4))
 ----
 
 The function `adder` is a function that evaluates to another function.
 
-[source,clojure]
+[source]
 ----
 (def adder (fn [addend] (fn [number] (+ number addend))))
 
 ((adder 10) 5)
 ----
 
-[source,clojure]
+[source]
 ----
 (def add10 (adder 10))
 
 (add10 5)
 ----
 
-[source,clojure]
+[source]
 ----
 (add3 (add3 5))
 ----
 
 Let's implement a function that takes a function as first argument (higher-order function) and applies it twice to the second argument.
 
-[source,clojure]
+[source]
 ----
 (def twice (fn [fun number] (fun (fun number))))
 
 (twice add3 5)
 ----
 
-[source,clojure]
+[source]
 ----
 (map add3 [1 2 3])
 ----
 
-[source,clojure]
+[source]
 ----
 (reduce + [1 2 3])
 ----
 
-[source,clojure]
+[source]
 ----
 (reduce + (map add3 [1 2 3]))
 ----
@@ -101,22 +101,22 @@ Who needs Hadoop®? ;-)
 
 Let's compose two functions into one.
 
-[source,clojure]
+[source]
 ----
 ((comp str add3) 5)
 ----
 
-[source,clojure]
+[source]
 ----
 (even? 3)
 ----
 
-[source,clojure]
+[source]
 ----
 (map even? [1 2 3 4 5 6])
 ----
 
-[source,clojure]
+[source]
 ----
 (filter even? [1 2 3 4 5 6])
 ----

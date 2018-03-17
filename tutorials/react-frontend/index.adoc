@@ -2,13 +2,16 @@ include::header.adoc[]
 
 toc::[]
 
-:leveloffset: 0
-
-include::clojure.adoc[]
 include::react.adoc[]
 include::reagent.adoc[]
+
+== Examples
+:leveloffset: 1
+
 include::bmi.adoc[]
-include::todo.adoc[]
 include::echarts.adoc[]
+include::todo.adoc[]
+
+:leveloffset: 0
 
 include::footer.adoc[]

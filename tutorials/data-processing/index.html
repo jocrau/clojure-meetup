@@ -420,8 +420,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<script src="../../resources/js/react/react.min.js"></script>
-<script src="../../resources/js/react/react-dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.production.min.js"></script>
+<!--<script src="../../resources/js/react/react.min.js"></script>-->
+<!--<script src="../../resources/js/react/react-dom.min.js"></script>-->
 <script src="../../resources/js/echarts/echarts.common.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
@@ -481,6 +483,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     content: "Rendered DOM:";
     color: #aaa;
 }
+
+table tr.even,
+table tr.alt,
+table tr:nth-of-type(even),
+table tr th,
+table tr td {
+    background: transparent;
+}
+
 </style>
 
 <style>
@@ -845,13 +856,74 @@ label[for='toggle-all'] {
 <div class="sectionbody">
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Table of Contents</div>
-<ul class="sectlevel0">
+<ul class="sectlevel1">
+<li><a href="#_function_composition">Function Composition</a></li>
 <li><a href="#_map_reduce_folds">Map, Reduce, Folds</a></li>
+<li><a href="#_an_illustrated_example">An Illustrated Example</a></li>
+<li><a href="#_concurrency_and_parallelism">Concurrency and Parallelism</a></li>
+<li><a href="#_distributed_systems">Distributed Systems</a></li>
 </ul>
 </div>
 </div>
 </div>
-<h1 id="_map_reduce_folds" class="sect0">Map, Reduce, Folds</h1>
+<div class="sect1">
+<h2 id="_function_composition">Function Composition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Functions can be nested or composed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(count (str (inc 9)))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>This expression is evaluated from inside out:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p><code>9</code> evaluates to itself.</p>
+</li>
+<li>
+<p><code>(inc 9)</code> evaluates to <code>10</code>.</p>
+</li>
+<li>
+<p><code>(str 10)</code> evaluates to <code>"10"</code>.</p>
+</li>
+<li>
+<p><code>(count "10"</code>) finally evaluates to 2 (as it counts the number of characters in the string).</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p>The functions <code>count</code>, <code>str</code>, <code>inc</code> can be composed into one single function that can be applied to any argument:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def composed-fun (fn [value] (count (str (inc value)))))
+
+(composed-fun 9)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Or with the Clojure <code>comp</code> function:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(def composed-fun (comp count str inc))
+
+(composed-fun 9)</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><code>composed-fun</code> is the functional composition of the three functions. The functions are applied from right to left (first <code>inc</code> then <code>str</code> then <code>count</code>).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_map_reduce_folds">Map, Reduce, Folds</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>The process called "mapping" applies a given function to each element of a sequence of values producing a sequence of values of the same length. Let&#8217;s take a look at the Clojure function <code>map</code>:</p>
 </div>
@@ -879,17 +951,142 @@ label[for='toggle-all'] {
 <div class="paragraph">
 <p>or a set</p>
 </div>
-<div class="listingblock">
+<div class="listingblock do-not-eval">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(map inc #{1 2 3})</code></pre>
 </div>
+</div>
+<table class="tableblock frame-none grid-none spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-center valign-top"><p class="tableblock">Fold Right</p></th>
+<th class="tableblock halign-center valign-top"><p class="tableblock">Fold Left</p></th>
+</tr>
+<tr>
+<td class="tableblock halign-center valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="img/fold-right-application.svg" alt="fold right application" width="70%" height="397">
+</div>
+</div></div></td>
+<td class="tableblock halign-center valign-top"><div><div class="imageblock">
+<div class="content">
+<img src="img/fold-left-application.svg" alt="fold left application" width="70%" height="397">
+</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_an_illustrated_example">An Illustrated Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s take a look at some real life example.<sup class="footnote" id="_footnote_disclaimer">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn cook [thing]
+  (condp = thing
+    '🐄 '🍔
+    '🥔 '🍟
+    '🐓 '🍗
+    '🌽 '🍿
+    '🥒 '🥗))
+
+(map cook ['🐄 '🥔 '🐓 '🌽])</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn vegetarian? [thing]
+  (some #{thing} ['🍎 '🍐 '🥔 '🍌 '🌽 '🍇 '🥕 '🥒]))
+
+(filter vegetarian? ['🐄 '🥔 '🐓 '🌽 '🥒])</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn eat [acc thing]
+  (str thing acc))
+
+(reduce eat " ⟹ 💩" (map cook (filter vegetarian? ['🐄 '🥔 '🐓 '🌽 '🥒])))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or more readable</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(-&gt;&gt; ['🐄 '🥔 '🐓 '🌽 '🥒]
+    (filter vegetarian?)
+    (map cook)
+    (reduce eat " ⟹ 💩"))</code></pre>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_concurrency_and_parallelism">Concurrency and Parallelism</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Parallelism and Concurrency describe different concerns.<sup class="footnote" id="_footnote_">[<a id="_footnoteref_2" class="footnote" href="#_footnote_2" title="View footnote.">2</a>]</sup></p>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Concurrency</dt>
+<dd>
+<p>How to <strong>structure</strong> a computation into independent processes and coordinate between them.</p>
+</dd>
+<dt class="hdlist1">Parallelism</dt>
+<dd>
+<p>How to <strong>execute</strong> (dependent or independent) processes at the same time.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>To execute code in parallel, it needs to be concurrent. But that also is true for sequential execution (eg. using the CPU clock for coordination).</p>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_distributed_systems">Distributed Systems</h2>
+<div class="sectionbody">
+<div class="quoteblock">
+<blockquote>
+A distributed system is one in which the failure of a computer you didn&#8217;t even know existed can render your own computer unusable.<sup class="footnote" id="_footnote_">[<a id="_footnoteref_3" class="footnote" href="#_footnote_3" title="View footnote.">3</a>]</sup>
+</blockquote>
+<div class="attribution">
+&#8212; Leslie Lamport<br>
+<cite>May 1987</cite>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="footnotes">
+<hr>
+<div class="footnote" id="_footnote_1">
+<a href="#_footnoteref_1">1</a>. Inspired by <a href="http://www.modernescpp.com/index.php/higher-order-functions" class="bare">http://www.modernescpp.com/index.php/higher-order-functions</a>
+</div>
+<div class="footnote" id="_footnote_2">
+<a href="#_footnoteref_2">2</a>. Definitely take a look at <a href="https://talks.golang.org/2012/waza.slide" class="bare">https://talks.golang.org/2012/waza.slide</a> and <a href="https://existentialtype.wordpress.com/2011/03/17/parallelism-is-not-concurrency/" class="bare">https://existentialtype.wordpress.com/2011/03/17/parallelism-is-not-concurrency/</a> for more background, or even <a href="http://www.usingcsp.com/cspbook.pdf" class="bare">http://www.usingcsp.com/cspbook.pdf</a> for a very detailed mathematical introduction.
+</div>
+<div class="footnote" id="_footnote_3">
+<a href="#_footnoteref_3">3</a>. See <a href="https://www.microsoft.com/en-us/research/publication/distribution/" class="bare">https://www.microsoft.com/en-us/research/publication/distribution/</a>
 </div>
 </div>
 <script>
     window.klipse_settings = {
         selector: '.listingblock:not(.do-not-eval) .language-clojure',
         selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
-        selector_jsx: '.listingblock:not(.do-not-eval) .language-react',
+        selector_jsx: '.listingblock:not(.do-not-eval) .language-jsx',
+        selector_render_jsx: '.listingblock:not(.do-not-eval) .language-render-jsx',
+        selector_transpile_jsx: '.listingblock:not(.do-not-eval) .language-transpile-jsx',
         selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         codemirror_options_in: {
             indentUnit: 2,
@@ -903,6 +1100,8 @@ label[for='toggle-all'] {
         }
     };
 </script>
+<!--<script src="../../resources/js/klipse_plugin.js"></script>-->
 <script src="../../resources/js/klipse/klipse_plugin.js"></script>
+<!--<script src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>-->
 </body>
 </html>

@@ -420,8 +420,10 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<script src="../../resources/js/react/react.min.js"></script>
-<script src="../../resources/js/react/react-dom.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.production.min.js"></script>
+<!--<script src="../../resources/js/react/react.min.js"></script>-->
+<!--<script src="../../resources/js/react/react-dom.min.js"></script>-->
 <script src="../../resources/js/echarts/echarts.common.min.js"></script>
 <link rel="stylesheet" type="text/css" href="../../resources/css/codemirror.css">
 <style>
@@ -481,6 +483,15 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
     content: "Rendered DOM:";
     color: #aaa;
 }
+
+table tr.even,
+table tr.alt,
+table tr:nth-of-type(even),
+table tr th,
+table tr td {
+    background: transparent;
+}
+
 </style>
 
 <style>
@@ -846,52 +857,60 @@ label[for='toggle-all'] {
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Table of Contents</div>
 <ul class="sectlevel1">
-<li><a href="#_clojure_basics">Clojure Basics</a></li>
 <li><a href="#_react">React</a></li>
-<li><a href="#_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</a></li>
+<li><a href="#_reagent">Reagent</a></li>
+<li><a href="#_examples">Examples</a>
+<ul class="sectlevel2">
 <li><a href="#_bmi_calculator">BMI Calculator</a></li>
-<li><a href="#_todo_app">ToDo App</a></li>
 <li><a href="#_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</a></li>
+<li><a href="#_todo_app">ToDo App</a></li>
 </ul>
-</div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_clojure_basics">Clojure Basics</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">:foo ;; Try something here</code></pre>
-</div>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_react">React</h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>React provides an abstraction over the DOM (<a href="https://en.wikipedia.org/wiki/Document_Object_Model">Document Object Model</a>) called the Virtual DOM. Rather than manipulating the DOM directly it provides a data-driven API to update the state of user interface.</p>
+</div>
+<div class="paragraph">
+<p>React renders elements into an existing DOM container. The elements can be expressed in HTML-style code. In this case the container is referenced by <code>klipse_container</code> (which is a <code>div</code> element below the code snippet).</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-react" data-lang="react">class HelloMessage extends React.Component {
-  render() {
-    return (
-      &lt;div&gt;
-        Hello {this.props.name}
-      &lt;/div&gt;
-    );
-  }
-}
-
-ReactDOM.render(
-  &lt;HelloMessage name="Taylor" /&gt;,
+<pre class="highlight"><code class="language-jsx" data-lang="jsx">ReactDOM.render(
+  &lt;p className="greeting"&gt;Hello, world!&lt;/p&gt;,
   klipse_container
-);
-null</code></pre>
+);</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The element <code>&lt;p className="greeting"&gt;Hello, world!&lt;/p&gt;</code> is written in JSX, a syntax extension to JavaScript. It is transpiled into JavaScript <code>React.createElement()</code> on the fly.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-transpile-jsx" data-lang="transpile-jsx">&lt;p className="greeting"&gt;Hello, world!&lt;/p&gt;</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>An element is a lightweight description of how the actual DOM instance should look like. It is just a regular JS object and not the DOM instance itself.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-js" data-lang="js">React.createElement(
+  "p",
+  {className: "greeting"},
+  "Hello, world!"
+);</code></pre>
 </div>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_reagent_a_wrapper_around_facebook_react">Reagent&#8201;&#8212;&#8201;A Wrapper around Facebook React</h2>
+<h2 id="_reagent">Reagent</h2>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
@@ -912,73 +931,149 @@ null</code></pre>
 <div class="paragraph">
 <p>Create some elements yourself:</p>
 </div>
-<div class="listingblock">
+<table class="tableblock frame-none grid-none spread">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<tbody>
+<tr>
+<th class="tableblock halign-left valign-top"><p class="tableblock">React JSX</p></th>
+<th class="tableblock halign-left valign-top"><p class="tableblock">Reagent</p></th>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-reagent" data-lang="reagent">(defn hello [name]
-  [:p (str "Hello " name "!")])
+<pre class="highlight"><code class="language-jsx" data-lang="jsx">function HelloMessage(props) {
+    return &lt;div&gt;Hello {props.name}&lt;/div&gt;;
+}
 
-[hello "Jochen"]</code></pre>
+ReactDOM.render(
+  &lt;HelloMessage name="Taylor" /&gt;,
+  klipse_container
+);</code></pre>
 </div>
-</div>
-<div class="listingblock">
+</div></div></td>
+<td class="tableblock halign-left valign-top"><div><div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(reagent.core/render-component [hello "World!"] js/klipse-container)</code></pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn hello-message [props]
+  [:div "Hello " (:name props)])
+
+
+(reagent.core/render-component
+    [hello-message {:name "Taylor"}]
+    js/klipse-container)</code></pre>
 </div>
-</div>
+</div></div></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_bmi_calculator">BMI Calculator</h2>
+<h2 id="_examples">Examples</h2>
 <div class="sectionbody">
+<div class="sect2">
+<h3 id="_bmi_calculator">BMI Calculator</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
 
-(defonce bmi-data (r/atom {:height 180 :weight 80}))
+(defn calc-bmi [height weight]
+  (/ weight (Math/pow (/ height 100) 2)))
 
-(defn calc-bmi [data]
-      (let [{:keys [height weight bmi]} data
-            h (/ height 100)]
-           (if (nil? bmi)
-             (assoc data :bmi (/ weight (Math/pow h 2)))
-             (assoc data :weight (* bmi h h)))))
+(defn calc-weight [bmi height]
+  (let [h (/ height 100)]
+    (* bmi h h)))
 
-(defn slider [attribute value min max]
-      [:input {:type      "range" :value value :min min :max max
-               :style     {:width "100%"}
-               :on-change (fn [e]
-                              (swap! bmi-data assoc attribute (.. e -target -value))
-                              (when-not (= :bmi attribute)
-                                        (swap! bmi-data dissoc :bmi)))}])
+(defn slider [props]
+  [:input (merge {:type "range" :style {:width "100%"}}
+                 (select-keys props [:min :max :value :on-change]))])
 
 (defn bmi-component []
-      (let [{:keys [weight height bmi]} (calc-bmi @bmi-data)
+  (let [bmi-data (r/atom {:height 180 :weight 80 :bmi (calc-bmi 180 80)})]
+    (fn []
+      (let [{:keys [weight height bmi]} @bmi-data
             [color diagnose] (cond
                                (&lt; bmi 18.5) ["orange" "underweight"]
                                (&lt; bmi 25) ["inherit" "normal"]
                                (&lt; bmi 30) ["orange" "overweight"]
                                :else ["red" "obese"])]
-           [:div
-            [:h4 "BMI Calculator"]
-            [:div
-             "Height: " (int height) "cm"
-             [slider :height height 100 220]]
-            [:div
-             "Weight: " (int weight) "kg"
-             [slider :weight weight 30 150]]
-            [:div
-             "BMI: " (int bmi) " "
-             [:span {:style {:color color}} diagnose]
-             [slider :bmi bmi 10 50]]]))
+        [:div
+         [:h4 "BMI Calculator"]
+         [:div
+          "Height: " (int height) "cm"
+          [slider {:min       100
+                   :max       220
+                   :value     height
+                   :on-change (fn [e]
+                                (let [new-value (.. e -target -value)]
+                                  (reset! bmi-data
+                                          {:height new-value
+                                           :weight weight
+                                           :bmi    (calc-bmi new-value weight)})))}]]
+         [:div
+          "Weight: " (int weight) "kg"
+          [slider {:min       30
+                   :max       150
+                   :value     weight
+                   :on-change (fn [e]
+                                (let [new-value (.. e -target -value)]
+                                  (reset! bmi-data
+                                          {:height height
+                                           :weight new-value
+                                           :bmi    (calc-bmi height new-value)})))}]]
+         [:div
+          "BMI: " (int bmi) " " [:span {:style {:color color}} diagnose]
+          [slider {:min       10
+                   :max       50
+                   :value     bmi
+                   :on-change (fn [e]
+                                (let [new-value (.. e -target -value)]
+                                  (reset! bmi-data
+                                          {:height height
+                                           :weight (calc-weight new-value height)
+                                           :bmi    new-value})))}]]]))))
 
 (reagent.core/render-component [bmi-component] js/klipse-container)</code></pre>
 </div>
 </div>
 </div>
+<div class="sect2">
+<h3 id="_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
+
+(defonce specification
+         (r/atom {:canvas {:width "600px" :height "400px"}
+                  :chart  {:title     {:text "ECharts Example"}
+                           :tooltip   {}
+                           :animation false
+                           :legend    {:data ["Sales"]}
+                           :xAxis     {:show true :data ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"]}
+                           :yAxis     {:show true}
+                           :series    [{:name "Sales"
+                                        :type "bar"
+                                        :data [6 17 36 10 10 20 25]}]}}))
+
+(defn chart []
+  (let [canvas (r/atom nil)]
+    (r/create-class
+      {:reagent-render       (fn [this]
+                               [:div {:style (:canvas @specification)}])
+       :component-did-mount  (fn [this]
+                               (reset! canvas (js/echarts.init (r/dom-node this)))
+                               (.setOption @canvas (clj-&gt;js (:chart @specification))))
+       :component-did-update (fn [this]
+                               (.setOption @canvas (clj-&gt;js (:chart @specification)) true))})))
+
+(reagent.core/render-component [chart specification] js/klipse-container)</code></pre>
 </div>
-<div class="sect1">
-<h2 id="_todo_app">ToDo App</h2>
-<div class="sectionbody">
+</div>
+</div>
+<div class="sect2">
+<h3 id="_todo_app">ToDo App</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
@@ -1091,50 +1186,15 @@ null</code></pre>
 </div>
 </div>
 </div>
-<div class="sect1">
-<h2 id="_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</h2>
-<div class="sectionbody">
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
-(declare specification)
-
-(defn chart []
-  (let [canvas (atom nil)]
-    (r/create-class
-      {:reagent-render       (fn [this]
-                               [:div {:style (:canvas @specification)}])
-       :component-did-mount  (fn [this]
-                               (reset! canvas (js/echarts.init (r/dom-node this)))
-                               (.setOption @canvas (clj-&gt;js (:chart @specification))))
-       :component-did-update (fn [this]
-                               (.setOption @canvas (clj-&gt;js (:chart @specification))))})))
-
-(def specification
-  (r/atom
-    {:canvas {:width  "600px"
-              :height "400px"}
-     :chart  {:title     {:text "ECharts Example"}
-              :tooltip   {}
-              :animation false
-              :legend    {:data ["Sales"]}
-              :xAxis     {:data ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"]}
-              :yAxis     {}
-              :series    [{:name "Sales"
-                           :type "bar"
-                           :data [6 17 36 10 10 20 25]}]}}))
-
-(reagent.core/render-component [chart specification] js/klipse-container)</code></pre>
-</div>
-</div>
-</div>
 </div>
 </div>
 <script>
     window.klipse_settings = {
         selector: '.listingblock:not(.do-not-eval) .language-clojure',
         selector_reagent: '.listingblock:not(.do-not-eval) .language-reagent',
-        selector_jsx: '.listingblock:not(.do-not-eval) .language-react',
+        selector_jsx: '.listingblock:not(.do-not-eval) .language-jsx',
+        selector_render_jsx: '.listingblock:not(.do-not-eval) .language-render-jsx',
+        selector_transpile_jsx: '.listingblock:not(.do-not-eval) .language-transpile-jsx',
         selector_eval_js: '.listingblock:not(.do-not-eval) .language-js',
         codemirror_options_in: {
             indentUnit: 2,
@@ -1148,6 +1208,8 @@ null</code></pre>
         }
     };
 </script>
+<!--<script src="../../resources/js/klipse_plugin.js"></script>-->
 <script src="../../resources/js/klipse/klipse_plugin.js"></script>
+<!--<script src="https://storage.googleapis.com/app.klipse.tech/plugin_prod/js/klipse_plugin.min.js"></script>-->
 </body>
 </html>

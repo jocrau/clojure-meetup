@@ -1,7 +1,0 @@
-== Clojure Basics
-
-
-[source]
-----
-:foo ;; Try something here
-----

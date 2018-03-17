@@ -2,14 +2,14 @@
 
 Straight forward calculation of the factorial of 8 (or in mathematical notation 8!):
 
-[source,clojure]
+[source]
 ----
   (* 1 2 3 4 5 6 7 8)
 ----
 
 The same as function `factorial` calling itself (recursive function call, or short recursion). What is the reason for the second argument `acc`? Can we get rid of it?
 
-[source,clojure]
+[source]
 ----
   (defn factorial [n acc]
     (if (zero? n)
@@ -21,7 +21,7 @@ The same as function `factorial` calling itself (recursive function call, or sho
 
 Clojure provides the form `recur` to make sure we recur from the "tail".
 
-[source,clojure]
+[source]
 ----
   (defn factorial [n acc]
     (if (zero? n)
@@ -31,7 +31,7 @@ Clojure provides the form `recur` to make sure we recur from the "tail".
   (factorial 8 1)
 ----
 
-[source,clojure]
+[source]
 ----
   (defn factorial [n]
     (loop [cnt n
@@ -44,7 +44,7 @@ Clojure provides the form `recur` to make sure we recur from the "tail".
   (factorial 8)
 ----
 
-[source,clojure]
+[source]
 ----
   (defn factorial [n]
     (reduce * (range 1 (inc n))))

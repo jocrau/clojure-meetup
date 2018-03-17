@@ -1,0 +1,39 @@
+
+== Function Composition
+
+Functions can be nested or composed.
+
+[source]
+----
+(count (str (inc 9)))
+----
+
+This expression is evaluated from inside out:
+
+- `9` evaluates to itself.
+- `(inc 9)` evaluates to `10`.
+- `(str 10)` evaluates to `"10"`.
+- `(count "10"`) finally evaluates to 2 (as it counts the number of characters in the string).
+
+The functions `count`, `str`, `inc` can be composed into one single function that can be applied to any argument:
+
+[source]
+----
+(def composed-fun (fn [value] (count (str (inc value)))))
+
+(composed-fun 9)
+----
+
+Or with the Clojure `comp` function:
+
+[source]
+----
+(def composed-fun (comp count str inc))
+
+(composed-fun 9)
+----
+
+`composed-fun` is the functional composition of the three functions. The functions are applied from right to left (first `inc` then `str` then `count`).
+
+
+

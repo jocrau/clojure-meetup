@@ -1,35 +1,35 @@
 == Lazy Evaluation
 
-[source,clojure]
+[source]
 ----
 (range 0 10)
 ----
 
-[source,clojure]
+[source]
 ----
 (range 10)
 ----
-[source,clojure]
+[source]
 ----
 #_(range)
 ----
 
-[source,clojure]
+[source]
 ----
 (take 10 (range))
 ----
 
-[source,clojure]
+[source]
 ----
 (time (nth (range) 1000000))
 ----
 
-[source,clojure]
+[source]
 ----
 #_(time (nth (map inc (range)) 1000000))
 ----
 
-[source,clojure]
+[source]
 ----
 #_(first (filter (fn [number]
           (println number)
@@ -37,7 +37,7 @@
         (map inc (range))))
 ----
 
-[source,clojure]
+[source]
 ----
 #_(filter (fn [number]
                  (println number)
