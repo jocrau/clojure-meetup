@@ -30,6 +30,11 @@ The following screenshot shows the settings I use. Each command (one for slides 
 
 image::resources/img/file-watchers.png[]
 
+== Install Tools and Libraries to Compile the Documents
+
+- Install (Node)[https://nodejs.org/en/download/]
+- Install Mermaid `yarn global add mermaid@7.0.11`
+
 == Thanks!
 
 I would like to thank all of the developers that spent endless hours to creating all the libraries and tools that this tutorial is based on. Keep up the good work!
