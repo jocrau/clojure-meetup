@@ -3,40 +3,59 @@
     [reagent.core :as r]))
 
 ;; tag::content[]
-(defonce bmi-data (r/atom {:height 180 :weight 80}))
+(defn calc-bmi [height weight]
+  (/ weight (Math/pow (/ height 100) 2)))
 
-(defn calc-bmi [data]
-      (let [{:keys [height weight bmi]} data
-            h (/ height 100)]
-           (if (nil? bmi)
-             (assoc data :bmi (/ weight (Math/pow h 2)))
-             (assoc data :weight (* bmi h h)))))
+(defn calc-weight [bmi height]
+  (let [h (/ height 100)]
+    (* bmi h h)))
 
-(defn slider [attribute value min max]
-      [:input {:type      "range" :value value :min min :max max
-               :style     {:width "100%"}
-               :on-change (fn [e]
-                              (swap! bmi-data assoc attribute (.. e -target -value))
-                              (when-not (= :bmi attribute)
-                                        (swap! bmi-data dissoc :bmi)))}])
+(defn slider [props]
+  [:input (merge {:type "range" :style {:width "100%"}}
+                 (select-keys props [:min :max :value :on-change]))])
 
 (defn bmi-component []
-      (let [{:keys [weight height bmi]} (calc-bmi @bmi-data)
+  (let [bmi-data (r/atom {:height 180 :weight 80 :bmi (calc-bmi 180 80)})]
+    (fn []
+      (let [{:keys [weight height bmi]} @bmi-data
             [color diagnose] (cond
                                (< bmi 18.5) ["orange" "underweight"]
                                (< bmi 25) ["inherit" "normal"]
                                (< bmi 30) ["orange" "overweight"]
                                :else ["red" "obese"])]
-           [:div
-            [:h4 "BMI Calculator"]
-            [:div
-             "Height: " (int height) "cm"
-             [slider :height height 100 220]]
-            [:div
-             "Weight: " (int weight) "kg"
-             [slider :weight weight 30 150]]
-            [:div
-             "BMI: " (int bmi) " "
-             [:span {:style {:color color}} diagnose]
-             [slider :bmi bmi 10 50]]]))
+        [:div
+         [:h4 "BMI Calculator"]
+         [:div
+          "Height: " (int height) "cm"
+          [slider {:min       100
+                   :max       220
+                   :value     height
+                   :on-change (fn [e]
+                                (let [new-value (.. e -target -value)]
+                                  (reset! bmi-data
+                                          {:height new-value
+                                           :weight weight
+                                           :bmi    (calc-bmi new-value weight)})))}]]
+         [:div
+          "Weight: " (int weight) "kg"
+          [slider {:min       30
+                   :max       150
+                   :value     weight
+                   :on-change (fn [e]
+                                (let [new-value (.. e -target -value)]
+                                  (reset! bmi-data
+                                          {:height height
+                                           :weight new-value
+                                           :bmi    (calc-bmi height new-value)})))}]]
+         [:div
+          "BMI: " (int bmi) " " [:span {:style {:color color}} diagnose]
+          [slider {:min       10
+                   :max       50
+                   :value     bmi
+                   :on-change (fn [e]
+                                (let [new-value (.. e -target -value)]
+                                  (reset! bmi-data
+                                          {:height height
+                                           :weight (calc-weight new-value height)
+                                           :bmi    new-value})))}]]]))))
 ;; end::content[]
