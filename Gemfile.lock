@@ -2,6 +2,8 @@ GEM
   remote: http://rubygems.org/
   specs:
     asciidoctor (1.5.5)
+    asciidoctor-diagram (1.4.0)
+      asciidoctor (~> 1.5.0)
     asciidoctor-revealjs (1.0.0)
       asciidoctor (~> 1.5.4)
       slim (~> 3.0.6)
@@ -17,6 +19,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  asciidoctor-diagram (~> 1.4.0)
   asciidoctor-revealjs
 
 BUNDLED WITH
