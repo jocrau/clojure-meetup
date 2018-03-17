@@ -1,5 +1,5 @@
 (require '[figwheel-sidecar.repl-api :as ra])
 
-(ra/start-figwheel!)
+(ra/start-figwheel! :dev)
 
-(ra/cljs-repl)
+(ra/cljs-repl :dev)
