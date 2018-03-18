@@ -10,21 +10,26 @@ tutorials.react_frontend.echarts.specification = reagent.core.atom.call(null,new
 }
 tutorials.react_frontend.echarts.chart = (function tutorials$react_frontend$echarts$chart(){
 var canvas = reagent.core.atom.call(null,null);
-return reagent.core.create_class.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"reagent-render","reagent-render",-985383853),((function (canvas){
+var previous_value = reagent.core.atom.call(null,(0));
+return reagent.core.create_class.call(null,new cljs.core.PersistentArrayMap(null, 4, [new cljs.core.Keyword(null,"reagent-render","reagent-render",-985383853),((function (canvas,previous_value){
 return (function (this$){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.Keyword(null,"canvas","canvas",-1798817489).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,tutorials.react_frontend.echarts.specification))], null)], null);
-});})(canvas))
-,new cljs.core.Keyword(null,"component-did-mount","component-did-mount",-1126910518),((function (canvas){
+});})(canvas,previous_value))
+,new cljs.core.Keyword(null,"component-will-update","component-will-update",335247566),((function (canvas,previous_value){
+return (function (this$){
+return cljs.core.reset_BANG_.call(null,previous_value,cljs.core.get_in.call(null,cljs.core.deref.call(null,tutorials.react_frontend.echarts.specification),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"chart","chart",1173225425),new cljs.core.Keyword(null,"series","series",600710694),(0),new cljs.core.Keyword(null,"data","data",-232669377),(0)], null),(0)));
+});})(canvas,previous_value))
+,new cljs.core.Keyword(null,"component-did-mount","component-did-mount",-1126910518),((function (canvas,previous_value){
 return (function (this$){
 cljs.core.reset_BANG_.call(null,canvas,echarts.init(reagent.core.dom_node.call(null,this$)));
 
 return cljs.core.deref.call(null,canvas).setOption(cljs.core.clj__GT_js.call(null,new cljs.core.Keyword(null,"chart","chart",1173225425).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,tutorials.react_frontend.echarts.specification))));
-});})(canvas))
-,new cljs.core.Keyword(null,"component-did-update","component-did-update",-1468549173),((function (canvas){
+});})(canvas,previous_value))
+,new cljs.core.Keyword(null,"component-did-update","component-did-update",-1468549173),((function (canvas,previous_value){
 return (function (this$){
-return cljs.core.deref.call(null,canvas).setOption(cljs.core.clj__GT_js.call(null,new cljs.core.Keyword(null,"chart","chart",1173225425).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,tutorials.react_frontend.echarts.specification))),true);
-});})(canvas))
+return cljs.core.deref.call(null,canvas).setOption(cljs.core.clj__GT_js.call(null,cljs.core.assoc_in.call(null,new cljs.core.Keyword(null,"chart","chart",1173225425).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,tutorials.react_frontend.echarts.specification)),new cljs.core.PersistentVector(null, 5, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"chart","chart",1173225425),new cljs.core.Keyword(null,"series","series",600710694),(0),new cljs.core.Keyword(null,"data","data",-232669377),(1)], null),cljs.core.deref.call(null,previous_value))),true);
+});})(canvas,previous_value))
 ], null));
 });
 
-//# sourceMappingURL=echarts.js.map?rel=1521310490428
+//# sourceMappingURL=echarts.js.map?rel=1521330018341

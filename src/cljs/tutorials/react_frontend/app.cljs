@@ -9,9 +9,8 @@
 
 (def tabs
   {:bmi    {:label "BMI Calculator"
-            :content #_[bmi-component]
-                   [slider {:type "range"
-                            :min       30
+            :content [bmi-component]
+                   #_[slider {:min       30
                             :max       150
                             :on-change (fn [e] (js/console.info (.. e -target -value)))}]}
    :charts {:label   "Charts"

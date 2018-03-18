@@ -1,4 +1,4 @@
-== ECharts as an example of a JS library
+== Charts (Component Lifecycle)
 
 [source]
 ----

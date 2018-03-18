@@ -420,8 +420,8 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 .show-for-print{display:inherit!important}}
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.1.0/umd/react.production.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.1.0/umd/react-dom.production.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.6.2/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/15.6.2/react-dom.js"></script>
 <!--<script src="../../resources/js/react/react.min.js"></script>-->
 <!--<script src="../../resources/js/react/react-dom.min.js"></script>-->
 <script src="../../resources/js/echarts/echarts.common.min.js"></script>
@@ -862,10 +862,11 @@ label[for='toggle-all'] {
 <li><a href="#_examples">Examples</a>
 <ul class="sectlevel2">
 <li><a href="#_bmi_calculator">BMI Calculator</a></li>
-<li><a href="#_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</a></li>
+<li><a href="#_charts_component_lifecycle">Charts (Component Lifecycle)</a></li>
 <li><a href="#_todo_app">ToDo App</a></li>
 </ul>
 </li>
+<li><a href="#_links">Links</a></li>
 </ul>
 </div>
 </div>
@@ -924,7 +925,8 @@ label[for='toggle-all'] {
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-reagent" data-lang="reagent">[:ul (map (fn [name] [:li name])
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">[:ul (map (fn [name]
+            [:li name])
           ["Jochen" "Alice" "Bob"])]</code></pre>
 </div>
 </div>
@@ -986,87 +988,85 @@ ReactDOM.render(
   (let [h (/ height 100)]
     (* bmi h h)))
 
-(defn slider [props]
-  [:input (merge {:type "range" :style {:width "100%"}}
-                 (select-keys props [:min :max :value :on-change]))])
+(defn slider [{:keys [min max value on-change]}]
+  [:input {:type "range"
+           :style {:width "100%"}
+           :min min
+           :max max
+           :value value
+           :on-change (fn [event]
+                        (let [new-value (.. event -target -value)]
+                          (on-change new-value)))}])
 
 (defn bmi-component []
-  (let [bmi-data (r/atom {:height 180 :weight 80 :bmi (calc-bmi 180 80)})]
+  (let [state (r/atom {:height 180 :weight 80 :bmi (calc-bmi 180 80)})]
     (fn []
-      (let [{:keys [weight height bmi]} @bmi-data
-            [color diagnose] (cond
-                               (&lt; bmi 18.5) ["orange" "underweight"]
-                               (&lt; bmi 25) ["inherit" "normal"]
-                               (&lt; bmi 30) ["orange" "overweight"]
-                               :else ["red" "obese"])]
+      (let [{:keys [weight height bmi]} @state
+            [color diagnose] (condp &gt; bmi
+                               18.5 ["orange" "underweight"]
+                               25 ["inherit" "normal"]
+                               30 ["orange" "overweight"]
+                               ["red" "obese"])]
         [:div
          [:h4 "BMI Calculator"]
          [:div
           "Height: " (int height) "cm"
-          [slider {:min       100
-                   :max       220
-                   :value     height
-                   :on-change (fn [e]
-                                (let [new-value (.. e -target -value)]
-                                  (reset! bmi-data
-                                          {:height new-value
-                                           :weight weight
-                                           :bmi    (calc-bmi new-value weight)})))}]]
+          [slider {:min 100 :max 220 :value height
+                   :on-change (fn [new-value]
+                                (reset! state
+                                        {:height new-value
+                                         :weight weight
+                                         :bmi (calc-bmi new-value weight)}))}]]
          [:div
           "Weight: " (int weight) "kg"
-          [slider {:min       30
-                   :max       150
-                   :value     weight
-                   :on-change (fn [e]
-                                (let [new-value (.. e -target -value)]
-                                  (reset! bmi-data
-                                          {:height height
-                                           :weight new-value
-                                           :bmi    (calc-bmi height new-value)})))}]]
+          [slider {:min 30 :max 150 :value weight
+                   :on-change (fn [new-value]
+                                (reset! state
+                                        {:height height
+                                         :weight new-value
+                                         :bmi (calc-bmi height new-value)}))}]]
          [:div
           "BMI: " (int bmi) " " [:span {:style {:color color}} diagnose]
-          [slider {:min       10
-                   :max       50
-                   :value     bmi
-                   :on-change (fn [e]
-                                (let [new-value (.. e -target -value)]
-                                  (reset! bmi-data
-                                          {:height height
-                                           :weight (calc-weight new-value height)
-                                           :bmi    new-value})))}]]]))))
+          [slider {:min 10 :max 50 :value bmi
+                   :on-change (fn [new-value]
+                                (reset! state
+                                        {:height height
+                                         :weight (calc-weight new-value height)
+                                         :bmi new-value}))}]]]))))
 
 (reagent.core/render-component [bmi-component] js/klipse-container)</code></pre>
 </div>
 </div>
 </div>
 <div class="sect2">
-<h3 id="_echarts_as_an_example_of_a_js_library">ECharts as an example of a JS library</h3>
+<h3 id="_charts_component_lifecycle">Charts (Component Lifecycle)</h3>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
 
 (defonce specification
          (r/atom {:canvas {:width "600px" :height "400px"}
-                  :chart  {:title     {:text "ECharts Example"}
-                           :tooltip   {}
-                           :animation false
-                           :legend    {:data ["Sales"]}
-                           :xAxis     {:show true :data ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"]}
-                           :yAxis     {:show true}
-                           :series    [{:name "Sales"
-                                        :type "bar"
-                                        :data [6 17 36 10 10 20 25]}]}}))
+                  :chart {:title {:text "ECharts Example"}
+                          :tooltip {}
+                          :animation false
+                          :legend {:data ["Sales"]}
+                          :xAxis {:show true :data ["Mon" "Tue" "Wed" "Thu" "Fri" "Sat" "Sun"]}
+                          :yAxis {:show true}
+                          :series [{:name "Sales"
+                                    :type "bar"
+                                    :data [6 17 36 10 10 20 25]}]}}))
 
 (defn chart []
-  (let [canvas (r/atom nil)]
-    (r/create-class
-      {:reagent-render       (fn [this]
-                               [:div {:style (:canvas @specification)}])
-       :component-did-mount  (fn [this]
-                               (reset! canvas (js/echarts.init (r/dom-node this)))
-                               (.setOption @canvas (clj-&gt;js (:chart @specification))))
-       :component-did-update (fn [this]
-                               (.setOption @canvas (clj-&gt;js (:chart @specification)) true))})))
+  (r/create-class
+    {:reagent-render (fn [this]
+                       [:div {:style (:canvas @specification)}])
+     :component-did-mount (fn [this]
+                            (doto (js/echarts.init (r/dom-node this))
+                              (.setOption (clj-&gt;js (:chart @specification)))))
+     :component-did-update (fn [this]
+                             (-&gt; (r/dom-node this)
+                                 (js/echarts.getInstanceByDom)
+                                 (.setOption (clj-&gt;js (:chart @specification)) true)))}))
 
 (reagent.core/render-component [chart specification] js/klipse-container)</code></pre>
 </div>
@@ -1093,13 +1093,6 @@ ReactDOM.render(
 (defn mmap [m f a] (-&gt;&gt; m (f a) (into (empty m))))
 (defn complete-all [v] (swap! todos mmap map #(assoc-in % [1 :done] v)))
 (defn clear-done [] (swap! todos mmap remove #(get-in % [1 :done])))
-
-(defonce init (do
-                (add-todo "Rename Cloact to Reagent")
-                (add-todo "Add undo demo")
-                (add-todo "Make all rendering async")
-                (add-todo "Allow any arguments to component functions")
-                (complete-all true)))
 
 (defn todo-input [{:keys [title on-save on-stop]}]
       (let [val (r/atom title)
@@ -1184,6 +1177,14 @@ ReactDOM.render(
 (r/render [todo-app] js/klipse-container)</code></pre>
 </div>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_links">Links</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p><a href="http://escherize.com/cljsfiddle/">Try Reagent</a></p>
 </div>
 </div>
 </div>

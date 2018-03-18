@@ -25,7 +25,7 @@
     (reset! running true)
     (go (while @running
           (request-wind-data)
-          (<! (timeout 3000))))))
+          (<! (timeout 1000))))))
 
 (defn stop []
   (reset! running false))

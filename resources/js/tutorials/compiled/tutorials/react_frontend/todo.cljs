@@ -19,13 +19,6 @@
 (defn complete-all [v] (swap! todos mmap map #(assoc-in % [1 :done] v)))
 (defn clear-done [] (swap! todos mmap remove #(get-in % [1 :done])))
 
-(defonce init (do
-                (add-todo "Rename Cloact to Reagent")
-                (add-todo "Add undo demo")
-                (add-todo "Make all rendering async")
-                (add-todo "Allow any arguments to component functions")
-                (complete-all true)))
-
 (defn todo-input [{:keys [title on-save on-stop]}]
       (let [val (r/atom title)
             stop #(do (reset! val "")

@@ -12,7 +12,8 @@
 
 [source,reagent]
 ----
-[:ul (map (fn [name] [:li name])
+[:ul (map (fn [name]
+            [:li name])
           ["Jochen" "Alice" "Bob"])]
 ----
 
