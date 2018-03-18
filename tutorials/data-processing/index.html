@@ -859,7 +859,7 @@ label[for='toggle-all'] {
 <ul class="sectlevel1">
 <li><a href="#_an_illustrated_example">An Illustrated Example</a></li>
 <li><a href="#_function_composition">Function Composition</a></li>
-<li><a href="#_map_reduce_folds">Map, Reduce, Folds</a></li>
+<li><a href="#_folds">Folds</a></li>
 <li><a href="#_concurrency_and_parallelism">Concurrency and Parallelism</a></li>
 <li><a href="#_distributed_systems">Distributed Systems</a></li>
 </ul>
@@ -970,24 +970,8 @@ label[for='toggle-all'] {
 </div>
 </div>
 <div class="sect1">
-<h2 id="_map_reduce_folds">Map, Reduce, Folds</h2>
+<h2 id="_folds">Folds</h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>The process called "mapping" applies a given function to each element of a sequence of values producing a sequence of values of the same length. Let&#8217;s take a look at the Clojure function <code>map</code>:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(map inc [1 2 3])</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>The function <code>inc</code> is applied to 1, 2, and 3. Any function that takes one argument can be mapped over the sequence:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(map str [1 2 3])</code></pre>
-</div>
-</div>
 <table class="tableblock frame-none grid-none spread">
 <colgroup>
 <col style="width: 50%;">
@@ -1001,17 +985,22 @@ label[for='toggle-all'] {
 <tr>
 <td class="tableblock halign-center valign-top"><div><div class="imageblock">
 <div class="content">
-<img src="img/fold-right-application.svg" alt="fold right application" width="70%" height="397">
+<img src="img/fold-left-application.svg" alt="fold left application" width="70%" height="397">
 </div>
 </div></div></td>
 <td class="tableblock halign-center valign-top"><div><div class="imageblock">
 <div class="content">
-<img src="img/fold-left-application.svg" alt="fold left application" width="70%" height="397">
+<img src="img/fold-right-application.svg" alt="fold right application" width="70%" height="397">
 </div>
 </div></div></td>
 </tr>
 </tbody>
 </table>
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="img/processing.svg" alt="Processing">
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">

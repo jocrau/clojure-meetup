@@ -96,7 +96,10 @@
               (t/filter #(= (:TEAM %) "Astros"))
               (t/group-by (juxt :TEAM :POS1))
               (t/fuse
-                {:count (t/count)
-                 :top2  (top-count 2 :Pitches)})))
+                {:count     (t/count)
+                 :top2      (top 2 :Pitches)
+                 :frequency (->> (t/map :Pitches)
+                                 (t/frequencies)
+                                 (t/post-combine #(into (sorted-map) %)))})))
 
   )

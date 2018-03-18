@@ -38,7 +38,6 @@
 (defn combine-fn
   ([] {})
   ([a b]
-   (println :combine)
    (merge-with + a b)))
 
 (defn reduce-fn [acc [word cnt]]

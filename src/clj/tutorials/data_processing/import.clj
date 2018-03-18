@@ -4,23 +4,7 @@
     [iota])
   (:import [java.io StringReader]))
 
-(defn str-to-long [x]
-  (try
-    (when-not (empty? x)
-      (Long/parseLong x))
-    (catch Exception e)))
-
-(defn str-to-integer [x]
-  (try
-    (when-not (empty? x)
-      (Integer/parseInt x))
-    (catch Exception e)))
-
-(defn str-to-double [x]
-  (try
-    (when-not (empty? x)
-      (Double/parseDouble x))
-    (catch Exception e)))
+(declare file col-defs)
 
 (defn parse-line [col-defs line]
   (loop [col-defs col-defs
@@ -31,51 +15,13 @@
             value   (first line)]
         (recur (rest col-defs)
                (rest line)
-               (assoc tuple (:name col-def) ((:parser col-def) value))))
+               (assoc tuple
+                 (:name col-def)
+                 (try
+                   (when-not (empty? value)
+                     ((:parser col-def) value))
+                   (catch Exception e)))))
       tuple)))
-
-(def file "data/Hitting.csv")
-
-(def col-defs
-  [{:name :G# :parser identity}
-   {:name :DATE :parser identity}
-   {:name :MON :parser str-to-integer}
-   {:name :WK :parser str-to-integer}
-   {:name :TEAM :parser identity}
-   {:name :NAME :parser identity}
-   {:name :POS :parser identity}
-   {:name :POS1 :parser identity}
-   {:name :AB :parser str-to-integer}
-   {:name :PA :parser str-to-integer}
-   {:name :H :parser str-to-integer}
-   {:name :1B :parser str-to-integer}
-   {:name :2B :parser str-to-integer}
-   {:name :3B :parser str-to-integer}
-   {:name :HR :parser str-to-integer}
-   {:name :R :parser str-to-integer}
-   {:name :RBI :parser str-to-integer}
-   {:name :BB :parser str-to-integer}
-   {:name :IBB :parser str-to-integer}
-   {:name :SO :parser str-to-integer}
-   {:name :HBP :parser str-to-integer}
-   {:name :SF :parser str-to-integer}
-   {:name :SH :parser str-to-integer}
-   {:name :GDP :parser str-to-integer}
-   {:name :SB :parser str-to-integer}
-   {:name :CS :parser str-to-integer}
-   {:name :GB :parser str-to-integer}
-   {:name :FB :parser str-to-integer}
-   {:name :LD :parser str-to-integer}
-   {:name :IFFB :parser str-to-integer}
-   {:name :IFH :parser str-to-integer}
-   {:name :BU :parser str-to-integer}
-   {:name :BUH :parser str-to-integer}
-   {:name :Balls :parser str-to-integer}
-   {:name :Strikes :parser str-to-integer}
-   {:name :Pitches :parser str-to-integer}
-   {:name :BO :parser str-to-integer}
-   {:name :WPA :parser str-to-double}
-   {:name :BATTER :parser identity}])
 
 (defn read-data []
   (->> (iota/seq file)
@@ -83,3 +29,45 @@
        (map #(#'clojure-csv.core/parse-csv-line (StringReader. %) \, \" false nil))
        (map #(parse-line col-defs %))))
 
+(def file "data/Hitting.csv")
+
+(def col-defs
+  [{:name :G# :parser identity}
+   {:name :DATE :parser identity}
+   {:name :MON :parser #(Integer/parseInt %)}
+   {:name :WK :parser #(Integer/parseInt %)}
+   {:name :TEAM :parser identity}
+   {:name :NAME :parser identity}
+   {:name :POS :parser identity}
+   {:name :POS1 :parser identity}
+   {:name :AB :parser #(Integer/parseInt %)}
+   {:name :PA :parser #(Integer/parseInt %)}
+   {:name :H :parser #(Integer/parseInt %)}
+   {:name :1B :parser #(Integer/parseInt %)}
+   {:name :2B :parser #(Integer/parseInt %)}
+   {:name :3B :parser #(Integer/parseInt %)}
+   {:name :HR :parser #(Integer/parseInt %)}
+   {:name :R :parser #(Integer/parseInt %)}
+   {:name :RBI :parser #(Integer/parseInt %)}
+   {:name :BB :parser #(Integer/parseInt %)}
+   {:name :IBB :parser #(Integer/parseInt %)}
+   {:name :SO :parser #(Integer/parseInt %)}
+   {:name :HBP :parser #(Integer/parseInt %)}
+   {:name :SF :parser #(Integer/parseInt %)}
+   {:name :SH :parser #(Integer/parseInt %)}
+   {:name :GDP :parser #(Integer/parseInt %)}
+   {:name :SB :parser #(Integer/parseInt %)}
+   {:name :CS :parser #(Integer/parseInt %)}
+   {:name :GB :parser #(Integer/parseInt %)}
+   {:name :FB :parser #(Integer/parseInt %)}
+   {:name :LD :parser #(Integer/parseInt %)}
+   {:name :IFFB :parser #(Integer/parseInt %)}
+   {:name :IFH :parser #(Integer/parseInt %)}
+   {:name :BU :parser #(Integer/parseInt %)}
+   {:name :BUH :parser #(Integer/parseInt %)}
+   {:name :Balls :parser #(Integer/parseInt %)}
+   {:name :Strikes :parser #(Integer/parseInt %)}
+   {:name :Pitches :parser #(Integer/parseInt %)}
+   {:name :BO :parser #(Integer/parseInt %)}
+   {:name :WPA :parser #(Double/parseDouble %)}
+   {:name :BATTER :parser identity}])

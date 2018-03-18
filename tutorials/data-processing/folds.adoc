@@ -1,34 +1,9 @@
-== Map, Reduce, Folds
-
-The process called "mapping" applies a given function to each element of a sequence of values producing a sequence of values of the same length. Let's take a look at the Clojure function `map`:
-
-[source]
-----
-(map inc [1 2 3])
-----
-
-The function `inc` is applied to 1, 2, and 3. Any function that takes one argument can be mapped over the sequence:
-
-[source]
-----
-(map str [1 2 3])
-----
+== Folds
 
 [cols="2*^a",frame=none,grid=none]
 |===
 h|Fold Right
 h|Fold Left
-|
-[mermaid,fold-right-application,svg,width="70%",css="../../resources/css/mermaid.neutral.css"]
-----
-graph TD
-n1{f} --- 1
-n1 --- n2{f}
-n2 --- 2
-n2 --- n3{f}
-n3 --- 3
-n3 --- Z
-----
 |
 [mermaid,fold-left-application,svg,width="70%"]
 ----
@@ -40,4 +15,17 @@ n2 --- B[2]
 n3 --- C[Z]
 n3 --- D[1]
 ----
+|
+[mermaid,fold-right-application,svg,width="70%",css="../../resources/css/mermaid.neutral.css"]
+----
+graph TD
+n1{f} --- 1
+n1 --- n2{f}
+n2 --- 2
+n2 --- n3{f}
+n3 --- 3
+n3 --- Z
+----
 |===
+
+image::processing.svg[Processing,align="center"]

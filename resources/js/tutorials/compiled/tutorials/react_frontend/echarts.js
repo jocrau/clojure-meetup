@@ -12,13 +12,13 @@ tutorials.react_frontend.echarts.chart = (function tutorials$react_frontend$echa
 return reagent.core.create_class.call(null,new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"reagent-render","reagent-render",-985383853),(function (this$){
 return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"div","div",1057191632),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"style","style",-496642736),new cljs.core.Keyword(null,"canvas","canvas",-1798817489).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,tutorials.react_frontend.echarts.specification))], null)], null);
 }),new cljs.core.Keyword(null,"component-did-mount","component-did-mount",-1126910518),(function (this$){
-var G__24903 = echarts.init(reagent.core.dom_node.call(null,this$));
-G__24903.setOption(cljs.core.clj__GT_js.call(null,new cljs.core.Keyword(null,"chart","chart",1173225425).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,tutorials.react_frontend.echarts.specification))));
+var G__25110 = echarts.init(reagent.core.dom_node.call(null,this$));
+G__25110.setOption(cljs.core.clj__GT_js.call(null,new cljs.core.Keyword(null,"chart","chart",1173225425).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,tutorials.react_frontend.echarts.specification))));
 
-return G__24903;
+return G__25110;
 }),new cljs.core.Keyword(null,"component-did-update","component-did-update",-1468549173),(function (this$){
 return echarts.getInstanceByDom(reagent.core.dom_node.call(null,this$)).setOption(cljs.core.clj__GT_js.call(null,new cljs.core.Keyword(null,"chart","chart",1173225425).cljs$core$IFn$_invoke$arity$1(cljs.core.deref.call(null,tutorials.react_frontend.echarts.specification))),true);
 })], null));
 });
 
-//# sourceMappingURL=echarts.js.map?rel=1521370188314
+//# sourceMappingURL=echarts.js.map?rel=1521389263022
