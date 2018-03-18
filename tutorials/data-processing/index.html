@@ -857,12 +857,60 @@ label[for='toggle-all'] {
 <div id="toc" class="toc">
 <div id="toctitle" class="title">Table of Contents</div>
 <ul class="sectlevel1">
+<li><a href="#_an_illustrated_example">An Illustrated Example</a></li>
 <li><a href="#_function_composition">Function Composition</a></li>
 <li><a href="#_map_reduce_folds">Map, Reduce, Folds</a></li>
-<li><a href="#_an_illustrated_example">An Illustrated Example</a></li>
 <li><a href="#_concurrency_and_parallelism">Concurrency and Parallelism</a></li>
 <li><a href="#_distributed_systems">Distributed Systems</a></li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_an_illustrated_example">An Illustrated Example</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Let&#8217;s take a look at some real life example.<sup class="footnote" id="_footnote_disclaimer">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn cook [thing]
+  (condp = thing
+    '🐄 '🍔
+    '🥔 '🍟
+    '🐓 '🍗
+    '🌽 '🍿
+    '🥒 '🥗))
+
+(map cook ['🐄 '🥔 '🐓 '🌽])</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn vegetarian? [thing]
+  (some #{thing} ['🍎 '🍐 '🥔 '🍌 '🌽 '🍇 '🥕 '🥒]))
+
+(filter vegetarian? ['🐄 '🥔 '🐓 '🌽 '🥒])</code></pre>
+</div>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn eat [acc thing]
+  (str thing acc))
+
+(reduce eat " ⟹ 💩" (map cook (filter vegetarian? ['🐄 '🥔 '🐓 '🌽 '🥒])))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>or more readable</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(-&gt;&gt; ['🐄 '🥔 '🐓 '🌽 '🥒]
+    (filter vegetarian?)
+    (map cook)
+    (reduce eat " ⟹ 💩"))</code></pre>
+</div>
 </div>
 </div>
 </div>
@@ -940,22 +988,6 @@ label[for='toggle-all'] {
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(map str [1 2 3])</code></pre>
 </div>
 </div>
-<div class="paragraph">
-<p>And we can use any collection of values that can be turned into a sequence, like a list</p>
-</div>
-<div class="listingblock do-not-eval">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(map inc '(1 2 3))</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>or a set</p>
-</div>
-<div class="listingblock do-not-eval">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(map inc #{1 2 3})</code></pre>
-</div>
-</div>
 <table class="tableblock frame-none grid-none spread">
 <colgroup>
 <col style="width: 50%;">
@@ -980,54 +1012,6 @@ label[for='toggle-all'] {
 </tr>
 </tbody>
 </table>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_an_illustrated_example">An Illustrated Example</h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>Let&#8217;s take a look at some real life example.<sup class="footnote" id="_footnote_disclaimer">[<a id="_footnoteref_1" class="footnote" href="#_footnote_1" title="View footnote.">1</a>]</sup></p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn cook [thing]
-  (condp = thing
-    '🐄 '🍔
-    '🥔 '🍟
-    '🐓 '🍗
-    '🌽 '🍿
-    '🥒 '🥗))
-
-(map cook ['🐄 '🥔 '🐓 '🌽])</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn vegetarian? [thing]
-  (some #{thing} ['🍎 '🍐 '🥔 '🍌 '🌽 '🍇 '🥕 '🥒]))
-
-(filter vegetarian? ['🐄 '🥔 '🐓 '🌽 '🥒])</code></pre>
-</div>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(defn eat [acc thing]
-  (str thing acc))
-
-(reduce eat " ⟹ 💩" (map cook (filter vegetarian? ['🐄 '🥔 '🐓 '🌽 '🥒])))</code></pre>
-</div>
-</div>
-<div class="paragraph">
-<p>or more readable</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(-&gt;&gt; ['🐄 '🥔 '🐓 '🌽 '🥒]
-    (filter vegetarian?)
-    (map cook)
-    (reduce eat " ⟹ 💩"))</code></pre>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">

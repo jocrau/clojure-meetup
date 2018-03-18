@@ -4,9 +4,9 @@ toc::[]
 
 :leveloffset: 0
 
+include::emoticons.adoc[]
 include::functions.adoc[]
 include::folds.adoc[]
-include::emoticons.adoc[]
 include::parallelism.adoc[]
 
 include::footer.adoc[]

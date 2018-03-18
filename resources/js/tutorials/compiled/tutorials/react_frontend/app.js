@@ -12,16 +12,16 @@ if(typeof tutorials.react_frontend.app.current_tab_id !== 'undefined'){
 tutorials.react_frontend.app.current_tab_id = reagent.core.atom.call(null,cljs.core.ffirst.call(null,tutorials.react_frontend.app.tabs));
 }
 tutorials.react_frontend.app.navbar = (function tutorials$react_frontend$app$navbar(){
-return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"ul.nav.navbar-nav.navbar-left","ul.nav.navbar-nav.navbar-left",2047252324),cljs.core.doall.call(null,cljs.core.map.call(null,(function (p__30546){
-var vec__30547 = p__30546;
-var tab_id = cljs.core.nth.call(null,vec__30547,(0),null);
-var map__30550 = cljs.core.nth.call(null,vec__30547,(1),null);
-var map__30550__$1 = ((((!((map__30550 == null)))?(((((map__30550.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__30550.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__30550):map__30550);
-var label = cljs.core.get.call(null,map__30550__$1,new cljs.core.Keyword(null,"label","label",1718410804));
-return cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"li","li",723558921),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),((cljs.core._EQ_.call(null,cljs.core.deref.call(null,tutorials.react_frontend.app.current_tab_id),tab_id))?"active":null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a","a",-2123407586),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (vec__30547,tab_id,map__30550,map__30550__$1,label){
+return new cljs.core.PersistentVector(null, 2, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"ul.nav.navbar-nav.navbar-left","ul.nav.navbar-nav.navbar-left",2047252324),cljs.core.doall.call(null,cljs.core.map.call(null,(function (p__24906){
+var vec__24907 = p__24906;
+var tab_id = cljs.core.nth.call(null,vec__24907,(0),null);
+var map__24910 = cljs.core.nth.call(null,vec__24907,(1),null);
+var map__24910__$1 = ((((!((map__24910 == null)))?(((((map__24910.cljs$lang$protocol_mask$partition0$ & (64))) || ((cljs.core.PROTOCOL_SENTINEL === map__24910.cljs$core$ISeq$))))?true:false):false))?cljs.core.apply.call(null,cljs.core.hash_map,map__24910):map__24910);
+var label = cljs.core.get.call(null,map__24910__$1,new cljs.core.Keyword(null,"label","label",1718410804));
+return cljs.core.with_meta(new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"li","li",723558921),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"class","class",-2030961996),((cljs.core._EQ_.call(null,cljs.core.deref.call(null,tutorials.react_frontend.app.current_tab_id),tab_id))?"active":null)], null),new cljs.core.PersistentVector(null, 3, 5, cljs.core.PersistentVector.EMPTY_NODE, [new cljs.core.Keyword(null,"a","a",-2123407586),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"on-click","on-click",1632826543),((function (vec__24907,tab_id,map__24910,map__24910__$1,label){
 return (function (){
 return cljs.core.reset_BANG_.call(null,tutorials.react_frontend.app.current_tab_id,tab_id);
-});})(vec__30547,tab_id,map__30550,map__30550__$1,label))
+});})(vec__24907,tab_id,map__24910,map__24910__$1,label))
 ], null),label], null)], null),new cljs.core.PersistentArrayMap(null, 1, [new cljs.core.Keyword(null,"key","key",-1516042587),tab_id], null));
 }),tutorials.react_frontend.app.tabs))], null);
 });
@@ -34,4 +34,4 @@ reagent.core.render_component.call(null,new cljs.core.PersistentVector(null, 1, 
 return reagent.core.render_component.call(null,new cljs.core.PersistentVector(null, 1, 5, cljs.core.PersistentVector.EMPTY_NODE, [tutorials.react_frontend.app.content], null),document.getElementById("container"));
 });
 
-//# sourceMappingURL=app.js.map?rel=1521345726214
+//# sourceMappingURL=app.js.map?rel=1521370188336

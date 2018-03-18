@@ -31,6 +31,12 @@
 
                  [reagent "0.8.0-alpha2"]
 
+                 ;; processing
+                 [tesser.core "1.0.2"]
+                 [tesser.math "1.0.2"]
+                 [clojure-csv/clojure-csv "2.0.2"]
+                 [iota "1.1.3"]
+
                  [org.clojure/tools.namespace "0.2.11"]]
 
   :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.15"]
@@ -68,5 +74,4 @@
   :clean-targets ^{:protect false} ["resources/js/tutorials"
                                     "resources/js/klipse"]
 
-  :main ^:skip-aot meetup.intro
   :target-path "target/%s")

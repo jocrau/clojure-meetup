@@ -29,3 +29,13 @@
 
 (defn stop []
   (reset! running false))
+
+(comment
+
+  (start)
+  (go (while @running
+        (when-let [conditions (<! data-processing-ch)]
+          (println conditions))))
+  (stop)
+
+  )

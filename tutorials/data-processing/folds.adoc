@@ -14,20 +14,6 @@ The function `inc` is applied to 1, 2, and 3. Any function that takes one argume
 (map str [1 2 3])
 ----
 
-And we can use any collection of values that can be turned into a sequence, like a list
-
-[source.do-not-eval]
-----
-(map inc '(1 2 3))
-----
-
-or a set
-
-[source.do-not-eval]
-----
-(map inc #{1 2 3})
-----
-
 [cols="2*^a",frame=none,grid=none]
 |===
 h|Fold Right
