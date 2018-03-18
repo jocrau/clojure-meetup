@@ -1,1 +1,0 @@
-{:output-dir "resources/js/klipse/compiled", :externs ["closure-js/externs"], :optimizations :none, :verbose true, :output-to "resources/js/klipse/klipse_plugin.js", :asset-path "../../resources/js/klipse/compiled", :output-wrapper false, :libs ["closure-js/libs"], :main klipse-meetup.plugin, :pretty-print true}

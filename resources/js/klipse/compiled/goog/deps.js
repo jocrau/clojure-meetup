@@ -17,7 +17,7 @@
 // Disable Clang formatter for this file.
 // See http://goo.gl/SdiwZH
 // clang-format off
-
+goog.isProvided_ = function(name) {};
 goog.addDependency('caja/string/html/htmlparser.js', ['goog.string.html', 'goog.string.html.HtmlParser', 'goog.string.html.HtmlParser.EFlags', 'goog.string.html.HtmlParser.Elements', 'goog.string.html.HtmlParser.Entities', 'goog.string.html.HtmlSaxHandler'], [], {});
 goog.addDependency('dojo/dom/query.js', ['goog.dom.query'], ['goog.array', 'goog.dom', 'goog.functions', 'goog.string', 'goog.userAgent'], {});
 goog.addDependency('dojo/dom/query_test.js', ['goog.dom.query_test'], ['goog.dom', 'goog.dom.query', 'goog.testing.asserts', 'goog.testing.jsunit', 'goog.userAgent'], {});

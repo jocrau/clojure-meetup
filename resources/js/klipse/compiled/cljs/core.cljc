@@ -752,12 +752,7 @@
                        (core/number? default) "number"
                        (core/or (core/true? default) (core/false? default)) "boolean")]
     `(do
-       (declare ~(core/vary-meta sym
-                   (core/fn [m]
-                     (core/cond-> m
-                       (core/not (core/contains? m :tag))
-                       (core/assoc :tag (core/symbol type))
-                       ))))
+       (declare ~(symbol sym))
        (~'js* ~(core/str "/** @define {" type "} */"))
        (goog/define ~defname ~default))))
 
@@ -855,7 +850,6 @@
            (map #(cljs.analyzer/no-warn (cljs.analyzer/analyze &env %)) forms))
        (core/let [and-str (core/->> (repeat (count forms) "(~{})")
                             (interpose " && ")
-                            (#(concat ["("] % [")"]))
                             (apply core/str))]
          (bool-expr `(~'js* ~and-str ~@forms)))
        `(let [and# ~x]
@@ -874,7 +868,6 @@
            (map #(cljs.analyzer/no-warn (cljs.analyzer/analyze &env %)) forms))
        (core/let [or-str (core/->> (repeat (count forms) "(~{})")
                            (interpose " || ")
-                           (#(concat ["("] % [")"]))
                            (apply core/str))]
          (bool-expr `(~'js* ~or-str ~@forms)))
        `(let [or# ~x]
@@ -1683,10 +1676,8 @@
   [rsym rname fields]
   (core/let [fn-name (with-meta (symbol (core/str '-> rsym))
                        (assoc (meta rsym) :factory :positional))
-             docstring (core/str "Positional factory function for " rname ".")
         field-values (if (core/-> rsym meta :internal-ctor) (conj fields nil nil nil) fields)]
     `(defn ~fn-name
-       ~docstring
        [~@fields]
        (new ~rname ~@field-values))))
 
@@ -1839,7 +1830,7 @@
                                                    (not-empty (dissoc ~'__extmap k#))
                                                    nil)))
                         'ISeqable
-                        `(~'-seq [this#] (seq (concat [~@(map #(core/list 'cljs.core.MapEntry. (keyword %) % nil) base-fields)]
+                        `(~'-seq [this#] (seq (concat [~@(map #(core/list `vector (keyword %) %) base-fields)]
                                                 ~'__extmap)))
 
                         'IIterable
@@ -1868,11 +1859,10 @@
 (core/defn- build-map-factory [rsym rname fields]
   (core/let [fn-name (with-meta (symbol (core/str 'map-> rsym))
                        (assoc (meta rsym) :factory :map))
-             docstring (core/str "Factory function for " rname ", taking a map of keywords to field values.")
              ms (gensym)
              ks (map keyword fields)
              getters (map (core/fn [k] `(~k ~ms)) ks)]
-    `(defn ~fn-name ~docstring [~ms]
+    `(defn ~fn-name [~ms]
        (new ~rname ~@getters nil (not-empty (dissoc ~ms ~@ks)) nil))))
 
 (core/defmacro defrecord
@@ -2187,7 +2177,8 @@
   predicate as its argument, the result of that call being the return
   value of condp. A single default expression can follow the clauses,
   and its value will be returned if no clause matches. If no default
-  expression is provided and no clause matches, an Error is thrown."
+  expression is provided and no clause matches, an
+  IllegalArgumentException is thrown."
   {:added "1.0"}
 
   [pred expr & clauses]
@@ -2418,7 +2409,7 @@
   (core/let [err (core/fn [& msg] (throw (ex-info (apply core/str msg) {})))
              step (core/fn step [recform exprs]
                     (core/if-not exprs
-                      [true `(do ~@body nil)]
+                      [true `(do ~@body)]
                       (core/let [k (first exprs)
                                  v (second exprs)
 
@@ -2493,11 +2484,11 @@
 (core/defmacro list
   ([]
    '(.-EMPTY cljs.core/List))
-  ([x]
-   `(cljs.core/List. nil ~x nil 1 nil))
   ([x & xs]
-   (core/let [cnt (core/inc (count xs))]
-     `(cljs.core/List. nil ~x (list ~@xs) ~cnt nil))))
+   (if (= :constant (:op (cljs.analyzer/no-warn (cljs.analyzer/analyze &env x))))
+     `(-conj (list ~@xs) ~x)
+     `(let [x# ~x]
+        (-conj (list ~@xs) x#)))))
 
 (core/defmacro vector
   ([] '(.-EMPTY cljs.core/PersistentVector))
@@ -2856,9 +2847,6 @@
   [x & forms]
   `(do ~@forms))
 
-;; An internal-use Var for defining specs on the ns special form
-(core/defmacro ^:private ns-special-form [])
-
 (core/defmacro require
   "Loads libs, skipping any that are already loaded. Each argument is
   either a libspec that identifies a lib or a flag that modifies how all the identified
@@ -3148,8 +3136,7 @@
     to the var metadata. prepost-map defines a map with optional keys
     :pre and :post that contain collections of pre or post conditions."
     :arglists '([name doc-string? attr-map? [params*] prepost-map? body]
-                 [name doc-string? attr-map? ([params*] prepost-map? body)+ attr-map?])
-    :macro true}
+                 [name doc-string? attr-map? ([params*] prepost-map? body)+ attr-map?])}
   defn (core/fn defn [&form &env name & fdecl]
          ;; Note: Cannot delegate this check to def because of the call to (with-meta name ..)
          (if (core/instance? #?(:clj clojure.lang.Symbol :cljs Symbol) name)

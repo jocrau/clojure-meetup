@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.145 {}
+// Compiled by ClojureScript 1.9.946 {}
 goog.provide('klipse.lang.clojure.bundled_namespaces');
 goog.require('cljs.core');
 goog.require('cljs.analyzer.api');

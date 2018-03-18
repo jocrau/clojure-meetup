@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.145 {}
+// Compiled by ClojureScript 1.9.946 {}
 goog.provide('rewrite_clj.node.protocols');
 goog.require('cljs.core');
 goog.require('clojure.string');
@@ -13,17 +13,17 @@ rewrite_clj.node.protocols.Node = function(){};
  * Keyword representing the type of the node.
  */
 rewrite_clj.node.protocols.tag = (function rewrite_clj$node$protocols$tag(_){
-if(((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$tag$arity$1 == null))))){
+if((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$tag$arity$1 == null)))){
 return _.rewrite_clj$node$protocols$Node$tag$arity$1(_);
 } else {
-var x__4211__auto__ = (((_ == null))?null:_);
-var m__4212__auto__ = (rewrite_clj.node.protocols.tag[goog.typeOf(x__4211__auto__)]);
-if(!((m__4212__auto__ == null))){
-return m__4212__auto__.call(null,_);
+var x__9649__auto__ = (((_ == null))?null:_);
+var m__9650__auto__ = (rewrite_clj.node.protocols.tag[goog.typeOf(x__9649__auto__)]);
+if(!((m__9650__auto__ == null))){
+return m__9650__auto__.call(null,_);
 } else {
-var m__4212__auto____$1 = (rewrite_clj.node.protocols.tag["_"]);
-if(!((m__4212__auto____$1 == null))){
-return m__4212__auto____$1.call(null,_);
+var m__9650__auto____$1 = (rewrite_clj.node.protocols.tag["_"]);
+if(!((m__9650__auto____$1 == null))){
+return m__9650__auto____$1.call(null,_);
 } else {
 throw cljs.core.missing_protocol.call(null,"Node.tag",_);
 }
@@ -36,17 +36,17 @@ throw cljs.core.missing_protocol.call(null,"Node.tag",_);
  *   element.
  */
 rewrite_clj.node.protocols.printable_only_QMARK_ = (function rewrite_clj$node$protocols$printable_only_QMARK_(_){
-if(((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$printable_only_QMARK_$arity$1 == null))))){
+if((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$printable_only_QMARK_$arity$1 == null)))){
 return _.rewrite_clj$node$protocols$Node$printable_only_QMARK_$arity$1(_);
 } else {
-var x__4211__auto__ = (((_ == null))?null:_);
-var m__4212__auto__ = (rewrite_clj.node.protocols.printable_only_QMARK_[goog.typeOf(x__4211__auto__)]);
-if(!((m__4212__auto__ == null))){
-return m__4212__auto__.call(null,_);
+var x__9649__auto__ = (((_ == null))?null:_);
+var m__9650__auto__ = (rewrite_clj.node.protocols.printable_only_QMARK_[goog.typeOf(x__9649__auto__)]);
+if(!((m__9650__auto__ == null))){
+return m__9650__auto__.call(null,_);
 } else {
-var m__4212__auto____$1 = (rewrite_clj.node.protocols.printable_only_QMARK_["_"]);
-if(!((m__4212__auto____$1 == null))){
-return m__4212__auto____$1.call(null,_);
+var m__9650__auto____$1 = (rewrite_clj.node.protocols.printable_only_QMARK_["_"]);
+if(!((m__9650__auto____$1 == null))){
+return m__9650__auto____$1.call(null,_);
 } else {
 throw cljs.core.missing_protocol.call(null,"Node.printable-only?",_);
 }
@@ -58,17 +58,17 @@ throw cljs.core.missing_protocol.call(null,"Node.printable-only?",_);
  * Convert node to s-expression.
  */
 rewrite_clj.node.protocols.sexpr = (function rewrite_clj$node$protocols$sexpr(_){
-if(((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$sexpr$arity$1 == null))))){
+if((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$sexpr$arity$1 == null)))){
 return _.rewrite_clj$node$protocols$Node$sexpr$arity$1(_);
 } else {
-var x__4211__auto__ = (((_ == null))?null:_);
-var m__4212__auto__ = (rewrite_clj.node.protocols.sexpr[goog.typeOf(x__4211__auto__)]);
-if(!((m__4212__auto__ == null))){
-return m__4212__auto__.call(null,_);
+var x__9649__auto__ = (((_ == null))?null:_);
+var m__9650__auto__ = (rewrite_clj.node.protocols.sexpr[goog.typeOf(x__9649__auto__)]);
+if(!((m__9650__auto__ == null))){
+return m__9650__auto__.call(null,_);
 } else {
-var m__4212__auto____$1 = (rewrite_clj.node.protocols.sexpr["_"]);
-if(!((m__4212__auto____$1 == null))){
-return m__4212__auto____$1.call(null,_);
+var m__9650__auto____$1 = (rewrite_clj.node.protocols.sexpr["_"]);
+if(!((m__9650__auto____$1 == null))){
+return m__9650__auto____$1.call(null,_);
 } else {
 throw cljs.core.missing_protocol.call(null,"Node.sexpr",_);
 }
@@ -80,17 +80,17 @@ throw cljs.core.missing_protocol.call(null,"Node.sexpr",_);
  * Get number of characters for the string version of this node.
  */
 rewrite_clj.node.protocols.length = (function rewrite_clj$node$protocols$length(_){
-if(((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$length$arity$1 == null))))){
+if((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$length$arity$1 == null)))){
 return _.rewrite_clj$node$protocols$Node$length$arity$1(_);
 } else {
-var x__4211__auto__ = (((_ == null))?null:_);
-var m__4212__auto__ = (rewrite_clj.node.protocols.length[goog.typeOf(x__4211__auto__)]);
-if(!((m__4212__auto__ == null))){
-return m__4212__auto__.call(null,_);
+var x__9649__auto__ = (((_ == null))?null:_);
+var m__9650__auto__ = (rewrite_clj.node.protocols.length[goog.typeOf(x__9649__auto__)]);
+if(!((m__9650__auto__ == null))){
+return m__9650__auto__.call(null,_);
 } else {
-var m__4212__auto____$1 = (rewrite_clj.node.protocols.length["_"]);
-if(!((m__4212__auto____$1 == null))){
-return m__4212__auto____$1.call(null,_);
+var m__9650__auto____$1 = (rewrite_clj.node.protocols.length["_"]);
+if(!((m__9650__auto____$1 == null))){
+return m__9650__auto____$1.call(null,_);
 } else {
 throw cljs.core.missing_protocol.call(null,"Node.length",_);
 }
@@ -102,17 +102,17 @@ throw cljs.core.missing_protocol.call(null,"Node.length",_);
  * Convert node to printable string.
  */
 rewrite_clj.node.protocols.string = (function rewrite_clj$node$protocols$string(_){
-if(((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$string$arity$1 == null))))){
+if((!((_ == null))) && (!((_.rewrite_clj$node$protocols$Node$string$arity$1 == null)))){
 return _.rewrite_clj$node$protocols$Node$string$arity$1(_);
 } else {
-var x__4211__auto__ = (((_ == null))?null:_);
-var m__4212__auto__ = (rewrite_clj.node.protocols.string[goog.typeOf(x__4211__auto__)]);
-if(!((m__4212__auto__ == null))){
-return m__4212__auto__.call(null,_);
+var x__9649__auto__ = (((_ == null))?null:_);
+var m__9650__auto__ = (rewrite_clj.node.protocols.string[goog.typeOf(x__9649__auto__)]);
+if(!((m__9650__auto__ == null))){
+return m__9650__auto__.call(null,_);
 } else {
-var m__4212__auto____$1 = (rewrite_clj.node.protocols.string["_"]);
-if(!((m__4212__auto____$1 == null))){
-return m__4212__auto____$1.call(null,_);
+var m__9650__auto____$1 = (rewrite_clj.node.protocols.string["_"]);
+if(!((m__9650__auto____$1 == null))){
+return m__9650__auto____$1.call(null,_);
 } else {
 throw cljs.core.missing_protocol.call(null,"Node.string",_);
 }
@@ -171,17 +171,17 @@ rewrite_clj.node.protocols.InnerNode = function(){};
  * Check whether the node can contain children.
  */
 rewrite_clj.node.protocols.inner_QMARK_ = (function rewrite_clj$node$protocols$inner_QMARK_(_){
-if(((!((_ == null))) && (!((_.rewrite_clj$node$protocols$InnerNode$inner_QMARK_$arity$1 == null))))){
+if((!((_ == null))) && (!((_.rewrite_clj$node$protocols$InnerNode$inner_QMARK_$arity$1 == null)))){
 return _.rewrite_clj$node$protocols$InnerNode$inner_QMARK_$arity$1(_);
 } else {
-var x__4211__auto__ = (((_ == null))?null:_);
-var m__4212__auto__ = (rewrite_clj.node.protocols.inner_QMARK_[goog.typeOf(x__4211__auto__)]);
-if(!((m__4212__auto__ == null))){
-return m__4212__auto__.call(null,_);
+var x__9649__auto__ = (((_ == null))?null:_);
+var m__9650__auto__ = (rewrite_clj.node.protocols.inner_QMARK_[goog.typeOf(x__9649__auto__)]);
+if(!((m__9650__auto__ == null))){
+return m__9650__auto__.call(null,_);
 } else {
-var m__4212__auto____$1 = (rewrite_clj.node.protocols.inner_QMARK_["_"]);
-if(!((m__4212__auto____$1 == null))){
-return m__4212__auto____$1.call(null,_);
+var m__9650__auto____$1 = (rewrite_clj.node.protocols.inner_QMARK_["_"]);
+if(!((m__9650__auto____$1 == null))){
+return m__9650__auto____$1.call(null,_);
 } else {
 throw cljs.core.missing_protocol.call(null,"InnerNode.inner?",_);
 }
@@ -193,17 +193,17 @@ throw cljs.core.missing_protocol.call(null,"InnerNode.inner?",_);
  * Get child nodes.
  */
 rewrite_clj.node.protocols.children = (function rewrite_clj$node$protocols$children(_){
-if(((!((_ == null))) && (!((_.rewrite_clj$node$protocols$InnerNode$children$arity$1 == null))))){
+if((!((_ == null))) && (!((_.rewrite_clj$node$protocols$InnerNode$children$arity$1 == null)))){
 return _.rewrite_clj$node$protocols$InnerNode$children$arity$1(_);
 } else {
-var x__4211__auto__ = (((_ == null))?null:_);
-var m__4212__auto__ = (rewrite_clj.node.protocols.children[goog.typeOf(x__4211__auto__)]);
-if(!((m__4212__auto__ == null))){
-return m__4212__auto__.call(null,_);
+var x__9649__auto__ = (((_ == null))?null:_);
+var m__9650__auto__ = (rewrite_clj.node.protocols.children[goog.typeOf(x__9649__auto__)]);
+if(!((m__9650__auto__ == null))){
+return m__9650__auto__.call(null,_);
 } else {
-var m__4212__auto____$1 = (rewrite_clj.node.protocols.children["_"]);
-if(!((m__4212__auto____$1 == null))){
-return m__4212__auto____$1.call(null,_);
+var m__9650__auto____$1 = (rewrite_clj.node.protocols.children["_"]);
+if(!((m__9650__auto____$1 == null))){
+return m__9650__auto____$1.call(null,_);
 } else {
 throw cljs.core.missing_protocol.call(null,"InnerNode.children",_);
 }
@@ -215,17 +215,17 @@ throw cljs.core.missing_protocol.call(null,"InnerNode.children",_);
  * Replace the node's children.
  */
 rewrite_clj.node.protocols.replace_children = (function rewrite_clj$node$protocols$replace_children(_,children){
-if(((!((_ == null))) && (!((_.rewrite_clj$node$protocols$InnerNode$replace_children$arity$2 == null))))){
+if((!((_ == null))) && (!((_.rewrite_clj$node$protocols$InnerNode$replace_children$arity$2 == null)))){
 return _.rewrite_clj$node$protocols$InnerNode$replace_children$arity$2(_,children);
 } else {
-var x__4211__auto__ = (((_ == null))?null:_);
-var m__4212__auto__ = (rewrite_clj.node.protocols.replace_children[goog.typeOf(x__4211__auto__)]);
-if(!((m__4212__auto__ == null))){
-return m__4212__auto__.call(null,_,children);
+var x__9649__auto__ = (((_ == null))?null:_);
+var m__9650__auto__ = (rewrite_clj.node.protocols.replace_children[goog.typeOf(x__9649__auto__)]);
+if(!((m__9650__auto__ == null))){
+return m__9650__auto__.call(null,_,children);
 } else {
-var m__4212__auto____$1 = (rewrite_clj.node.protocols.replace_children["_"]);
-if(!((m__4212__auto____$1 == null))){
-return m__4212__auto____$1.call(null,_,children);
+var m__9650__auto____$1 = (rewrite_clj.node.protocols.replace_children["_"]);
+if(!((m__9650__auto____$1 == null))){
+return m__9650__auto____$1.call(null,_,children);
 } else {
 throw cljs.core.missing_protocol.call(null,"InnerNode.replace-children",_);
 }
@@ -264,17 +264,17 @@ return null;
 rewrite_clj.node.protocols.NodeCoerceable = function(){};
 
 rewrite_clj.node.protocols.coerce = (function rewrite_clj$node$protocols$coerce(_){
-if(((!((_ == null))) && (!((_.rewrite_clj$node$protocols$NodeCoerceable$coerce$arity$1 == null))))){
+if((!((_ == null))) && (!((_.rewrite_clj$node$protocols$NodeCoerceable$coerce$arity$1 == null)))){
 return _.rewrite_clj$node$protocols$NodeCoerceable$coerce$arity$1(_);
 } else {
-var x__4211__auto__ = (((_ == null))?null:_);
-var m__4212__auto__ = (rewrite_clj.node.protocols.coerce[goog.typeOf(x__4211__auto__)]);
-if(!((m__4212__auto__ == null))){
-return m__4212__auto__.call(null,_);
+var x__9649__auto__ = (((_ == null))?null:_);
+var m__9650__auto__ = (rewrite_clj.node.protocols.coerce[goog.typeOf(x__9649__auto__)]);
+if(!((m__9650__auto__ == null))){
+return m__9650__auto__.call(null,_);
 } else {
-var m__4212__auto____$1 = (rewrite_clj.node.protocols.coerce["_"]);
-if(!((m__4212__auto____$1 == null))){
-return m__4212__auto____$1.call(null,_);
+var m__9650__auto____$1 = (rewrite_clj.node.protocols.coerce["_"]);
+if(!((m__9650__auto____$1 == null))){
+return m__9650__auto____$1.call(null,_);
 } else {
 throw cljs.core.missing_protocol.call(null,"NodeCoerceable.coerce",_);
 }

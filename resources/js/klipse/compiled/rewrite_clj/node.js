@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.145 {}
+// Compiled by ClojureScript 1.9.946 {}
 goog.provide('rewrite_clj.node');
 goog.require('cljs.core');
 goog.require('rewrite_clj.node.coercer');
@@ -119,9 +119,9 @@ rewrite_clj.node.linebreak_QMARK_ = rewrite_clj.node.whitespace.linebreak_QMARK_
  * Check whether the given node represents whitespace or comment.
  */
 rewrite_clj.node.whitespace_or_comment_QMARK_ = (function rewrite_clj$node$whitespace_or_comment_QMARK_(node){
-var or__3922__auto__ = rewrite_clj.node.whitespace_QMARK_.call(null,node);
-if(cljs.core.truth_(or__3922__auto__)){
-return or__3922__auto__;
+var or__8916__auto__ = rewrite_clj.node.whitespace_QMARK_.call(null,node);
+if(cljs.core.truth_(or__8916__auto__)){
+return or__8916__auto__;
 } else {
 return rewrite_clj.node.comment_QMARK_.call(null,node);
 }

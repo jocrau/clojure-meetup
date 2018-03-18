@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.145 {}
+// Compiled by ClojureScript 1.9.946 {}
 goog.provide('cljs.source_map.base64_vlq');
 goog.require('cljs.core');
 goog.require('clojure.string');
@@ -27,20 +27,20 @@ return shifted;
 cljs.source_map.base64_vlq.encode_val = (function cljs$source_map$base64_vlq$encode_val(n){
 var sb = (new goog.string.StringBuffer());
 var vlq = cljs.source_map.base64_vlq.to_vlq_signed.call(null,n);
-var digit_24454 = (vlq & cljs.source_map.base64_vlq.vlq_base_mask);
-var vlq_24455__$1 = (vlq >>> (5));
+var digit_29762 = (vlq & cljs.source_map.base64_vlq.vlq_base_mask);
+var vlq_29763__$1 = (vlq >>> (5));
 while(true){
-if((vlq_24455__$1 > (0))){
-var digit_24456__$1 = (digit_24454 | cljs.source_map.base64_vlq.vlq_continuation_bit);
-sb.append(cljs.source_map.base64.encode.call(null,digit_24456__$1));
+if((vlq_29763__$1 > (0))){
+var digit_29764__$1 = (digit_29762 | cljs.source_map.base64_vlq.vlq_continuation_bit);
+sb.append(cljs.source_map.base64.encode.call(null,digit_29764__$1));
 
-var G__24457 = (vlq_24455__$1 & cljs.source_map.base64_vlq.vlq_base_mask);
-var G__24458 = (vlq_24455__$1 >>> (5));
-digit_24454 = G__24457;
-vlq_24455__$1 = G__24458;
+var G__29765 = (vlq_29763__$1 & cljs.source_map.base64_vlq.vlq_base_mask);
+var G__29766 = (vlq_29763__$1 >>> (5));
+digit_29762 = G__29765;
+vlq_29763__$1 = G__29766;
 continue;
 } else {
-sb.append(cljs.source_map.base64.encode.call(null,digit_24454));
+sb.append(cljs.source_map.base64.encode.call(null,digit_29762));
 }
 break;
 }
@@ -68,12 +68,12 @@ var digit__$1 = (digit & cljs.source_map.base64_vlq.vlq_base_mask);
 var result__$1 = (result + (digit__$1 << shift));
 var shift__$1 = (shift + (5));
 if(continuation_QMARK_){
-var G__24459 = i__$1;
-var G__24460 = result__$1;
-var G__24461 = shift__$1;
-i = G__24459;
-result = G__24460;
-shift = G__24461;
+var G__29767 = i__$1;
+var G__29768 = result__$1;
+var G__29769 = shift__$1;
+i = G__29767;
+result = G__29768;
+shift = G__29769;
 continue;
 } else {
 return (new cljs.core.LazySeq(null,((function (i,result,shift,i__$1,continuation_QMARK_,digit__$1,result__$1,shift__$1,digit,l){
@@ -92,4 +92,4 @@ break;
 }
 });
 
-//# sourceMappingURL=base64_vlq.js.map?rel=1521297423045
+//# sourceMappingURL=base64_vlq.js.map

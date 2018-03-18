@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.145 {}
+// Compiled by ClojureScript 1.9.946 {}
 goog.provide('rewrite_clj.parser.string');
 goog.require('cljs.core');
 goog.require('rewrite_clj.node');
@@ -23,22 +23,22 @@ while(true){
 var temp__5455__auto__ = rewrite_clj.reader.read_char.call(null,reader);
 if(cljs.core.truth_(temp__5455__auto__)){
 var c = temp__5455__auto__;
-if(((!(escape_QMARK_)) && ((c === "\"")))){
+if((!(escape_QMARK_)) && ((c === "\""))){
 return rewrite_clj.parser.string.flush_into.call(null,lines,buf);
 } else {
 if((c === "\n")){
-var G__15152 = escape_QMARK_;
-var G__15153 = rewrite_clj.parser.string.flush_into.call(null,lines,buf);
-escape_QMARK_ = G__15152;
-lines = G__15153;
+var G__31754 = escape_QMARK_;
+var G__31755 = rewrite_clj.parser.string.flush_into.call(null,lines,buf);
+escape_QMARK_ = G__31754;
+lines = G__31755;
 continue;
 } else {
 buf.append(c);
 
-var G__15154 = ((!(escape_QMARK_)) && ((c === "\\")));
-var G__15155 = lines;
-escape_QMARK_ = G__15154;
-lines = G__15155;
+var G__31756 = (!(escape_QMARK_)) && ((c === "\\"));
+var G__31757 = lines;
+escape_QMARK_ = G__31756;
+lines = G__31757;
 continue;
 
 }

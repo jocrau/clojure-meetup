@@ -1,8 +1,8 @@
-// Compiled by ClojureScript 1.10.145 {}
+// Compiled by ClojureScript 1.9.946 {}
 goog.provide('process.env');
 goog.require('cljs.core');
 
 /** @define {string} */
 goog.define("process.env.NODE_ENV","development");
 
-//# sourceMappingURL=env.js.map?rel=1521146651587
+//# sourceMappingURL=env.js.map

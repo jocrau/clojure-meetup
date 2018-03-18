@@ -1,4 +1,4 @@
-// Compiled by ClojureScript 1.10.145 {}
+// Compiled by ClojureScript 1.9.946 {}
 goog.provide('rewrite_clj.reader');
 goog.require('cljs.core');
 goog.require('cljs.tools.reader');
@@ -17,23 +17,23 @@ rewrite_clj.reader.read_string = cljs.tools.reader.read_string;
  * Throw reader exception, including line/column.
  */
 rewrite_clj.reader.throw_reader = (function rewrite_clj$reader$throw_reader(var_args){
-var args__4500__auto__ = [];
-var len__4497__auto___14685 = arguments.length;
-var i__4498__auto___14686 = (0);
+var args__10202__auto__ = [];
+var len__10195__auto___31518 = arguments.length;
+var i__10196__auto___31519 = (0);
 while(true){
-if((i__4498__auto___14686 < len__4497__auto___14685)){
-args__4500__auto__.push((arguments[i__4498__auto___14686]));
+if((i__10196__auto___31519 < len__10195__auto___31518)){
+args__10202__auto__.push((arguments[i__10196__auto___31519]));
 
-var G__14687 = (i__4498__auto___14686 + (1));
-i__4498__auto___14686 = G__14687;
+var G__31520 = (i__10196__auto___31519 + (1));
+i__10196__auto___31519 = G__31520;
 continue;
 } else {
 }
 break;
 }
 
-var argseq__4501__auto__ = ((((2) < args__4500__auto__.length))?(new cljs.core.IndexedSeq(args__4500__auto__.slice((2)),(0),null)):null);
-return rewrite_clj.reader.throw_reader.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),argseq__4501__auto__);
+var argseq__10203__auto__ = ((((2) < args__10202__auto__.length))?(new cljs.core.IndexedSeq(args__10202__auto__.slice((2)),(0),null)):null);
+return rewrite_clj.reader.throw_reader.cljs$core$IFn$_invoke$arity$variadic((arguments[(0)]),(arguments[(1)]),argseq__10203__auto__);
 });
 
 rewrite_clj.reader.throw_reader.cljs$core$IFn$_invoke$arity$variadic = (function (reader,fmt,data){
@@ -44,12 +44,12 @@ throw (new Error([cljs.core.str.cljs$core$IFn$_invoke$arity$1(data),cljs.core.st
 
 rewrite_clj.reader.throw_reader.cljs$lang$maxFixedArity = (2);
 
-rewrite_clj.reader.throw_reader.cljs$lang$applyTo = (function (seq14682){
-var G__14683 = cljs.core.first.call(null,seq14682);
-var seq14682__$1 = cljs.core.next.call(null,seq14682);
-var G__14684 = cljs.core.first.call(null,seq14682__$1);
-var seq14682__$2 = cljs.core.next.call(null,seq14682__$1);
-return rewrite_clj.reader.throw_reader.cljs$core$IFn$_invoke$arity$variadic(G__14683,G__14684,seq14682__$2);
+rewrite_clj.reader.throw_reader.cljs$lang$applyTo = (function (seq31515){
+var G__31516 = cljs.core.first.call(null,seq31515);
+var seq31515__$1 = cljs.core.next.call(null,seq31515);
+var G__31517 = cljs.core.first.call(null,seq31515__$1);
+var seq31515__$2 = cljs.core.next.call(null,seq31515__$1);
+return rewrite_clj.reader.throw_reader.cljs$core$IFn$_invoke$arity$variadic(G__31516,G__31517,seq31515__$2);
 });
 
 /**
@@ -77,9 +77,9 @@ rewrite_clj.reader.space_QMARK_ = (function rewrite_clj$reader$space_QMARK_(c){
 return ((-1) < ["\t"," ",","].indexOf(c));
 });
 rewrite_clj.reader.whitespace_or_boundary_QMARK_ = (function rewrite_clj$reader$whitespace_or_boundary_QMARK_(c){
-var or__3922__auto__ = rewrite_clj.reader.whitespace_QMARK_.call(null,c);
-if(or__3922__auto__){
-return or__3922__auto__;
+var or__8916__auto__ = rewrite_clj.reader.whitespace_QMARK_.call(null,c);
+if(or__8916__auto__){
+return or__8916__auto__;
 } else {
 return rewrite_clj.reader.boundary_QMARK_.call(null,c);
 }
@@ -90,8 +90,8 @@ rewrite_clj.reader.buf = (new goog.string.StringBuffer(""));
  *   the unmatching char.
  */
 rewrite_clj.reader.read_while = (function rewrite_clj$reader$read_while(var_args){
-var G__14689 = arguments.length;
-switch (G__14689) {
+var G__31522 = arguments.length;
+switch (G__31522) {
 case 2:
 return rewrite_clj.reader.read_while.cljs$core$IFn$_invoke$arity$2((arguments[(0)]),(arguments[(1)]));
 
@@ -150,8 +150,8 @@ return rewrite_clj.reader.read_while.call(null,reader,cljs.core.complement.call(
  * Read until linebreak and include it.
  */
 rewrite_clj.reader.read_include_linebreak = (function rewrite_clj$reader$read_include_linebreak(reader){
-return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(rewrite_clj.reader.read_until.call(null,reader,(function (p1__14691_SHARP_){
-return (((p1__14691_SHARP_ == null)) || (rewrite_clj.reader.linebreak_QMARK_.call(null,p1__14691_SHARP_)));
+return [cljs.core.str.cljs$core$IFn$_invoke$arity$1(rewrite_clj.reader.read_until.call(null,reader,(function (p1__31524_SHARP_){
+return ((p1__31524_SHARP_ == null)) || (rewrite_clj.reader.linebreak_QMARK_.call(null,p1__31524_SHARP_));
 }))),cljs.core.str.cljs$core$IFn$_invoke$arity$1(rewrite_clj.reader.read_char.call(null,reader))].join('');
 });
 /**
@@ -226,10 +226,10 @@ if((c < n)){
 var temp__5455__auto__ = read_fn.call(null,reader);
 if(cljs.core.truth_(temp__5455__auto__)){
 var v = temp__5455__auto__;
-var G__14692 = (cljs.core.truth_(p_QMARK_.call(null,v))?(c + (1)):c);
-var G__14693 = cljs.core.conj.call(null,vs,v);
-c = G__14692;
-vs = G__14693;
+var G__31525 = (cljs.core.truth_(p_QMARK_.call(null,v))?(c + (1)):c);
+var G__31526 = cljs.core.conj.call(null,vs,v);
+c = G__31525;
+vs = G__31526;
 continue;
 } else {
 return rewrite_clj.reader.throw_reader.call(null,reader,"%s node expects %d value%s.",node_tag,n,((cljs.core._EQ_.call(null,n,(1)))?"":"s"));
@@ -242,7 +242,7 @@ break;
 });
 rewrite_clj.reader.re_matches_STAR_ = (function rewrite_clj$reader$re_matches_STAR_(re,s){
 var matches = re.exec(s);
-if(((!((matches == null))) && (((matches[(0)]) === s)))){
+if((!((matches == null))) && (((matches[(0)]) === s))){
 if((matches.length === (1))){
 return (matches[(0)]);
 } else {
@@ -258,10 +258,10 @@ var a = rewrite_clj.reader.re_matches_STAR_.call(null,cljs.core.re_pattern.call(
 var token = (a[(0)]);
 var ns = (a[(1)]);
 var name = (a[(2)]);
-if(((((!((void 0 === ns))) && ((ns.substring((ns.length - (2)),ns.length) === ":/")))) || (((name[(name.length - (1))]) === ":")) || (!((token.indexOf("::",(1)) === (-1)))))){
+if(((!((void 0 === ns))) && ((ns.substring((ns.length - (2)),ns.length) === ":/"))) || (((name[(name.length - (1))]) === ":")) || (!((token.indexOf("::",(1)) === (-1))))){
 return cljs.tools.reader.impl.errors.reader_error.call(null,reader,"Invalid token: ",token);
 } else {
-if(((!((ns == null))) && ((ns.length > (0))))){
+if((!((ns == null))) && ((ns.length > (0)))){
 return cljs.core.keyword.call(null,ns.substring((0),ns.indexOf("/")),name);
 } else {
 return cljs.core.keyword.call(null,token.substring((1)));

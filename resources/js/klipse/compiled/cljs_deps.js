@@ -46,9 +46,9 @@ goog.addDependency("../klipse/lang/jsx.js", ['klipse.lang.jsx'], ['goog.dom', 'k
 goog.addDependency("../klipse/args_from_element.js", ['klipse.args_from_element'], ['gadjett.collections', 'klipse.utils', 'cljs.core', 'cljs.core.async', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../cljs/spec/gen/alpha.js", ['cljs.spec.gen.alpha'], ['cljs.core']);
 goog.addDependency("../cljs/spec/alpha.js", ['cljs.spec.alpha'], ['cljs.core', 'goog.object', 'clojure.string', 'clojure.walk', 'cljs.spec.gen.alpha']);
-goog.addDependency("../cljsjs/codemirror/development/codemirror.inc.js", ['cljsjs.codemirror', 'codemirror'], [], {'foreign-lib': true});
-goog.addDependency("../cljsjs/codemirror/common/addon/edit/matchbrackets.inc.js", ['codemirror.addon.edit.matchbrackets', 'cljsjs.codemirror.addon.edit.matchbrackets'], ['codemirror'], {'foreign-lib': true});
-goog.addDependency("../cljsjs/codemirror/common/addon/edit/closebrackets.inc.js", ['codemirror.addon.edit.closebrackets', 'cljsjs.codemirror.addon.edit.closebrackets'], ['codemirror'], {'foreign-lib': true});
+goog.addDependency("../cljsjs/codemirror/development/codemirror.inc.js", ['cljsjs.codemirror', 'codemirror'], []);
+goog.addDependency("../cljsjs/codemirror/common/addon/edit/matchbrackets.inc.js", ['codemirror.addon.edit.matchbrackets', 'cljsjs.codemirror.addon.edit.matchbrackets'], ['codemirror']);
+goog.addDependency("../cljsjs/codemirror/common/addon/edit/closebrackets.inc.js", ['codemirror.addon.edit.closebrackets', 'cljsjs.codemirror.addon.edit.closebrackets'], ['codemirror']);
 goog.addDependency("../klipse/dom_utils.js", ['klipse.dom_utils'], ['goog.dom', 'cljs.core']);
 goog.addDependency("../klipse/ui/editors/editor.js", ['klipse.ui.editors.editor'], ['goog.dom', 'gadjett.collections', 'cljs.core', 'cljsjs.codemirror', 'cljsjs.codemirror.addon.edit.matchbrackets', 'clojure.string', 'cljsjs.codemirror.addon.edit.closebrackets', 'klipse.dom_utils']);
 goog.addDependency("../klipse/ui/editors/common.js", ['klipse.ui.editors.common'], ['klipse.ui.editors.editor', 'klipse.utils', 'cljs.core']);

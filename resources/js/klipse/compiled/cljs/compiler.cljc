@@ -378,25 +378,11 @@
                                 ;; but not standalone `default` variable names
                                 ;; as they're not valid ES5 - Antonio
                                 (some? (namespace var-name)))
-                           (set/difference ana/es5-allowed))
-                js-module (get-in cenv [:js-namespaces (or (namespace var-name) (name var-name))])
-                info (cond-> info
-                       (not= form 'js/-Infinity) (munge reserved))]
+                           (set/difference ana/es5-allowed))]
             (emit-wrap env
-              (case (:module-type js-module)
-                ;; Closure exports CJS exports through default property
-                :commonjs
-                (if (namespace var-name)
-                  (emits (munge (namespace var-name) reserved) "[\"default\"]." (munge (name var-name) reserved))
-                  (emits (munge (name var-name) reserved) "[\"default\"]"))
-
-                ;; Emit bracket notation for default prop access instead of dot notation
-                :es6
-                (if (and (namespace var-name) (= "default" (name var-name)))
-                  (emits (munge (namespace var-name) reserved) "[\"default\"]")
-                  (emits info))
-
-                (emits info)))))))))
+              (emits
+                (cond-> info
+                  (not= form 'js/-Infinity) (munge reserved))))))))))
 
 (defmethod emit* :var-special
   [{:keys [env var sym meta] :as arg}]
@@ -1288,6 +1274,11 @@
    (defn url-path [^File f]
      (.getPath (.toURL (.toURI f)))))
 
+(defn- build-affecting-options [opts]
+  (select-keys opts
+    [:static-fns :fn-invoke-direct :optimize-constants :elide-asserts :target
+     :cache-key :checked-arrays :language-out]))
+
 #?(:clj
    (defn compiled-by-string
      ([]
@@ -1298,7 +1289,7 @@
       (str "// Compiled by ClojureScript "
         (util/clojurescript-version)
         (when opts
-          (str " " (pr-str (ana/build-affecting-options opts))))))))
+          (str " " (pr-str (build-affecting-options opts))))))))
 
 #?(:clj
    (defn cached-core [ns ext opts]
@@ -1432,7 +1423,6 @@
                        (merge opts {:ext ext :provides [ns-name]})))
                    (let [path (.getPath (.toURL ^File dest))]
                      (swap! env/*compiler* assoc-in [::compiled-cljs path] ret))
-                   (ana/ensure-defs ns-name)
                    (let [{:keys [output-dir cache-analysis]} opts]
                      (when (and (true? cache-analysis) output-dir)
                        (ana/write-analysis-cache ns-name
@@ -1452,10 +1442,10 @@
           (fn []
             (when (and (or ana/*verbose* (:verbose opts))
                        (not (:compiler-stats opts)))
-              (util/debug-prn "Compiling" (str src) "to" (str dest)))
+              (util/debug-prn "Compiling" (str src)))
             (util/measure (and (or ana/*verbose* (:verbose opts))
                                (:compiler-stats opts))
-              (str "Compiling " (str src) " to " (str dest))
+              (str "Compiling " src)
               (let [ext (util/ext src)
                    {:keys [ns] :as ns-info} (ana/parse-ns src)]
                (if-let [cached (cached-core ns ext opts)]
@@ -1486,8 +1476,8 @@
                  (and version (not= version version')))
                (and opts
                     (not (and (io/resource "cljs/core.aot.js") (= 'cljs.core ns)))
-                    (not= (ana/build-affecting-options opts)
-                          (ana/build-affecting-options (util/build-options dest))))
+                    (not= (build-affecting-options opts)
+                          (build-affecting-options (util/build-options dest))))
                (and opts (:source-map opts)
                  (if (= (:optimizations opts) :none)
                    (not (.exists (io/file (str (.getPath dest) ".map"))))

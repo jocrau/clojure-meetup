@@ -155,27 +155,23 @@
   (str pre s))
 
 (defn- append-source-map
-  [state name source sb sm-data {:keys [output-dir asset-path source-map-timestamp] :as opts}]
+  [state name source sb sm-data {:keys [output-dir asset-path] :as opts}]
    (let [t    (.valueOf (js/Date.))
-         mn   (if name
-                (munge (str name))
+         smn  (if name
+                (string/replace (munge (str name)) "." "/")
                 (str "cljs-" t))
-         smn  (cond-> mn
-                name (string/replace "." "/"))
          ts   (.valueOf (js/Date.))
          out  (or output-dir asset-path)
-         src  (cond-> (str smn ".cljs")
-                (true? source-map-timestamp) (str "?rel=" ts)
+         src  (cond-> (str smn ".cljs?rel=" ts)
                 out (prefix (str out "/")))
-         file (cond-> (str smn ".js")
-                (true? source-map-timestamp) (str "?rel=" ts)
+         file (cond-> (str smn ".js?rel=" ts)
                 out (prefix (str out "/")))
          json (sm/encode {src (:source-map sm-data)}
                 {:lines (+ (:gen-line sm-data) 3)
                  :file  file :sources-content [source]})]
      (when (:verbose opts) (debug-prn json))
      (swap! state assoc-in
-       [:source-maps (symbol mn)] (sm/invert-reverse-map (:source-map sm-data)))
+       [:source-maps name] (sm/invert-reverse-map (:source-map sm-data)))
      (.append sb
        (str "\n//# sourceURL=" file
             "\n//# sourceMappingURL=data:application/json;base64,"
@@ -660,23 +656,14 @@
     (when (and (seq deps) emit-nil-result?)
       (.append sb "null;"))))
 
-(defn- trampoline-safe
-  "Returns a new function that calls f but discards any return value,
-  returning nil instead, thus avoiding any inadvertent trampoline continuation
-  if a function happens to be returned."
-  [f]
-  (comp (constantly nil) f))
-
 (defn- analyze-str* [bound-vars source name opts cb]
   (let [rdr        (rt/indexing-push-back-reader source 1 name)
-        cb         (trampoline-safe cb)
         eof        (js-obj)
         aenv       (ana/empty-env)
         the-ns     (or (:ns opts) 'cljs.user)
         bound-vars (cond-> (merge bound-vars {:*cljs-ns* the-ns})
                      (:source-map opts) (assoc :*sm-data* (sm-data)))]
-    (trampoline
-     (fn analyze-loop [last-ast ns]
+    ((fn analyze-loop [last-ast ns]
        (binding [env/*compiler*         (:*compiler* bound-vars)
                  ana/*cljs-ns*          ns
                  ana/*checked-arrays*   (:checked-arrays opts)
@@ -712,12 +699,12 @@
                      (cb res)
                      (let [ast (:value res)]
                        (if (#{:ns :ns*} (:op ast))
-                         ((trampoline-safe ns-side-effects) bound-vars aenv ast opts
+                         (ns-side-effects bound-vars aenv ast opts
                            (fn [res]
                              (if (:error res)
                                (cb res)
-                               (trampoline analyze-loop ast (:name ast)))))
-                         #(analyze-loop ast ns)))))
+                               (analyze-loop ast (:name ast)))))
+                         (recur ast ns)))))
                  (cb {:value last-ast}))))))) nil the-ns)))
 
 (defn analyze-str
@@ -896,15 +883,13 @@
 
 (defn- compile-str* [bound-vars source name opts cb]
   (let [rdr        (rt/indexing-push-back-reader source 1 name)
-        cb         (trampoline-safe cb)
         eof        (js-obj)
         aenv       (ana/empty-env)
         sb         (StringBuffer.)
         the-ns     (or (:ns opts) 'cljs.user)
         bound-vars (cond-> (merge bound-vars {:*cljs-ns* the-ns})
                      (:source-map opts) (assoc :*sm-data* (sm-data)))]
-    (trampoline
-     (fn compile-loop [ns]
+    ((fn compile-loop [ns]
        (binding [env/*compiler*         (:*compiler* bound-vars)
                  *eval-fn*              (:*eval-fn* bound-vars)
                  ana/*cljs-ns*          ns
@@ -943,7 +928,7 @@
                                                [node-libs (assoc ast :deps libs-to-load)])
                                              [nil ast])]
                        (if (#{:ns :ns*} (:op ast))
-                         ((trampoline-safe ns-side-effects) bound-vars aenv ast opts
+                         (ns-side-effects bound-vars aenv ast opts
                            (fn [res]
                              (if (:error res)
                                (cb res)
@@ -951,10 +936,10 @@
                                  (.append sb (with-out-str (comp/emit (:value res))))
                                  (when-not (nil? node-deps)
                                    (node-side-effects bound-vars sb node-deps ns-name (:def-emits-var opts)))
-                                 (trampoline compile-loop (:name ast))))))
+                                 (compile-loop (:name ast))))))
                          (do
                            (.append sb (with-out-str (comp/emit ast)))
-                           #(compile-loop ns))))))
+                           (recur ns))))))
                  (do
                    (when (:source-map opts)
                      (append-source-map env/*compiler*
@@ -971,7 +956,7 @@
      the ClojureScript source
 
    name (symbol or string)
-     optional, the name of the source - used as key in :source-maps
+     optional, the name of the source
 
    opts (map)
      compilation options.
@@ -1028,7 +1013,6 @@
 
 (defn- eval-str* [bound-vars source name opts cb]
   (let [rdr        (rt/indexing-push-back-reader source 1 name)
-        cb         (trampoline-safe cb)
         eof        (js-obj)
         aenv       (ana/empty-env)
         sb         (StringBuffer.)
@@ -1037,8 +1021,7 @@
                      (:source-map opts) (assoc :*sm-data* (sm-data)))
         aname      (cond-> name (:macros-ns opts) ana/macro-ns-name)]
     (when (:verbose opts) (debug-prn "Evaluating" name))
-    (trampoline
-     (fn compile-loop [ns]
+    ((fn compile-loop [ns]
        (binding [env/*compiler*         (:*compiler* bound-vars)
                  *eval-fn*              (:*eval-fn* bound-vars)
                  ana/*cljs-ns*          ns
@@ -1082,7 +1065,7 @@
                         (do
                           (.append sb
                             (with-out-str (comp/emitln (str "goog.provide(\"" (comp/munge (:name ast)) "\");"))))
-                          ((trampoline-safe ns-side-effects) true bound-vars aenv ast opts
+                          (ns-side-effects true bound-vars aenv ast opts
                             (fn [res]
                               (if (:error res)
                                 (cb res)
@@ -1093,11 +1076,11 @@
                                     (filter ana/dep-has-global-exports? (:deps ast))
                                     ns-name
                                     (:def-emits-var opts))
-                                  (trampoline compile-loop ns'))))))
+                                  (compile-loop ns'))))))
                         (do
                           (env/with-compiler-env (assoc @(:*compiler* bound-vars) :options opts)
                             (.append sb (with-out-str (comp/emit ast))))
-                          #(compile-loop ns'))))))
+                          (recur ns'))))))
                  (do
                    (when (:source-map opts)
                      (append-source-map env/*compiler*
@@ -1122,7 +1105,7 @@
                                                        (wrap-error (ana/error aenv "ERROR" cause))))]
                                            (cb res)))))]
                      (if-let [f (:cache-source opts)]
-                       ((trampoline-safe f) evalm complete)
+                       (f evalm complete)
                        (complete {:value nil}))))))))))
       (:*cljs-ns* bound-vars))))
 
@@ -1136,7 +1119,7 @@
     the ClojureScript source
 
   name (symbol or string)
-    optional, the name of the source - used as key in :source-maps
+    optional, the name of the source
 
   opts (map)
     compilation options.
