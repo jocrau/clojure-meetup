@@ -1,5 +1,6 @@
 == BMI Calculator
 
+This example is a modified version of the BMI Calculator found on the http://reagent-project.github.io[Reagent demo site].
 
 [source]
 ----

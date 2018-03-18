@@ -10,12 +10,16 @@ include::reagent.adoc[]
 
 include::bmi.adoc[]
 include::echarts.adoc[]
-include::todo.adoc[]
+//include::todo.adoc[]
 
 :leveloffset: 0
 
 == Links
 
-http://escherize.com/cljsfiddle/[Try Reagent]
+- https://reactjs.org[React Home Page]
+- http://escherize.com/cljsfiddle/[Try Reagent]
+- http://reagent-project.github.io[Reagent Demo]
+- https://clojure.org[The Clojure Programming Language]
+- https://ecomfe.github.io/echarts-examples/public/index.html[ECharts Library]
 
 include::footer.adoc[]

@@ -8,11 +8,8 @@
 (enable-console-print!)
 
 (def tabs
-  {:bmi    {:label "BMI Calculator"
-            :content [bmi-component]
-                   #_[slider {:min       30
-                            :max       150
-                            :on-change (fn [e] (js/console.info (.. e -target -value)))}]}
+  {:bmi    {:label   "BMI Calculator"
+            :content [bmi-component]}
    :charts {:label   "Charts"
             :content [chart]}
    :todo   {:label   "ToDo App"
@@ -25,10 +22,8 @@
    (doall
      (map (fn [[tab-id {:keys [label]}]]
             ^{:key tab-id}
-            [:li
-             {:class (when (= @current-tab-id tab-id) "active")}
-             [:a
-              {:on-click #(reset! current-tab-id tab-id)}
+            [:li {:class (when (= @current-tab-id tab-id) "active")}
+             [:a {:on-click #(reset! current-tab-id tab-id)}
               label]])
           tabs))])
 

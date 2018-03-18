@@ -863,7 +863,6 @@ label[for='toggle-all'] {
 <ul class="sectlevel2">
 <li><a href="#_bmi_calculator">BMI Calculator</a></li>
 <li><a href="#_charts_component_lifecycle">Charts (Component Lifecycle)</a></li>
-<li><a href="#_todo_app">ToDo App</a></li>
 </ul>
 </li>
 <li><a href="#_links">Links</a></li>
@@ -918,20 +917,45 @@ label[for='toggle-all'] {
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>A simple component:</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-reagent" data-lang="reagent">[:div "Hello World!!"]</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Let&#8217;s create a sequence of components:</p>
+</div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-reagent" data-lang="reagent">[:ul (map (fn [name]
-            [:li name])
-          ["Jochen" "Alice" "Bob"])]</code></pre>
+<pre class="highlight"><code class="language-clojure" data-lang="clojure">(for [name ["Jochen" "Alice" "Bob"]]
+        [:li name])</code></pre>
 </div>
 </div>
 <div class="paragraph">
-<p>Create some elements yourself:</p>
+<p>And use them as content of another component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">[:ul (for [name ["Jochen" "Alice" "Bob"]]
+        [:li name])]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Components in Reagent are pure functions that return components:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">(defn hello-message [name]
+  [:div "Hello " name "!"])
+
+[hello-message "Jochen"]</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Compare React JSX with Clojure Reagent:</p>
 </div>
 <table class="tableblock frame-none grid-none spread">
 <colgroup>
@@ -970,6 +994,40 @@ ReactDOM.render(
 </tr>
 </tbody>
 </table>
+<div class="paragraph">
+<p>A component can hold a local state:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">(defn input-field []
+  (let [state (r/atom "")]
+    (fn []
+      [:input {:type      "text"
+               :value     (deref state)
+               :on-change (fn [event]
+                            (let [new-value (.. event -target -value)]
+                              (js/console.info new-value)
+                              (reset! state new-value)))}])))</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Functions can be passed to a component:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">(defn input-field [persist-value]
+  (let [state (r/atom "")]
+    (fn [persist-value]
+      [:input {:type        "text"
+               :value       (deref state)
+               :on-change   #(reset! state (.. % -target -value))
+               :on-key-down #(when (= (.-key %) "Enter")
+                               (doto % (.stopPropagation) (.. -target blur)))
+               :on-blur     #(persist-value (deref state))}])))
+
+[input-field (fn [value] (js/alert (str "Persisted: " value)))]</code></pre>
+</div>
+</div>
 </div>
 </div>
 <div class="sect1">
@@ -977,6 +1035,9 @@ ReactDOM.render(
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_bmi_calculator">BMI Calculator</h3>
+<div class="paragraph">
+<p>This example is a modified version of the BMI Calculator found on the <a href="http://reagent-project.github.io">Reagent demo site</a>.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
@@ -1072,119 +1133,29 @@ ReactDOM.render(
 </div>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_todo_app">ToDo App</h3>
-<div class="listingblock">
-<div class="content">
-<pre class="highlight"><code class="language-clojure" data-lang="clojure">(require '[reagent.core :as r])
-
-(defonce todos (r/atom (sorted-map)))
-
-(defonce counter (r/atom 0))
-
-(defn add-todo [text]
-      (let [id (swap! counter inc)]
-           (swap! todos assoc id {:id id :title text :done false})))
-
-(defn toggle [id] (swap! todos update-in [id :done] not))
-(defn save [id title] (swap! todos assoc-in [id :title] title))
-(defn delete [id] (swap! todos dissoc id))
-
-(defn mmap [m f a] (-&gt;&gt; m (f a) (into (empty m))))
-(defn complete-all [v] (swap! todos mmap map #(assoc-in % [1 :done] v)))
-(defn clear-done [] (swap! todos mmap remove #(get-in % [1 :done])))
-
-(defn todo-input [{:keys [title on-save on-stop]}]
-      (let [val (r/atom title)
-            stop #(do (reset! val "")
-                      (if on-stop (on-stop)))
-            save #(let [v (-&gt; @val str clojure.string/trim)]
-                       (if-not (empty? v) (on-save v))
-                       (stop))]
-           (fn [{:keys [id class placeholder]}]
-               [:input {:type "text" :value @val
-                        :id id :class class :placeholder placeholder
-                        :on-blur save
-                        :on-change #(reset! val (-&gt; % .-target .-value))
-                        :on-key-down #(case (.-which %)
-                                            13 (save)
-                                            27 (stop)
-                                            nil)}])))
-
-(def todo-edit (with-meta todo-input
-                          {:component-did-mount #(.focus (r/dom-node %))}))
-
-(defn todo-stats [{:keys [filt active done]}]
-      (let [props-for (fn [name]
-                          {:class (if (= name @filt) "selected")
-                           :on-click #(reset! filt name)})]
-           [:div
-            [:span#todo-count
-             [:strong active] " " (case active 1 "item" "items") " left"]
-            [:ul#filters
-             [:li [:a (props-for :all) "All"]]
-             [:li [:a (props-for :active) "Active"]]
-             [:li [:a (props-for :done) "Completed"]]]
-            (when (pos? done)
-                  [:button#clear-completed {:on-click clear-done}
-                   "Clear completed " done])]))
-
-(defn todo-item []
-      (let [editing (r/atom false)]
-           (fn [{:keys [id done title]}]
-               [:li {:class (str (if done "completed ")
-                                 (if @editing "editing"))}
-                [:div.view
-                 [:input.toggle {:type "checkbox" :checked done
-                                 :on-change #(toggle id)}]
-                 [:label {:on-double-click #(reset! editing true)} title]
-                 [:button.destroy {:on-click #(delete id)}]]
-                (when @editing
-                      [todo-edit {:class "edit" :title title
-                                  :on-save #(save id %)
-                                  :on-stop #(reset! editing false)}])])))
-
-(defn todo-app []
-      (let [filt (r/atom :all)]
-           (fn []
-               (let [items (vals @todos)
-                     done (-&gt;&gt; items (filter :done) count)
-                     active (- (count items) done)]
-                    [:div
-                     [:section#todoapp
-                      [:header#header
-                       [:h1 "todos"]
-                       [todo-input {:id "new-todo"
-                                    :placeholder "What needs to be done?"
-                                    :on-save add-todo}]]
-                      (when (-&gt; items count pos?)
-                            [:div
-                             [:section#main
-                              [:input#toggle-all {:type "checkbox" :checked (zero? active)
-                                                  :on-change #(complete-all (pos? active))}]
-                              [:label {:for "toggle-all"} "Mark all as complete"]
-                              [:ul#todo-list
-                               (for [todo (filter (case @filt
-                                                        :active (complement :done)
-                                                        :done :done
-                                                        :all identity) items)]
-                                    ^{:key (:id todo)} [todo-item todo])]]
-                             [:footer#footer
-                              [todo-stats {:active active :done done :filt filt}]]])]
-                     [:footer#info
-                      [:p "Double-click to edit a todo"]]]))))
-
-(r/render [todo-app] js/klipse-container)</code></pre>
-</div>
-</div>
-</div>
 </div>
 </div>
 <div class="sect1">
 <h2 id="_links">Links</h2>
 <div class="sectionbody">
-<div class="paragraph">
+<div class="ulist">
+<ul>
+<li>
+<p><a href="https://reactjs.org">React Home Page</a></p>
+</li>
+<li>
 <p><a href="http://escherize.com/cljsfiddle/">Try Reagent</a></p>
+</li>
+<li>
+<p><a href="http://reagent-project.github.io">Reagent Demo</a></p>
+</li>
+<li>
+<p><a href="https://clojure.org">The Clojure Programming Language</a></p>
+</li>
+<li>
+<p><a href="https://ecomfe.github.io/echarts-examples/public/index.html">ECharts Library</a></p>
+</li>
+</ul>
 </div>
 </div>
 </div>

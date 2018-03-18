@@ -39,7 +39,7 @@
 
   (swap! specification assoc-in [:chart :series 0 :data] [15 17 20 10 12 22 25])
 
-  (swap! specification assoc-in [:chart :series 1] {:name "Foo" :type "line" :data [6 17 36 10 10 20 25]})
+  (swap! specification assoc-in [:chart :series 1] {:name "Foo" :type "bar" :data [6 17 36 10 10 20 25]})
 
   (swap! specification assoc :chart
          {:title {:text "ECharts Gauge Example"}

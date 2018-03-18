@@ -5,19 +5,40 @@
 (require '[reagent.core :as r])
 ----
 
+A simple component:
+
 [source,reagent]
 ----
 [:div "Hello World!!"]
 ----
 
-[source,reagent]
+Let's create a sequence of components:
+
+[source]
 ----
-[:ul (map (fn [name]
-            [:li name])
-          ["Jochen" "Alice" "Bob"])]
+(for [name ["Jochen" "Alice" "Bob"]]
+        [:li name])
 ----
 
-Create some elements yourself:
+And use them as content of another component:
+
+[source,reagent]
+----
+[:ul (for [name ["Jochen" "Alice" "Bob"]]
+        [:li name])]
+----
+
+Components in Reagent are pure functions that return components:
+
+[source,reagent]
+----
+(defn hello-message [name]
+  [:div "Hello " name "!"])
+
+[hello-message "Jochen"]
+----
+
+Compare React JSX with Clojure Reagent:
 
 [cols=2,frame=none,grid=none,stripes=none]
 |===
@@ -47,3 +68,36 @@ a|
     js/klipse-container)
 ----
 |===
+
+A component can hold a local state:
+
+[source,reagent]
+----
+(defn input-field []
+  (let [state (r/atom "")]
+    (fn []
+      [:input {:type      "text"
+               :value     (deref state)
+               :on-change (fn [event]
+                            (let [new-value (.. event -target -value)]
+                              (js/console.info new-value)
+                              (reset! state new-value)))}])))
+----
+
+Functions can be passed to a component:
+
+[source,reagent]
+----
+(defn input-field [persist-value]
+  (let [state (r/atom "")]
+    (fn [persist-value]
+      [:input {:type        "text"
+               :value       (deref state)
+               :on-change   #(reset! state (.. % -target -value))
+               :on-key-down #(when (= (.-key %) "Enter")
+                               (doto % (.stopPropagation) (.. -target blur)))
+               :on-blur     #(persist-value (deref state))}])))
+
+[input-field (fn [value] (js/alert (str "Persisted: " value)))]
+----
+
