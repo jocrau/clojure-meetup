@@ -15,7 +15,7 @@
 (defonce data-processing-ch (chan (sliding-buffer 1) process-data))
 
 (defn request-wind-data []
-  (go (let [response (<! (http/get (str "http://stationdata.wunderground.com/cgi-bin/stationlookup?station=" station-id "&units=english&v=2.0&format=json")))]
+  (go (let [response (<! (http/get (str "https://stationdata.wunderground.com/cgi-bin/stationlookup?station=" station-id "&units=english&v=2.0&format=json")))]
         (>! data-processing-ch response))))
 
 (defonce running (atom false))
