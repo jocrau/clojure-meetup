@@ -5,7 +5,7 @@
     [cljs-http.client :as http]
     [cljs.core.async :refer [<! >! chan sliding-buffer pipe timeout close!]]))
 
-(def station-id "KMAAMHER21")
+(def station-id "KMAAMHER12")
 
 (def process-data
   (comp
