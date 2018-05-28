@@ -4,7 +4,7 @@
 
 (map inc (range 10))
 
-(filter even? (map inc (range 10)))
+(take 10 (filter even? (map inc (range))))
 
 (reduce + (filter even? (map inc (range 10))))
 

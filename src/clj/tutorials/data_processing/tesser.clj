@@ -38,8 +38,7 @@
                                      (recur (rest tuple-collections)
                                             (+ rank (count tuples))
                                             (into result (map (fn [tuple]
-                                                                (assoc tuple
-                                                                  :rank rank))
+                                                                (assoc tuple :rank rank))
                                                               tuples)))
                                      ((:post-combiner downstream identity) result))))}))))
 
