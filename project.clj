@@ -29,7 +29,7 @@
                  [enlive "1.1.6"]
                  [de.ubercode.clostache/clostache "1.4.0"]
 
-                 [reagent "0.8.0-alpha2"]
+                 [reagent "0.8.1"]
 
                  ;; processing
                  [tesser.core "1.0.2"]
