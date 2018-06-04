@@ -37,7 +37,8 @@
                  [clojure-csv/clojure-csv "2.0.2"]
                  [iota "1.1.3"]
 
-                 [org.clojure/tools.namespace "0.2.11"]]
+                 [org.clojure/tools.namespace "0.2.11"]
+                 [com.taoensso/timbre "4.10.0"]]
 
   :profiles {:dev {:dependencies [[figwheel-sidecar "0.5.15"]
                                   [binaryage/devtools "0.9.9"]
