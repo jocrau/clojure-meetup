@@ -69,7 +69,7 @@ goog.addDependency("../reagent/impl/util.js", ['reagent.impl.util'], ['reagent.i
 goog.addDependency("../reagent/impl/batching.js", ['reagent.impl.batching'], ['reagent.impl.util', 'reagent.interop', 'cljs.core', 'reagent.debug', 'clojure.string']);
 goog.addDependency("../reagent/ratom.js", ['reagent.ratom'], ['reagent.impl.util', 'cljs.core', 'reagent.impl.batching', 'clojure.set', 'reagent.debug']);
 goog.addDependency("../cljsjs/react/development/react.inc.js", ['react', 'cljsjs.react'], [], {'foreign-lib': true});
-goog.addDependency("../cljsjs/create-react-class/development/create-react-class.inc.js", ['cljsjs.create_react_class', 'create_react_class'], ['react'], {'foreign-lib': true});
+goog.addDependency("../cljsjs/create-react-class/development/create-react-class.inc.js", ['create_react_class', 'cljsjs.create_react_class'], ['react'], {'foreign-lib': true});
 goog.addDependency("../reagent/impl/component.js", ['reagent.impl.component'], ['create_react_class', 'module$Users$jocrau$dev$workspaces$clojure_meetup$node_modules$react$index', 'reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.batching', 'reagent.debug']);
 goog.addDependency("../reagent/impl/template.js", ['reagent.impl.template'], ['module$Users$jocrau$dev$workspaces$clojure_meetup$node_modules$react$index', 'reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug', 'clojure.string', 'clojure.walk']);
 goog.addDependency("../node_modules/fbjs/lib/ExecutionEnvironment.js", ['module$Users$jocrau$dev$workspaces$clojure_meetup$node_modules$fbjs$lib$ExecutionEnvironment'], []);
@@ -89,7 +89,6 @@ goog.addDependency("../node_modules/react-dom/cjs/react-dom.development.js", ['m
 goog.addDependency("../node_modules/react-dom/index.js", ['module$Users$jocrau$dev$workspaces$clojure_meetup$node_modules$react_dom$index'], ['module$Users$jocrau$dev$workspaces$clojure_meetup$node_modules$react_dom$cjs$react_dom_production_min', 'module$Users$jocrau$dev$workspaces$clojure_meetup$node_modules$react_dom$cjs$react_dom_development']);
 goog.addDependency("../reagent/dom.js", ['reagent.dom'], ['reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'module$Users$jocrau$dev$workspaces$clojure_meetup$node_modules$react_dom$index', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'reagent.debug']);
 goog.addDependency("../reagent/core.js", ['reagent.core'], ['module$Users$jocrau$dev$workspaces$clojure_meetup$node_modules$react$index', 'reagent.impl.util', 'reagent.interop', 'reagent.ratom', 'cljs.core', 'reagent.impl.template', 'reagent.impl.batching', 'reagent.impl.component', 'reagent.debug', 'reagent.dom']);
-goog.addDependency("../tutorials/react_frontend/todo.js", ['tutorials.react_frontend.todo'], ['reagent.core', 'cljs.core']);
 goog.addDependency("../no/en/core.js", ['no.en.core'], ['cljs.core', 'goog.crypt.base64', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../com/cognitect/transit/util.js", ['com.cognitect.transit.util'], ['goog.object']);
 goog.addDependency("../com/cognitect/transit/eq.js", ['com.cognitect.transit.eq'], ['com.cognitect.transit.util']);
@@ -106,6 +105,15 @@ goog.addDependency("../cljs_http/util.js", ['cljs_http.util'], ['no.en.core', 'g
 goog.addDependency("../cljs_http/core.js", ['cljs_http.core'], ['goog.net.Jsonp', 'goog.net.XhrIo', 'cljs.core', 'cljs_http.util', 'cljs.core.async', 'goog.net.EventType', 'clojure.string', 'goog.net.ErrorCode']);
 goog.addDependency("../cljs_http/client.js", ['cljs_http.client'], ['cljs_http.core', 'no.en.core', 'goog.Uri', 'cljs.core', 'cljs_http.util', 'cljs.core.async', 'clojure.string', 'cljs.reader']);
 goog.addDependency("../tutorials/react_frontend/endpoint.js", ['tutorials.react_frontend.endpoint'], ['cljs.core', 'cljs_http.client', 'cljs.core.async']);
-goog.addDependency("../tutorials/react_frontend/echarts.js", ['tutorials.react_frontend.echarts'], ['reagent.core', 'cljs.core', 'cljs.core.async', 'tutorials.react_frontend.endpoint']);
+goog.addDependency("../taoensso/truss/impl.js", ['taoensso.truss.impl'], ['cljs.core', 'clojure.set']);
+goog.addDependency("../taoensso/truss.js", ['taoensso.truss'], ['cljs.core', 'taoensso.truss.impl']);
+goog.addDependency("../cljs/test.js", ['cljs.test'], ['cljs.core', 'cljs.pprint', 'clojure.string']);
+goog.addDependency("../taoensso/encore.js", ['taoensso.encore'], ['goog.net.XhrIoPool', 'cljs.tools.reader.edn', 'taoensso.truss', 'goog.net.XhrIo', 'goog.string', 'goog.Uri.QueryData', 'cljs.core', 'cljs.test', 'goog.object', 'goog.string.StringBuffer', 'goog.net.EventType', 'clojure.set', 'goog.structs', 'goog.string.format', 'clojure.string', 'cljs.reader', 'goog.events', 'goog.net.ErrorCode']);
+goog.addDependency("../taoensso/timbre/appenders/core.js", ['taoensso.timbre.appenders.core'], ['cljs.core', 'clojure.string', 'taoensso.encore']);
+goog.addDependency("../taoensso/timbre.js", ['taoensso.timbre'], ['cljs.core', 'taoensso.timbre.appenders.core', 'clojure.string', 'taoensso.encore']);
+goog.addDependency("../tutorials/react_frontend/gauge.js", ['tutorials.react_frontend.gauge'], ['reagent.core', 'cljs.core', 'taoensso.timbre']);
+goog.addDependency("../tutorials/react_frontend/weather.js", ['tutorials.react_frontend.weather'], ['reagent.core', 'cljs.core', 'cljs.core.async', 'tutorials.react_frontend.endpoint', 'tutorials.react_frontend.gauge', 'taoensso.timbre']);
+goog.addDependency("../tutorials/react_frontend/todo.js", ['tutorials.react_frontend.todo'], ['reagent.core', 'cljs.core']);
+goog.addDependency("../tutorials/react_frontend/echarts.js", ['tutorials.react_frontend.echarts'], ['reagent.core', 'cljs.core']);
 goog.addDependency("../tutorials/react_frontend/bmi.js", ['tutorials.react_frontend.bmi'], ['reagent.core', 'cljs.core']);
-goog.addDependency("../tutorials/react_frontend/app.js", ['tutorials.react_frontend.app'], ['tutorials.react_frontend.todo', 'reagent.core', 'cljs.core', 'tutorials.react_frontend.echarts', 'tutorials.react_frontend.bmi']);
+goog.addDependency("../tutorials/react_frontend/app.js", ['tutorials.react_frontend.app'], ['tutorials.react_frontend.weather', 'tutorials.react_frontend.todo', 'reagent.core', 'cljs.core', 'tutorials.react_frontend.echarts', 'tutorials.react_frontend.bmi']);

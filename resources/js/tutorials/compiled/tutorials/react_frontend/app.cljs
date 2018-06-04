@@ -3,17 +3,21 @@
     [reagent.core :as r]
     [tutorials.react-frontend.bmi :refer [bmi-component slider]]
     [tutorials.react-frontend.todo :refer [todo-app]]
-    [tutorials.react-frontend.echarts :refer [chart]]))
+    [tutorials.react-frontend.echarts :refer [chart]]
+    [tutorials.react-frontend.weather :refer [dashboard]]))
 
 (enable-console-print!)
 
+
 (def tabs
-  {:bmi    {:label   "BMI Calculator"
-            :content [bmi-component]}
-   :charts {:label   "Charts"
-            :content [chart]}
-   :todo   {:label   "ToDo App"
-            :content [todo-app]}})
+  {:bmi       {:label   "BMI Calculator"
+               :content [bmi-component]}
+   :todo      {:label   "ToDo App"
+               :content [todo-app]}
+   :charts    {:label   "Charts"
+               :content [chart]}
+   :dashboard {:label   "Dashboard"
+               :content [dashboard]}})
 
 (defonce current-tab-id (r/atom (ffirst tabs)))
 
