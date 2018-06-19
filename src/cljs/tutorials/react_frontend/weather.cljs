@@ -6,6 +6,7 @@
     [taoensso.timbre :refer-macros [log trace debug info warn error fatal report spy]]
     [cljs.core.async :refer [<! >! chan sliding-buffer pipe timeout close! pub sub unsub unsub-all]]
     [tutorials.react-frontend.gauge :refer [gauge]]
+    [tutorials.react-frontend.chart :refer [timeline]]
     [tutorials.react-frontend.endpoint :as endpoint]))
 
 (defn station-uri [station-id]
@@ -18,29 +19,47 @@
           (map #(-> % :body :stations first second)))))
 
 (def stations
-  [{:id "KMAAMHER12" :name "North Amherst"}
-   {:id "KMAADAMS4" :name "Mt. Greylock"}
-   {:id "KCASANFR131" :name "San Francisco"}])
+  [{:id "KMAAMHER21" :name "North Amherst"}
+   {:id "KCASANFR131" :name "San Francisco"}
+   {:id "KMACHESH5" :name "Mt. Greylock"}])
 
-(defn wind-gauge [{:keys [id name] :as station}]
-  (let [channel    (processing-ch)
-        wind-speed (r/atom 0)]
+(defn interval [delta]
+  (let [now   (js/Date.)
+        end   (js/Date. (.setSeconds (js/Date.) (+ (.getSeconds now) 5)))
+        start (js/Date. (.setSeconds (js/Date.) (- (.getSeconds end) delta)))]
+    {:start start :end end}))
+
+(defn data-point [[timestamp data]]
+  {:value [timestamp (:wind_speed data)]})
+
+(defn weather-widget [{:keys [id name] :as station}]
+  (let [channel      (processing-ch)
+        data         (r/atom (sorted-map))
+        send-requests (atom true)]
     (r/create-class
-      {:reagent-render      (fn [this]
-                              [:div
-                               [gauge {:title (str name " (" id ")") :max 20} @wind-speed]
-                               [gauge {:title (str name " (" id ")") :max 20} @wind-speed]])
-       :component-did-mount (fn [this]
-                              (go (while true
-                                    (endpoint/request-data (station-uri id) channel)
-                                    (<! (timeout 2000))))
-                              (go (while true
-                                    (when-let [conditions (<! channel)]
-                                      (reset! wind-speed (:wind_speed conditions))))))})))
+      {:reagent-render         (fn [this]
+                                 (let [[timestamp current-conditions] (last @data)
+                                       wind-speed (:wind_speed current-conditions 0)]
+                                   [:div
+                                    [:h5 (str name " (" id ")")]
+                                    [gauge {:max 20 :value wind-speed}]
+                                    [timeline {:interval (interval 60) :data (map data-point @data)}]]))
+       :component-did-mount    (fn [this]
+                                 (js/console.info "component-did-mount" id)
+                                 (go (while @send-requests
+                                       (endpoint/request-data (station-uri id) channel)
+                                       (<! (timeout 2000))))
+                                 (go (while @send-requests
+                                       (when-let [conditions (<! channel)]
+                                         (swap! data #(assoc % (js/Date. (* (:updated conditions) 1000)) conditions))))))
+       :component-will-unmount (fn [this]
+                                 (js/console.debug "component-will-unmount" id)
+                                 (reset! send-requests false))})))
 
 (defn dashboard []
-  [:div.row (map-indexed (fn [idx station]
-                           ^{:key idx} [:div.col-md-3
-                                        [wind-gauge station]])
-                         stations)])
+  [:div.row (map (fn [station]
+                   ^{:key (:id station)}
+                   [:div.col-md-3
+                    [weather-widget station]])
+                 stations)])
 

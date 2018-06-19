@@ -3,15 +3,28 @@
     [reagent.core :as r]
     [taoensso.timbre :refer-macros [log trace debug info warn error fatal report spy]]))
 
-(defn gauge [{:keys [title size max] :or {size "300px" max 10} :as props} value]
-  (let [spec {:title  {:text title}
-              :series [{:type "gauge" :min 0 :max max :data [0]}]}]
-    (r/create-class
-      {:reagent-render       (fn [this]
-                               [:span {:style {:width size :height size}}])
-       :component-did-mount  (fn [this]
-                               (doto (js/echarts.init (r/dom-node this))
-                                 (.setOption (clj->js spec))))
-       :component-did-update (fn [this [_ _ value]]
-                               (doto (js/echarts.getInstanceByDom (r/dom-node this))
-                                 (.setOption (clj->js (assoc-in spec [:series 0 :data] [value])) true)))})))
+(defn props->option [{:keys [value max] :as props}]
+  (clj->js {:series [{:type "gauge" :min 0 :max max :data [value]}]}))
+
+(defn gauge [{:keys [size] :or {size "300px" max 10 value 0} :as props}]
+  (r/create-class
+    {:reagent-render               (fn [this]
+                                     [:span {:style {:width size :height size}}])
+     :component-did-mount          (fn [this]
+                                     (js/console.debug "component-did-mount")
+                                     (doto (js/echarts.init (r/dom-node this))
+                                       (.setOption (props->option props))))
+     :component-will-unmount       (fn [this]
+                                     (js/console.debug "component-will-unmount")
+                                     (.dispose (js/echarts.getInstanceByDom (r/dom-node this))))
+     :should-component-update      (fn [this [_ old-props] [_ new-props]]
+                                     (js/console.debug "should-component-update" (clj->js old-props) (clj->js new-props))
+                                     true)
+     :component-will-receive-props (fn [this [_ new-props]]
+                                     (js/console.debug "component-will-receive-props" (clj->js new-props)))
+     :component-will-update        (fn [this [_ new-props]]
+                                     (js/console.debug "component-will-update" (clj->js new-props)))
+     :component-did-update         (fn [this [_ old-props]]
+                                     (js/console.debug "component-did-update" (clj->js old-props))
+                                     (doto (js/echarts.getInstanceByDom (r/dom-node this))
+                                       (.setOption (props->option old-props) true)))}))

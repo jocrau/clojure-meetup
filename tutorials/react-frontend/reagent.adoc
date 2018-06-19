@@ -86,7 +86,7 @@ class InputField extends React.Component {
     return (
       <input
         value={this.state.value}
-        onChange={(e) => this.setState({value: "foo"})}
+        onChange={(e) => this.setState({value: e.target.value})}
         />
     );
   }
@@ -98,7 +98,22 @@ ReactDOM.render(
 );
 ----
 
-.Reagent
+.Reagent (long)
+[source,reagent]
+----
+(defn input-field [props]
+  (let [state (r/atom (:initial-value props))]
+    (r/create-class
+      {:reagent-render (fn [props]
+                         [:input {:value     (deref state)
+                                  :on-change (fn [event]
+                                               (let [new-value (.. event -target -value)]
+                                                 (reset! state new-value)))}])})))
+
+[input-field {:initial-value "Default Text"}]
+----
+
+.Reagent (short)
 [source,reagent]
 ----
 (defn input-field [props]
@@ -107,7 +122,6 @@ ReactDOM.render(
       [:input {:value     (deref state)
                :on-change (fn [event]
                             (let [new-value (.. event -target -value)]
-                              (js/console.info new-value)
                               (reset! state new-value)))}])))
 
 [input-field {:initial-value "Default Text"}]
