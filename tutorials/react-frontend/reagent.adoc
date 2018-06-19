@@ -2,7 +2,8 @@
 
 [source]
 ----
-(require '[reagent.core :as r])
+(ns tutorials.react-frontend
+  (:require [reagent.core :as r]))
 ----
 
 A simple component:
@@ -42,9 +43,8 @@ Compare React JSX with Clojure Reagent:
 
 [cols=2,frame=none,grid=none,stripes=none]
 |===
-h|React JSX
-h|Reagent
 a|
+.React JSX
 [source,jsx]
 ----
 function HelloMessage(props) {
@@ -57,6 +57,7 @@ ReactDOM.render(
 );
 ----
 a|
+.Reagent
 [source]
 ----
 (defn hello-message [props]
@@ -71,17 +72,45 @@ a|
 
 A component can hold a local state:
 
+
+.React JSX
+[source,jsx]
+----
+class InputField extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: props.initialValue};
+  }
+
+  render() {
+    return (
+      <input
+        value={this.state.value}
+        onChange={(e) => this.setState({value: "foo"})}
+        />
+    );
+  }
+}
+
+ReactDOM.render(
+  <InputField initialValue="Default Text" />,
+  klipse_container
+);
+----
+
+.Reagent
 [source,reagent]
 ----
-(defn input-field []
-  (let [state (r/atom "")]
-    (fn []
-      [:input {:type      "text"
-               :value     (deref state)
+(defn input-field [props]
+  (let [state (r/atom (:initial-value props))]
+    (fn [props]
+      [:input {:value     (deref state)
                :on-change (fn [event]
                             (let [new-value (.. event -target -value)]
                               (js/console.info new-value)
                               (reset! state new-value)))}])))
+
+[input-field {:initial-value "Default Text"}]
 ----
 
 Functions can be passed to a component:
@@ -91,8 +120,7 @@ Functions can be passed to a component:
 (defn input-field [persist-value]
   (let [state (r/atom "")]
     (fn [persist-value]
-      [:input {:type        "text"
-               :value       (deref state)
+      [:input {:value       (deref state)
                :on-change   #(reset! state (.. % -target -value))
                :on-key-down #(when (= (.-key %) "Enter")
                                (doto % (.stopPropagation) (.. -target blur)))
