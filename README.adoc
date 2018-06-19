@@ -34,6 +34,7 @@ image::resources/img/file-watchers.png[]
 
 - Install (Node)[https://nodejs.org/en/download/]
 - Install Mermaid `yarn global add mermaid@7.0.11`
+- Install asciidoctor-diagram: `gem install asciidoctor-diagram`
 
 == Thanks!
 
