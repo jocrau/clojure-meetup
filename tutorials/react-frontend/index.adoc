@@ -18,6 +18,7 @@ include::todo.adoc[]
 
 - https://reactjs.org[React Home Page]
 - http://escherize.com/cljsfiddle/[Try Reagent]
+- https://evilmartians.com/chronicles/optimizing-react-virtual-dom-explained[Optimizing React: Virtual DOM explained]
 - http://reagent-project.github.io[Reagent Demo]
 - https://clojure.org[The Clojure Programming Language]
 - https://ecomfe.github.io/echarts-examples/public/index.html[ECharts Library]

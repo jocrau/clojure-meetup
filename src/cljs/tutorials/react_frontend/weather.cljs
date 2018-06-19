@@ -18,10 +18,10 @@
           (filter #(= (:status %) 200))
           (map #(-> % :body :stations first second)))))
 
-(def stations
-  [{:id "KMAAMHER21" :name "North Amherst"}
-   {:id "KCASANFR131" :name "San Francisco"}
-   {:id "KMACHESH5" :name "Mt. Greylock"}])
+(defonce stations
+         (r/atom [{:id "KMAAMHER21" :name "North Amherst"}
+                  {:id "KCASANFR131" :name "San Francisco"}
+                  {:id "KMACHESH5" :name "Mt. Greylock"}]))
 
 (defn interval [delta]
   (let [now   (js/Date.)
@@ -33,8 +33,8 @@
   {:value [timestamp (:wind_speed data)]})
 
 (defn weather-widget [{:keys [id name] :as station}]
-  (let [channel      (processing-ch)
-        data         (r/atom (sorted-map))
+  (let [channel       (processing-ch)
+        data          (r/atom (sorted-map))
         send-requests (atom true)]
     (r/create-class
       {:reagent-render         (fn [this]
@@ -45,7 +45,7 @@
                                     [gauge {:max 20 :value wind-speed}]
                                     [timeline {:interval (interval 60) :data (map data-point @data)}]]))
        :component-did-mount    (fn [this]
-                                 (js/console.info "component-did-mount" id)
+                                 (js/console.info "weather-widget did mount" id)
                                  (go (while @send-requests
                                        (endpoint/request-data (station-uri id) channel)
                                        (<! (timeout 2000))))
@@ -53,7 +53,7 @@
                                        (when-let [conditions (<! channel)]
                                          (swap! data #(assoc % (js/Date. (* (:updated conditions) 1000)) conditions))))))
        :component-will-unmount (fn [this]
-                                 (js/console.debug "component-will-unmount" id)
+                                 (js/console.debug "weather-widget will unmount" id)
                                  (reset! send-requests false))})))
 
 (defn dashboard []
@@ -61,5 +61,5 @@
                    ^{:key (:id station)}
                    [:div.col-md-3
                     [weather-widget station]])
-                 stations)])
+                 @stations)])
 
