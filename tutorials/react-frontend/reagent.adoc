@@ -70,8 +70,9 @@ a|
 ----
 |===
 
-A component can hold a local state:
+== Stateful Components
 
+A component can hold a local state:
 
 .React JSX
 [source,jsx]
@@ -127,19 +128,24 @@ ReactDOM.render(
 [input-field {:initial-value "Default Text"}]
 ----
 
-Functions can be passed to a component:
+What happens if a child component needs to update the state of its parent component? In this case a function can be passed to a component:
 
 [source,reagent]
 ----
-(defn input-field [persist-value]
+(defn input-field [{:keys [persist-value] :as props}]
   (let [state (r/atom "")]
-    (fn [persist-value]
+    (fn [props]
       [:input {:value       (deref state)
                :on-change   #(reset! state (.. % -target -value))
                :on-key-down #(when (= (.-key %) "Enter")
                                (doto % (.stopPropagation) (.. -target blur)))
                :on-blur     #(persist-value (deref state))}])))
 
-[input-field (fn [value] (js/alert (str "Persisted: " value)))]
+[input-field {:persist-value (fn [value] (js/alert (str "Persisted: " value)))}]
 ----
 
+== Life-Cycle of a React Component
+
+image::lifecycle.png[Virtual DOM,align="center",caption="https://medium.com/@rajaraodv/the-inner-workings-of-virtual-dom-666ee7ad47cf"]
+
+(https://medium.com/@rajaraodv/the-inner-workings-of-virtual-dom-666ee7ad47cf)

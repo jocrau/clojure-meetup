@@ -871,6 +871,8 @@ label[for='toggle-all'] {
 <ul class="sectlevel1">
 <li><a href="#_react">React</a></li>
 <li><a href="#_reagent">Reagent</a></li>
+<li><a href="#_stateful_components">Stateful Components</a></li>
+<li><a href="#_life_cycle_of_a_react_component">Life-Cycle of a React Component</a></li>
 <li><a href="#_examples">Examples</a>
 <ul class="sectlevel2">
 <li><a href="#_bmi_calculator">BMI Calculator</a></li>
@@ -1006,6 +1008,11 @@ ReactDOM.render(
 </tr>
 </tbody>
 </table>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_stateful_components">Stateful Components</h2>
+<div class="sectionbody">
 <div class="paragraph">
 <p>A component can hold a local state:</p>
 </div>
@@ -1064,21 +1071,34 @@ ReactDOM.render(
 </div>
 </div>
 <div class="paragraph">
-<p>Functions can be passed to a component:</p>
+<p>What happens if a child component needs to update the state of its parent component? In this case a function can be passed to a component:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-reagent" data-lang="reagent">(defn input-field [persist-value]
+<pre class="highlight"><code class="language-reagent" data-lang="reagent">(defn input-field [{:keys [persist-value] :as props}]
   (let [state (r/atom "")]
-    (fn [persist-value]
+    (fn [props]
       [:input {:value       (deref state)
                :on-change   #(reset! state (.. % -target -value))
                :on-key-down #(when (= (.-key %) "Enter")
                                (doto % (.stopPropagation) (.. -target blur)))
                :on-blur     #(persist-value (deref state))}])))
 
-[input-field (fn [value] (js/alert (str "Persisted: " value)))]</code></pre>
+[input-field {:persist-value (fn [value] (js/alert (str "Persisted: " value)))}]</code></pre>
 </div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_life_cycle_of_a_react_component">Life-Cycle of a React Component</h2>
+<div class="sectionbody">
+<div class="imageblock" style="text-align: center">
+<div class="content">
+<img src="img/lifecycle.png" alt="Virtual DOM">
+</div>
+</div>
+<div class="paragraph">
+<p>(<a href="https://medium.com/@rajaraodv/the-inner-workings-of-virtual-dom-666ee7ad47cf" class="bare">https://medium.com/@rajaraodv/the-inner-workings-of-virtual-dom-666ee7ad47cf</a>)</p>
 </div>
 </div>
 </div>
