@@ -31,6 +31,8 @@
 
                  [reagent "0.8.1"]
 
+                 [cljsjs/moment "2.17.1-1"]
+
                  ;; processing
                  [tesser.core "1.0.2"]
                  [tesser.math "1.0.2"]
